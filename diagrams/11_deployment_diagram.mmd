@@ -1,0 +1,37 @@
+flowchart TD
+    subgraph ClientEnvironment ["CLIENT HARDWARE & BROWSER"]
+        ClientDevice["Desktop / Laptop Computer"]
+        BrowserApp["Web Browser Engine (V8 JavaScript Runtime)"]
+        ClientDevice --> BrowserApp
+    end
+
+    subgraph EdgeTier ["EDGE NETWORK & STATIC CDN (VERCEL)"]
+        VercelCDN["Vercel Global Edge Network"]
+        StaticAssets["Static SPA Bundle (HTML, JS, CSS, Assets)"]
+        VercelCDN --> StaticAssets
+    end
+
+    subgraph CloudAppTier ["APPLICATION CLOUD HOSTING (RENDER)"]
+        RenderService["Render Linux Web Service Container (Node.js 20 LTS)"]
+        AppServer["Express.js HTTP Server (Port 5000)"]
+        WSServer["Socket.IO WebSocket Server (Port 5000)"]
+        LocalSandbox["In-Memory AST Sandboxed Execution Engine"]
+        
+        RenderService --> AppServer
+        RenderService --> WSServer
+        RenderService --> LocalSandbox
+    end
+
+    subgraph CloudDataTier ["DATABASE INFRASTRUCTURE (MONGODB ATLAS)"]
+        AtlasCluster["MongoDB Atlas Cloud Database Cluster"]
+        PrimaryReplica[("Primary Data Node (Read/Write)")]
+        SecondaryReplica[("Secondary Replica Node (Failover)")]
+        AtlasCluster --> PrimaryReplica
+        AtlasCluster --> SecondaryReplica
+    end
+
+    BrowserApp -->|1. HTTPS GET Static Assets| VercelCDN
+    BrowserApp <-->|2. HTTPS REST API Calls (JWT)| AppServer
+    BrowserApp <-->|3. Full-Duplex WSS Connection| WSServer
+    AppServer <-->|4. TCP 27017 TLS Connection| AtlasCluster
+    WSServer <-->|5. Real-Time Document Mutations| AtlasCluster

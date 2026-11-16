@@ -1,0 +1,36 @@
+sequenceDiagram
+    autonumber
+    actor Host as Player 1 (Host)
+    actor Opponent as Player 2 (Opponent)
+    participant SocketGateway as Socket.IO (/battle)
+    participant RoomManager as Battle State Controller
+    participant DB as MongoDB Battles
+
+    Host->>SocketGateway: emit("battle:create", {difficulty, duration})
+    SocketGateway->>RoomManager: generateRoomCode() -> "SBHD44"
+    RoomManager->>DB: create(Battle Document: status='waiting')
+    SocketGateway-->>Host: emit("battle:created", {roomCode: "SBHD44"})
+
+    Opponent->>SocketGateway: emit("battle:join", {roomCode: "SBHD44"})
+    SocketGateway->>RoomManager: joinRoom("SBHD44", Opponent)
+    SocketGateway-->>Host: emit("battle:user_joined", OpponentData)
+    SocketGateway-->>Opponent: emit("battle:joined_success", BattleData)
+
+    Host->>SocketGateway: emit("battle:ready")
+    Opponent->>SocketGateway: emit("battle:ready")
+    RoomManager->>SocketGateway: Broadcast 3-Second Synchronized Countdown
+    SocketGateway-->>Host: emit("battle:start", {problemStatement, duration: 600})
+    SocketGateway-->>Opponent: emit("battle:start", {problemStatement, duration: 600})
+
+    Note over Host,Opponent: REAL-TIME CONCURRENT CODING & PROGRESS STREAMING
+    Host->>SocketGateway: emit("battle:progress", {testCasesPassed: 3, total: 5})
+    SocketGateway-->>Opponent: emit("opponent:progress", {passed: 3, total: 5})
+
+    Opponent->>SocketGateway: emit("battle:submit", {code, language})
+    SocketGateway->>RoomManager: evaluateFinalSubmission(OpponentCode)
+    RoomManager-->>SocketGateway: Passed 5/5 Tests (VICTORY)
+    SocketGateway->>DB: updateOne({status: 'completed', winner: Opponent})
+    SocketGateway->>DB: updateRatings(Opponent +100 ELO, Host -25 ELO)
+
+    SocketGateway-->>Host: emit("battle:game_over", {winner: Opponent, eloShift: -25})
+    SocketGateway-->>Opponent: emit("battle:game_over", {winner: Opponent, eloShift: +100})

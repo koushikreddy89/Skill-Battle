@@ -1,0 +1,77 @@
+erDiagram
+    USER ||--o{ SUBMISSION : submits
+    USER ||--o{ BATTLE : creates
+    USER ||--o{ BATTLE : opposes
+    USER ||--o{ BATTLE : wins
+    USER ||--o{ TOKEN_BLACKLIST : invalidates
+    PROBLEM ||--o{ SUBMISSION : evaluated_for
+    PROBLEM ||--o{ BATTLE : assigned_to
+    PROBLEM ||--o{ DAILY_CHALLENGE : features_in
+
+    USER {
+        ObjectId id PK
+        string name
+        string username UK
+        string email UK
+        string password
+        string role "student | admin"
+        int rating "Default 1200"
+        object streak "current, max, lastDate"
+        object battleStats "battles, wins, losses, winRate"
+        date createdAt
+    }
+
+    PROBLEM {
+        ObjectId id PK
+        string title
+        string slug UK
+        string description
+        string difficulty "Easy | Medium | Hard"
+        array tags
+        object starterCode "js, python"
+        array testCases "input, output, isHidden"
+        ObjectId author FK
+        date createdAt
+    }
+
+    SUBMISSION {
+        ObjectId id PK
+        ObjectId user FK
+        ObjectId problem FK
+        string language "javascript | python"
+        string code
+        string status "Accepted | Wrong Answer | TLE"
+        float executionTime
+        float memory
+        int passedTests
+        int totalTests
+        date createdAt
+    }
+
+    BATTLE {
+        ObjectId id PK
+        string roomCode UK
+        ObjectId creator FK
+        ObjectId opponent FK
+        ObjectId problem FK
+        string status "waiting | active | completed"
+        ObjectId winner FK
+        int duration "seconds"
+        date createdAt
+    }
+
+    DAILY_CHALLENGE {
+        ObjectId id PK
+        string date UK "YYYY-MM-DD"
+        ObjectId problem FK
+        int bonusPoints "Default 50"
+        array participants
+    }
+
+    TOKEN_BLACKLIST {
+        ObjectId id PK
+        string token UK
+        ObjectId userId FK
+        date expiresAt "TTL Indexed"
+        string reason
+    }

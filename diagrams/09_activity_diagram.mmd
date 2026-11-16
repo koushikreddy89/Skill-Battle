@@ -1,0 +1,35 @@
+flowchart TD
+    Start([User Logs In]) --> Choice{Select Activity}
+    
+    Choice -->|Practice Solo| Browse[Browse Problem Library]
+    Browse --> SelectProb[Select Algorithmic Problem]
+    SelectProb --> LoadEditor[Load Monaco Editor & Boilerplate]
+    LoadEditor --> WriteCode[Write / Edit Solution]
+    WriteCode --> RunSample{Run Sample Tests?}
+    RunSample -->|Yes| ExecSample[Execute in Local AST Sandbox]
+    ExecSample --> ReviewSample[Review Output & Diff]
+    ReviewSample --> WriteCode
+    RunSample -->|No| SubmitFinal[Submit Solution]
+    SubmitFinal --> EvalHidden[Evaluate Against Hidden Test Cases]
+    EvalHidden --> CheckAccepted{All Tests Passed?}
+    CheckAccepted -->|No| FixCode[Inspect Error Details]
+    FixCode --> WriteCode
+    CheckAccepted -->|Yes| UpdateStats[Increment Streak & Solved Count]
+    UpdateStats --> SaveSub[Persist Accepted Submission Document]
+
+    Choice -->|1v1 Coding Battle| BattleChoice{Host or Join?}
+    BattleChoice -->|Host| CreateRoom[Configure Difficulty & Create Room Code]
+    CreateRoom --> WaitOpponent[Wait in Lobby for Opponent]
+    BattleChoice -->|Join| EnterCode[Enter 6-Character Room Code]
+    EnterCode --> JoinLobby[Enter Battle Lobby]
+    WaitOpponent --> ReadyCheck[Both Players Signal Ready]
+    JoinLobby --> ReadyCheck
+    ReadyCheck --> SyncCountdown[Server Initiates Synchronized Countdown]
+    SyncCountdown --> BattleLive[Live Coding Duel with Progress Stream]
+    BattleLive --> BattleSubmit[Submit Final Duel Code]
+    BattleSubmit --> CheckWin{Passed All Tests First?}
+    CheckWin -->|Yes| Winner[Declared Match Winner: +100 ELO]
+    CheckWin -->|No / Time Out| RunnerUp[Match Concluded: ELO Recalculated]
+    Winner --> EndBattle([Return to Dashboard])
+    RunnerUp --> EndBattle
+    SaveSub --> EndBattle

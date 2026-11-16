@@ -1,0 +1,24 @@
+flowchart TD
+    Student[Student Competitor]
+    Admin[Platform Administrator]
+    System((0.0 SKILL BATTLE SYSTEM))
+    Judge0[External Execution API / Judge0]
+
+    Student -->|1. Credentials, Registration Data| System
+    Student -->|2. Code Solutions & Sample Inputs| System
+    Student -->|3. Battle Lobby Actions & Room Codes| System
+    Student -->|4. Live Duel Socket Events & Progress| System
+
+    System -->|5. Auth Tokens & Cookie Handshake| Student
+    System -->|6. Test Results & Execution Metrics| Student
+    System -->|7. Opponent Progress & Sync Countdown| Student
+    System -->|8. Profile Heatmap, Streaks, Ratings| Student
+
+    Admin -->|9. Admin Credentials & Session| System
+    Admin -->|10. Problem CRUD Statements & Hidden Tests| System
+    Admin -->|11. User Suspension & Daily Schedules| System
+
+    System -->|12. Platform Telemetry & User Audits| Admin
+    System -->|13. Content Status Confirmations| Admin
+
+    System <-->|14. Sandboxed Code Payloads & Execution Output| Judge0

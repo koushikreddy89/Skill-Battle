@@ -1,0 +1,42 @@
+flowchart LR
+    Student((Student / Competitor))
+    Admin((System Administrator))
+
+    subgraph SkillBattleSystem ["SKILL BATTLE SYSTEM"]
+        UC01["UC-01: Register & Authenticate Account"]
+        UC02["UC-02: Browse Algorithmic Problem Library"]
+        UC03["UC-03: Filter by Topic Tag & Difficulty"]
+        UC04["UC-04: Write Code in Monaco Editor"]
+        UC05["UC-05: Run Sample Test Cases"]
+        UC06["UC-06: Submit Final Algorithmic Solution"]
+        UC07["UC-07: Create 1v1 Battle Lobby"]
+        UC08["UC-08: Join 1v1 Battle with Room Code"]
+        UC09["UC-09: Compete in Real-Time 1v1 Duel"]
+        UC10["UC-10: View 365-Day Activity Heatmap & Streaks"]
+        UC11["UC-11: Solve 24-Hour Daily Coding Challenge"]
+        UC12["UC-12: View Global Leaderboards & Badges"]
+        
+        UC13["UC-13: View System Telemetry & Metrics"]
+        UC14["UC-14: Problem CRUD (Author Statements & Tests)"]
+        UC15["UC-15: Student Governance & Account Suspension"]
+        UC16["UC-16: Schedule Daily Challenge Calendar"]
+    end
+
+    Student --> UC01
+    Student --> UC02
+    Student --> UC03
+    Student --> UC04
+    Student --> UC05
+    Student --> UC06
+    Student --> UC07
+    Student --> UC08
+    Student --> UC09
+    Student --> UC10
+    Student --> UC11
+    Student --> UC12
+
+    Admin --> UC01
+    Admin --> UC13
+    Admin --> UC14
+    Admin --> UC15
+    Admin --> UC16

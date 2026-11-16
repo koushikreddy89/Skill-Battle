@@ -1,0 +1,35 @@
+sequenceDiagram
+    autonumber
+    actor Student
+    participant Monaco as Monaco Editor Component
+    participant API as Axios Problem Client
+    participant Router as Express Problem Router
+    participant Service as Code Execution Service
+    participant Sandbox as AST Local Sandbox / Judge0
+    participant DB as MongoDB Submissions
+
+    Student->>Monaco: Types code solution in editor
+    Student->>Monaco: Clicks "Submit Solution"
+    Monaco->>API: POST /api/problems/:slug/submit {code, language}
+    API->>Router: Protected HTTP Request (JWT Bearer)
+    Router->>Service: submitSolution(problemId, code, language, user)
+    Service->>Service: AST Lexical Token Filter (Block require/process)
+    
+    alt AST Security Violation Detected
+        Service-->>Router: Throw Security Error ("Forbidden token detected")
+        Router-->>API: 400 Bad Request
+        API-->>Monaco: Display Security Violation Alert
+    else AST Security Check Passed
+        Service->>Sandbox: executeAgainstTestCases(code, testCases)
+        loop Each Test Case (Sample & Hidden)
+            Sandbox->>Sandbox: Execute in Null-Prototype VM / Python Process
+            Sandbox->>Sandbox: Compare Normalized Output with Expected
+        end
+        Sandbox-->>Service: Return {status: "Accepted", time: 42ms, passed: 5/5}
+        Service->>DB: create(Submission Record)
+        Service->>DB: Update Problem (totalSubmissions, solvedCount)
+        Service->>DB: Update User (streak, problemsSolved)
+        Service-->>Router: Return Grading Results
+        Router-->>API: 200 OK {success: true, results}
+        API-->>Monaco: Render Confetti & Results Drawer
+    end

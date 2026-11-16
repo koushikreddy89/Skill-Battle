@@ -1,0 +1,38 @@
+flowchart TB
+    subgraph FrontendComponents ["FRONTEND ARCHITECTURE (REACT 18)"]
+        UI_Pages["Pages (Public, Student, Admin)"]
+        UI_Context["Contexts (AuthContext, SocketContext, ToastContext)"]
+        UI_Editor["Editor Components (Monaco Workspace, LanguageSelect)"]
+        UI_Battle["Battle Components (BattleLobby, OpponentProgress, Timer)"]
+        UI_Profile["Profile Components (SolvedRings, 365DayHeatmap, Badges)"]
+        API_Services["Services Layer (authService, problemService, battleService)"]
+        StorageUtil["Storage Scoping Utility (editorStorage.js)"]
+
+        UI_Pages --> UI_Context
+        UI_Pages --> UI_Editor
+        UI_Pages --> UI_Battle
+        UI_Pages --> UI_Profile
+        UI_Editor --> StorageUtil
+        UI_Pages --> API_Services
+    end
+
+    subgraph BackendComponents ["BACKEND ARCHITECTURE (EXPRESS & NODE.JS)"]
+        MW_Pipeline["Middleware (Security, Auth, RateLimit, Validate)"]
+        Routers["Express Routers (Auth, Problem, Battle, Profile, Admin)"]
+        Controllers["Controllers (authCtrl, problemCtrl, battleCtrl, adminCtrl)"]
+        SocketModule["WebSocket Gateway (battleSocket.js)"]
+        ExecutionService["Code Execution Service (AST Scanner & Sandbox)"]
+        StreakService["Gamification & Streak Calculation Service"]
+        DB_Models["Mongoose ODM Models (User, Problem, Submission, Battle)"]
+
+        Routers --> MW_Pipeline
+        Routers --> Controllers
+        Controllers --> ExecutionService
+        Controllers --> StreakService
+        Controllers --> DB_Models
+        SocketModule --> DB_Models
+        SocketModule --> ExecutionService
+    end
+
+    API_Services <-->|HTTP / JSON| Routers
+    UI_Battle <-->|WebSockets| SocketModule

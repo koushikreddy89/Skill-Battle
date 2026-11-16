@@ -1,0 +1,54 @@
+flowchart TB
+    subgraph ClientTier ["PRESENTATION TIER (CLIENT)"]
+        Browser["Modern Web Browser (Chrome / Edge / Firefox)"]
+        SPA["React 18 SPA (Vite Framework)"]
+        Monaco["Monaco Code Editor (@monaco-editor/react)"]
+        SocketClient["Socket.IO Client (Full-Duplex WSS)"]
+        AxiosClient["Axios HTTP REST Client"]
+        Tailwind["Tailwind CSS UI Component Library"]
+        Browser --> SPA
+        SPA --> Monaco
+        SPA --> SocketClient
+        SPA --> AxiosClient
+        SPA --> Tailwind
+    end
+
+    subgraph ServerTier ["APPLICATION & EXECUTION TIER (BACKEND)"]
+        NodeServer["Node.js & Express.js HTTP Server"]
+        SecurityMW["Security Pipeline (Helmet, CORS, NoSQL Sanitizer, Rate Limiter)"]
+        AuthMW["Authentication & RBAC Middleware (JWT Verification)"]
+        SocketServer["Socket.IO Battle Gateway (Namespace: /battle)"]
+        ASTSandbox["AST-Guarded Local Sandboxed Runner (Node VM & Python)"]
+        Judge0Client["Judge0 Cloud API Client (Fallback Runner)"]
+        
+        NodeServer --> SecurityMW
+        SecurityMW --> AuthMW
+        NodeServer --> SocketServer
+        NodeServer --> ASTSandbox
+        NodeServer --> Judge0Client
+    end
+
+    subgraph DataTier ["PERSISTENCE & STORAGE TIER (DATABASE)"]
+        MongooseODM["Mongoose ODM (Data Modeling & Schema Validation)"]
+        MongoDB[("MongoDB Database (Replica Set / Atlas)")]
+        UsersCol[("users")]
+        ProblemsCol[("problems")]
+        SubmissionsCol[("submissions")]
+        BattlesCol[("battles")]
+        DailyCol[("dailychallenges")]
+        BlacklistCol[("tokenblacklists (TTL)")]
+
+        MongooseODM --> MongoDB
+        MongoDB --> UsersCol
+        MongoDB --> ProblemsCol
+        MongoDB --> SubmissionsCol
+        MongoDB --> BattlesCol
+        MongoDB --> DailyCol
+        MongoDB --> BlacklistCol
+    end
+
+    AxiosClient <-->|HTTPS REST API Requests| SecurityMW
+    SocketClient <-->|WSS Full-Duplex Events| SocketServer
+    AuthMW <--> MongooseODM
+    ASTSandbox <--> MongooseODM
+    SocketServer <--> MongooseODM

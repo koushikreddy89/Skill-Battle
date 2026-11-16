@@ -1,0 +1,34 @@
+sequenceDiagram
+    autonumber
+    actor User as Student / Admin
+    participant Client as React 18 Client
+    participant Router as Express Auth Router
+    participant Ctrl as Auth Controller
+    participant Security as Bcrypt & JWT
+    participant DB as MongoDB Atlas
+    participant Blacklist as TokenBlacklist (TTL)
+
+    Note over User,DB: REGISTRATION & LOGIN LIFECYCLE
+    User->>Client: Enters credentials & submits form
+    Client->>Router: POST /api/auth/login {email, password}
+    Router->>Ctrl: invoke login()
+    Ctrl->>DB: findOne({ email: cleanEmail })
+    DB-->>Ctrl: returns User Document
+    Ctrl->>Security: bcrypt.compare(password, hash)
+    Security-->>Ctrl: password verified (True)
+    Ctrl->>Security: signJWT({ id, jti: uuid() }, secret, 7d)
+    Security-->>Ctrl: returns Signed Token
+    Ctrl-->>Router: setCookie('token', HttpOnly, SameSite=Lax)
+    Router-->>Client: 200 OK { success: true, token, user }
+    Client-->>User: Navigate to /dashboard (Session active)
+
+    Note over User,DB: SECURE LOGOUT & SERVER-SIDE REVOCATION
+    User->>Client: Clicks "Logout"
+    Client->>Router: POST /api/auth/logout (Bearer Token + Cookie)
+    Router->>Ctrl: invoke logout()
+    Ctrl->>Blacklist: create({ token, userId, expiresAt })
+    Blacklist-->>Ctrl: Token blacklisted
+    Ctrl-->>Router: clearCookie('token') & no-store headers
+    Router-->>Client: 200 OK { message: "Session Invalidated" }
+    Client->>Client: localStorage.clear() & flush AuthContext
+    Client-->>User: Redirect to /login
