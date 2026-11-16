@@ -1,13 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { problemService } from '../../services/problemService';
+import { useAuth } from '../../hooks/useAuth';
 import { useToast } from '../../hooks/useToast';
+import { problemService } from '../../services/problemService';
 import { CodeEditor } from '../../components/editor/CodeEditor';
 import { TestCasePanel } from '../../components/editor/TestCasePanel';
 import { SubmissionModal } from '../../components/editor/SubmissionModal';
 import { DifficultyBadge } from '../../components/common/DifficultyBadge';
 import { StatusBadge } from '../../components/common/StatusBadge';
 import { Loader } from '../../components/common/Loader';
+import {
+  getScopedCode,
+  setScopedCode,
+  removeScopedCode,
+  cleanupLegacyEditorStorage
+} from '../../utils/editorStorage';
 import {
   Play,
   Send,
@@ -17,11 +24,13 @@ import {
   CheckCircle2,
   AlertCircle,
   HelpCircle,
-  Clock
+  Clock,
+  RotateCcw
 } from 'lucide-react';
 
 export const ProblemWorkspacePage = () => {
   const { slug } = useParams();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const toast = useToast();
 
@@ -42,44 +51,121 @@ export const ProblemWorkspacePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [actionError, setActionError] = useState('');
 
-  // Fetch problem details
-  const fetchProblem = async () => {
-    try {
-      setLoading(true);
-      const res = await problemService.getProblemBySlug(slug);
-      if (res.success && res.problem) {
-        setProblem(res.problem);
-        // Set initial code template
-        setCode(res.problem.starterCode?.[language] || '');
-      }
-    } catch (err) {
-      console.error('Failed to load problem:', err);
-      const msg = err.response?.data?.message || 'Could not load problem';
-      setActionError(msg);
-      toast.error(msg);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // Auto-save debounce timer ref
+  const saveTimeoutRef = useRef(null);
+  // Direct Monaco editor reference for imperative model updates
+  const editorRef = useRef(null);
 
+  // Re-fetch and isolate state whenever the problem route changes
   useEffect(() => {
-    fetchProblem();
-  }, [slug]);
+    let isCancelled = false;
 
-  // Handle language switch
-  const handleLanguageChange = (newLang) => {
-    setLanguage(newLang);
-    if (problem?.starterCode?.[newLang]) {
-      setCode(problem.starterCode[newLang]);
+    // 1. Immediately reset editor and execution states to guarantee isolation
+    setProblem(null);
+    setCode('');
+    setRunResults(null);
+    setSubmissionResult(null);
+    setCustomInput('');
+    setActionError('');
+    setLeftTab('description');
+    cleanupLegacyEditorStorage();
+
+    const fetchProblemData = async () => {
+      try {
+        setLoading(true);
+        const res = await problemService.getProblemBySlug(slug);
+        if (isCancelled) return;
+
+        if (res.success && res.problem) {
+          setProblem(res.problem);
+
+          // 2. Fetch scoped user progress or fall back to official boilerplate
+          const savedDraft = getScopedCode(user?._id, res.problem._id, language);
+          const initialBoilerplate = res.problem.starterCode?.[language] || '';
+          setCode(savedDraft !== null ? savedDraft : initialBoilerplate);
+        }
+      } catch (err) {
+        if (isCancelled) return;
+        console.error('Failed to load problem:', err);
+        const msg = err.response?.data?.message || 'Could not load problem';
+        setActionError(msg);
+        toast.error(msg);
+      } finally {
+        if (!isCancelled) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchProblemData();
+
+    return () => {
+      isCancelled = true;
+      if (saveTimeoutRef.current) {
+        clearTimeout(saveTimeoutRef.current);
+      }
+    };
+  }, [slug, user?._id]);
+
+  // Handle Code Change with debounced per-problem scoped storage
+  const handleCodeChange = (newCode) => {
+    const updated = newCode || '';
+    setCode(updated);
+
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
     }
+
+    saveTimeoutRef.current = setTimeout(() => {
+      if (problem?._id) {
+        setScopedCode(user?._id, problem._id, language, updated);
+      }
+    }, 400);
   };
 
-  // Reset starter code
-  const handleResetStarter = () => {
-    if (problem?.starterCode?.[language]) {
-      setCode(problem.starterCode[language]);
-      toast.info('Starter code reset.');
+  // Handle language switch: preserve progress for old lang, load/template for new lang
+  const handleLanguageChange = (newLang) => {
+    if (problem?._id) {
+      setScopedCode(user?._id, problem._id, language, code);
     }
+    setLanguage(newLang);
+
+    if (problem) {
+      const savedForNewLang = getScopedCode(user?._id, problem._id, newLang);
+      const templateForNewLang = problem.starterCode?.[newLang] || '';
+      setCode(savedForNewLang !== null ? savedForNewLang : templateForNewLang);
+    }
+    setRunResults(null);
+  };
+
+  // Explicit Reset mechanism: clears cached draft and restores official problem boilerplate
+  const handleResetStarter = () => {
+    if (!problem) return '';
+
+    // 1. Immediately abort any pending auto-save timers to avoid re-saving stale text
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+      saveTimeoutRef.current = null;
+    }
+
+    // 2. Fetch the official starter boilerplate for this problem and language
+    const officialTemplate = problem.starterCode?.[language] || '';
+
+    // 3. Clear scoped cache for this problem
+    removeScopedCode(user?._id, problem._id, language);
+
+    // 4. Reset editor content in React state & results
+    setCode(officialTemplate);
+    setRunResults(null);
+    setCustomInput('');
+
+    // 5. Directly update the Monaco editor instance model view
+    if (editorRef.current) {
+      editorRef.current.setValue(officialTemplate);
+    }
+
+    toast.info('Code reset to default starter template.');
+    return officialTemplate;
   };
 
   // Run Code against sample test cases
@@ -131,7 +217,10 @@ export const ProblemWorkspacePage = () => {
           toast.error(`Submission status: ${res.submission.status}`);
         }
         // Refresh problem details to update solved status and history
-        fetchProblem();
+        const refreshed = await problemService.getProblemBySlug(slug);
+        if (refreshed.success && refreshed.problem) {
+          setProblem(refreshed.problem);
+        }
       }
     } catch (err) {
       const msg = err.response?.data?.message || 'Failed to submit code';
@@ -163,31 +252,49 @@ export const ProblemWorkspacePage = () => {
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-5rem)] max-w-[1700px] mx-auto space-y-3">
-      {/* Top Breadcrumb & Action Header */}
-      <div className="flex items-center justify-between pb-1 border-b border-[#232738]/80 shrink-0">
+    <div className="flex flex-col h-[calc(100vh-5rem)] space-y-3 animate-fade-in">
+      {/* Top Bar Navigation & Actions */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 px-1">
         <div className="flex items-center space-x-3">
           <Link
             to="/problems"
-            className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-[#1D2130] transition-colors"
+            className="p-2 rounded-xl bg-[#161924] hover:bg-[#232738] border border-[#232738] text-gray-400 hover:text-white transition-colors"
+            title="Back to Problems"
           >
-            <ChevronLeft className="w-5 h-5" />
+            <ChevronLeft className="w-4 h-4" />
           </Link>
-          <div className="flex items-center space-x-2">
-            <h1 className="text-lg font-bold text-white truncate max-w-[300px] sm:max-w-md">
-              {problem.title}
-            </h1>
-            <DifficultyBadge difficulty={problem.difficulty} />
-            <StatusBadge status={problem.userStatus} />
+
+          <div>
+            <div className="flex items-center space-x-2">
+              <h1 className="text-base sm:text-lg font-bold text-white tracking-tight">
+                {problem.title}
+              </h1>
+              <DifficultyBadge difficulty={problem.difficulty} />
+              {problem.userStatus && <StatusBadge status={problem.userStatus} />}
+            </div>
+            <div className="flex items-center space-x-3 text-[11px] text-gray-500 mt-0.5">
+              <span>Acceptance: {problem.acceptanceRate || 0}%</span>
+              <span>•</span>
+              <span>Submissions: {problem.totalSubmissions || 0}</span>
+            </div>
           </div>
         </div>
 
         {/* Action Buttons: Run & Submit */}
         <div className="flex items-center space-x-2.5">
           <button
+            onClick={handleResetStarter}
+            title="Reset code to original problem template"
+            className="px-3 py-2 rounded-xl bg-[#161924] hover:bg-[#232738] border border-[#2A2E42] text-gray-300 hover:text-white text-xs font-semibold flex items-center space-x-1.5 transition-colors"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Reset</span>
+          </button>
+
+          <button
             onClick={handleRunCode}
             disabled={isRunning || isSubmitting}
-            className="px-3.5 py-1.5 rounded-xl bg-[#1C2030] hover:bg-[#232738] border border-[#2A2E42] text-xs font-semibold text-gray-200 flex items-center space-x-1.5 transition-all disabled:opacity-50"
+            className="px-4 py-2 rounded-xl bg-[#1F2436] hover:bg-[#2A314A] border border-[#2A2E42] text-white text-xs font-semibold flex items-center space-x-1.5 transition-all disabled:opacity-50"
           >
             {isRunning ? (
               <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -200,7 +307,7 @@ export const ProblemWorkspacePage = () => {
           <button
             onClick={handleSubmitCode}
             disabled={isRunning || isSubmitting}
-            className="px-4 py-1.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold text-xs shadow-md shadow-purple-900/30 flex items-center space-x-1.5 transition-all hover:scale-105 disabled:opacity-50"
+            className="px-5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg shadow-purple-900/30 flex items-center space-x-1.5 transition-all disabled:opacity-50"
           >
             {isSubmitting ? (
               <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -213,18 +320,18 @@ export const ProblemWorkspacePage = () => {
       </div>
 
       {actionError && (
-        <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs flex items-center space-x-2">
+        <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs flex items-center space-x-2">
           <AlertCircle className="w-4 h-4 shrink-0" />
           <span>{actionError}</span>
         </div>
       )}
 
-      {/* Main Split Panels */}
+      {/* Main Dual-Column Split Workspace */}
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-3 min-h-0 overflow-hidden">
-        {/* Left Column: Problem Description & Submissions */}
+        {/* Left Column: Problem Description, Examples, Past Submissions */}
         <div className="lg:col-span-5 flex flex-col h-full rounded-2xl bg-[#141622] border border-[#232738] overflow-hidden">
-          {/* Left Tabs */}
-          <div className="flex items-center px-4 py-2 bg-[#171A26] border-b border-[#232738] space-x-2">
+          {/* Tab Headers */}
+          <div className="flex items-center space-x-1 px-4 py-2.5 bg-[#171A26] border-b border-[#232738]">
             <button
               onClick={() => setLeftTab('description')}
               className={`px-3 py-1 rounded-lg text-xs font-semibold flex items-center space-x-1.5 transition-all ${
@@ -353,11 +460,13 @@ export const ProblemWorkspacePage = () => {
 
         {/* Right Column: Monaco Code Editor + Test Case Console */}
         <div className="lg:col-span-7 flex flex-col h-full space-y-3 min-h-0 overflow-hidden">
-          {/* Monaco Editor Pane */}
+          {/* Monaco Editor Pane with explicit Key isolation */}
           <div className="flex-1 min-h-[320px]">
             <CodeEditor
+              key={`${problem._id}_${language}`}
+              editorRef={editorRef}
               code={code}
-              onChange={(newCode) => setCode(newCode || '')}
+              onChange={handleCodeChange}
               language={language}
               onLanguageChange={handleLanguageChange}
               onResetStarter={handleResetStarter}
@@ -388,4 +497,3 @@ export const ProblemWorkspacePage = () => {
     </div>
   );
 };
-

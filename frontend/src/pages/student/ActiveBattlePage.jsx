@@ -705,6 +705,7 @@ export const ActiveBattlePage = () => {
         <div className="lg:col-span-7 flex flex-col h-full space-y-3 min-h-0 overflow-hidden">
           <div className="flex-1 min-h-[320px]">
             <CodeEditor
+              key={`${battle?.problem?._id || battle?._id}_${language}`}
               code={code}
               onChange={(newCode) => setCode(newCode || '')}
               language={language}

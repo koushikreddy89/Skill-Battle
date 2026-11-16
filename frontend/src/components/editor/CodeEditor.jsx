@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Editor from '@monaco-editor/react';
 import { RotateCcw, Copy, Check, Code } from 'lucide-react';
 
@@ -9,10 +9,12 @@ export const CodeEditor = ({
   onLanguageChange,
   onResetStarter,
   height = '500px',
-  readOnly = false
+  readOnly = false,
+  editorRef: externalEditorRef
 }) => {
   const [copied, setCopied] = React.useState(false);
-  const editorRef = useRef(null);
+  const internalEditorRef = useRef(null);
+  const editorRef = externalEditorRef || internalEditorRef;
 
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
@@ -44,10 +46,38 @@ export const CodeEditor = ({
     });
 
     monaco.editor.setTheme('skillBattleDark');
+
+    // Ensure model has latest code if already mounted
+    if (code !== undefined && code !== null) {
+      if (editor.getValue() !== code) {
+        editor.setValue(code);
+      }
+    }
+  };
+
+  // Synchronize Monaco text buffer whenever `code` prop updates externally (e.g. Reset or Language switch)
+  useEffect(() => {
+    if (editorRef.current) {
+      const currentEditorValue = editorRef.current.getValue();
+      if (code !== undefined && code !== null && code !== currentEditorValue) {
+        editorRef.current.setValue(code);
+      }
+    }
+  }, [code, editorRef]);
+
+  // Target handler for top-right Reset button
+  const handleResetClick = () => {
+    if (onResetStarter && !readOnly) {
+      const defaultTemplate = onResetStarter(editorRef.current);
+      if (typeof defaultTemplate === 'string' && editorRef.current) {
+        editorRef.current.setValue(defaultTemplate);
+      }
+    }
   };
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(code);
+    const currentCode = editorRef.current ? editorRef.current.getValue() : code;
+    navigator.clipboard.writeText(currentCode || '');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -80,7 +110,7 @@ export const CodeEditor = ({
         <div className="flex items-center space-x-2">
           {onResetStarter && !readOnly && (
             <button
-              onClick={onResetStarter}
+              onClick={handleResetClick}
               title="Reset code to original starter template"
               className="p-1.5 text-gray-400 hover:text-white hover:bg-[#232738] rounded-lg transition-colors text-xs flex items-center space-x-1"
             >
@@ -137,4 +167,3 @@ export const CodeEditor = ({
     </div>
   );
 };
-
