@@ -4,3 +4,10 @@ dist/
 *.log
 .DS_Store
 
+# Temporary Microsoft Word lock files
+~$*
+~$*.docx
+~$*.doc
+
+# Automation scratch scripts
+scratch/
