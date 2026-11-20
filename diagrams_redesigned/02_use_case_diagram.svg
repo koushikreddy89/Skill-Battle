@@ -1,0 +1,295 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2050" width="2400" height="2050" style="background-color: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.12" />
+    </filter>
+    <linearGradient id="hdrUC" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="actorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <marker id="arrUC" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#1E3A8A" />
+    </marker>
+    <marker id="arrAdmin" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#0F172A" />
+    </marker>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="60" y="40" width="2280" height="120" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+  <text x="1200" y="90" text-anchor="middle" font-size="30" font-weight="800" fill="#0F172A" letter-spacing="0.5">FIGURE 3.1: UML USE CASE DIAGRAM — FUNCTIONAL ACTOR BOUNDARIES</text>
+  <text x="1200" y="128" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Functional Decomposition across Core Practice Arena, Real-Time 1v1 Battle Arena, and Administrative Governance Subsystems</text>
+
+  <!-- =============================================================== -->
+  <!-- SYSTEM BOUNDARY BOX (Center)                                    -->
+  <!-- =============================================================== -->
+  <g transform="translate(480, 200)" filter="url(#shadow)">
+    <!-- Boundary Container -->
+    <rect x="0" y="0" width="1440" height="1620" rx="16" fill="#F8FAFC" stroke="#1E3A8A" stroke-width="3" />
+    <!-- Boundary Header -->
+    <rect x="0" y="0" width="1440" height="56" rx="16" fill="url(#hdrUC)" />
+    <rect x="0" y="44" width="1440" height="12" fill="#1E3A8A" />
+    <text x="30" y="36" font-size="20" font-weight="800" fill="#FFFFFF">SKILL BATTLE PLATFORM — SYSTEM BOUNDARY</text>
+    <rect x="1240" y="14" width="170" height="28" rx="14" fill="#3B82F6" />
+    <text x="1325" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">18 TOTAL USE CASES</text>
+
+    <!-- ------------------------------------------------------------- -->
+    <!-- SUBSYSTEM 1: PRACTICE & CODE EXECUTION (7 Use Cases)          -->
+    <!-- ------------------------------------------------------------- -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="1380" height="500" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="1380" height="40" rx="12" fill="#EFF6FF" />
+      <text x="20" y="26" font-size="15" font-weight="800" fill="#1E3A8A">1. Authentication &amp; Algorithmic Practice Arena (UC-01 to UC-07)</text>
+
+      <!-- 2 Columns of Use Cases -->
+      <!-- Col 1 -->
+      <!-- UC-01 -->
+      <g transform="translate(40, 70)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F0FDF4" stroke="#16A34A" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#14532D">UC-01: Register &amp; Authenticate Account (JWT &amp; HttpOnly)</text>
+      </g>
+      <!-- UC-02 -->
+      <g transform="translate(40, 130)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">UC-02: Manage User Profile &amp; Developer Preferences</text>
+      </g>
+      <!-- UC-03 -->
+      <g transform="translate(40, 190)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">UC-03: Browse Problem Library by Topic Tag Chips</text>
+      </g>
+      <!-- UC-04 -->
+      <g transform="translate(40, 250)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">UC-04: Filter Challenges by Difficulty &amp; Acceptance Rate</text>
+      </g>
+
+      <!-- Col 2 -->
+      <!-- UC-05 -->
+      <g transform="translate(730, 70)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">UC-05: Write Code in Monaco Editor (JS / Python)</text>
+      </g>
+      <!-- UC-06 -->
+      <g transform="translate(730, 130)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">UC-06: Execute Sample Tests in AST In-Memory Sandbox</text>
+      </g>
+      <!-- UC-07 -->
+      <g transform="translate(730, 190)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">UC-07: Submit Final Solution &amp; Evaluate Hidden Tests</text>
+      </g>
+      <!-- Description note -->
+      <g transform="translate(40, 320)">
+        <rect x="0" y="0" width="1300" height="150" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+        <text x="20" y="30" font-size="13" font-weight="700" fill="#1E3A8A">Practice Subsystem Architectural Scope:</text>
+        <text x="20" y="60" font-size="13" fill="#475569">• Provides isolated algorithmic training ground with immediate runtime feedback.</text>
+        <text x="20" y="85" font-size="13" fill="#475569">• Employs regex AST parsing to neutralize unsafe Node.js/Python system calls before VM invocation.</text>
+        <text x="20" y="110" font-size="13" fill="#475569">• Automatically caches code draft in scoped localStorage keys to prevent accidental loss across reloads.</text>
+        <text x="20" y="135" font-size="13" fill="#475569">• Persists submission records with execution latency (ms), memory footprint (MB), and testcase pass ratio.</text>
+      </g>
+    </g>
+
+    <!-- ------------------------------------------------------------- -->
+    <!-- SUBSYSTEM 2: 1v1 BATTLE & GAMIFICATION (7 Use Cases)          -->
+    <!-- ------------------------------------------------------------- -->
+    <g transform="translate(30, 610)">
+      <rect x="0" y="0" width="1380" height="520" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="1380" height="40" rx="12" fill="#F5F3FF" />
+      <text x="20" y="26" font-size="15" font-weight="800" fill="#5B21B6">2. Real-Time 1v1 Battle Arena &amp; Gamification (UC-08 to UC-14)</text>
+
+      <!-- Col 1 -->
+      <!-- UC-08 -->
+      <g transform="translate(40, 65)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#5B21B6">UC-08: Create 1v1 Battle Lobby &amp; 6-Char Room Code</text>
+      </g>
+      <!-- UC-09 -->
+      <g transform="translate(40, 125)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#5B21B6">UC-09: Join Battle Lobby with 6-Character Room Code</text>
+      </g>
+      <!-- UC-10 -->
+      <g transform="translate(40, 185)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#5B21B6">UC-10: Compete in Synchronized 1v1 Duel Match</text>
+      </g>
+      <!-- UC-11 -->
+      <g transform="translate(40, 245)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#5B21B6">UC-11: Stream Opponent Testcase Progress Live</text>
+      </g>
+
+      <!-- Col 2 -->
+      <!-- UC-12 -->
+      <g transform="translate(730, 65)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#5B21B6">UC-12: View 365-Day Activity Heatmap &amp; Streaks</text>
+      </g>
+      <!-- UC-13 -->
+      <g transform="translate(730, 125)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#FFFBEB" stroke="#D97706" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#92400E">UC-13: Solve 24-Hour Deterministic Daily Challenge</text>
+      </g>
+      <!-- UC-14 -->
+      <g transform="translate(730, 185)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#5B21B6">UC-14: View Global Leaderboards &amp; ELO Badges</text>
+      </g>
+
+      <!-- Description note -->
+      <g transform="translate(40, 315)">
+        <rect x="0" y="0" width="1300" height="180" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+        <text x="20" y="28" font-size="13" font-weight="700" fill="#5B21B6">Multiplayer Subsystem Architectural Scope:</text>
+        <text x="20" y="55" font-size="13" fill="#475569">• Full-duplex Socket.IO WebSocket synchronization over dedicated /battle namespace.</text>
+        <text x="20" y="80" font-size="13" fill="#475569">• Server-authoritative state clock enforcing 3-second ready countdown and 15-minute game termination.</text>
+        <text x="20" y="105" font-size="13" fill="#475569">• Live telemetry broadcasting passing testcase counts to opponents without revealing raw source code.</text>
+        <text x="20" y="130" font-size="13" fill="#475569">• Atomic ELO rating updates: +100 points for first-to-solve victory, -25 for defeat (floor 800), +25 for draw.</text>
+        <text x="20" y="155" font-size="13" fill="#475569">• Daily Challenge engine delivers rotating algorithmic puzzles every 24 hours awarding 50 bonus rating points.</text>
+      </g>
+    </g>
+
+    <!-- ------------------------------------------------------------- -->
+    <!-- SUBSYSTEM 3: ADMIN GOVERNANCE & TELEMETRY (4 Use Cases)       -->
+    <!-- ------------------------------------------------------------- -->
+    <g transform="translate(30, 1160)">
+      <rect x="0" y="0" width="1380" height="430" rx="12" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="1380" height="40" rx="12" fill="#F1F5F9" />
+      <text x="20" y="26" font-size="15" font-weight="800" fill="#0F172A">3. Platform Governance &amp; Infrastructure Telemetry (UC-15 to UC-18)</text>
+
+      <!-- Col 1 -->
+      <!-- UC-15 -->
+      <g transform="translate(40, 65)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F1F5F9" stroke="#0F172A" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">UC-15: Monitor Real-Time System Telemetry &amp; Load</text>
+      </g>
+      <!-- UC-16 -->
+      <g transform="translate(40, 125)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F1F5F9" stroke="#0F172A" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">UC-16: Problem CRUD (Author Statements &amp; Test Suites)</text>
+      </g>
+
+      <!-- Col 2 -->
+      <!-- UC-17 -->
+      <g transform="translate(730, 65)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F1F5F9" stroke="#0F172A" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">UC-17: Student Governance &amp; Account Suspension</text>
+      </g>
+      <!-- UC-18 -->
+      <g transform="translate(730, 125)">
+        <rect x="0" y="0" width="610" height="48" rx="24" fill="#F1F5F9" stroke="#0F172A" stroke-width="2" />
+        <text x="305" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#0F172A">UC-18: Schedule Deterministic Daily Challenge Calendar</text>
+      </g>
+
+      <!-- Description note -->
+      <g transform="translate(40, 195)">
+        <rect x="0" y="0" width="1300" height="210" rx="8" fill="#F8FAFC" stroke="#E2E8F0" />
+        <text x="20" y="28" font-size="13" font-weight="700" fill="#0F172A">Administrative Governance Subsystem Scope:</text>
+        <text x="20" y="55" font-size="13" fill="#475569">• Privileged administrative operations protected by RBAC middleware verifying JWT role claims.</text>
+        <text x="20" y="80" font-size="13" fill="#475569">• Full CRUD capability for curriculum problems: markdown description formatting, constraints, tags, testcase suite generation.</text>
+        <text x="20" y="105" font-size="13" fill="#475569">• Moderation engine allows instant suspension of compromised accounts with immediate token invalidation via TTL blacklist.</text>
+        <text x="20" y="130" font-size="13" fill="#475569">• Automated telemetry monitoring tracking active WebSocket connections, CPU usage, and database query latency.</text>
+        <text x="20" y="155" font-size="13" fill="#475569">• Controls daily challenge schedule to ensure equitable competitive scheduling and bonus point allocation.</text>
+      </g>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- ACTOR 1: STUDENT / COMPETITOR (Left)                            -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 480)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="520" rx="14" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="2.5" />
+    <rect x="0" y="0" width="380" height="56" rx="14" fill="url(#actorGrad)" />
+    <rect x="0" y="44" width="380" height="12" fill="#1E3A8A" />
+    <text x="24" y="36" font-size="19" font-weight="800" fill="#FFFFFF">👤 STUDENT ACTOR</text>
+
+    <!-- Actor details -->
+    <text x="24" y="90" font-size="14" font-weight="700" fill="#1E3A8A">Primary Platform Participant:</text>
+    <text x="24" y="120" font-size="13" fill="#334155">• Initiates practice sessions</text>
+    <text x="24" y="145" font-size="13" fill="#334155">• Solves algorithmic problems</text>
+    <text x="24" y="170" font-size="13" fill="#334155">• Competes in 1v1 duels</text>
+    <text x="24" y="195" font-size="13" fill="#334155">• Earns rating points &amp; badges</text>
+    <text x="24" y="220" font-size="13" fill="#334155">• Participates in daily events</text>
+
+    <line x1="24" y1="250" x2="356" y2="250" stroke="#CBD5E1" stroke-width="1" />
+
+    <text x="24" y="280" font-size="13.5" font-weight="700" fill="#1E3A8A">Associated Use Cases:</text>
+    <text x="24" y="310" font-size="13" font-weight="600" fill="#2563EB">• UC-01 through UC-07 (Core)</text>
+    <text x="24" y="335" font-size="13" font-weight="600" fill="#7C3AED">• UC-08 through UC-14 (Battle)</text>
+
+    <rect x="24" y="370" width="332" height="120" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1" />
+    <text x="36" y="398" font-size="12.5" font-weight="700" fill="#1E3A8A">Security Context:</text>
+    <text x="36" y="422" font-size="12" fill="#475569">• Access: Public &amp; Authenticated</text>
+    <text x="36" y="444" font-size="12" fill="#475569">• Token Claims: role: 'student'</text>
+    <text x="36" y="466" font-size="12" fill="#475569">• Rate Limited: 100 req/15min</text>
+  </g>
+
+  <!-- Connectors from Student Actor to Subsystems -->
+  <line x1="440" y1="600" x2="480" y2="400" stroke="#1E3A8A" stroke-width="3" marker-end="url(#arrUC)" />
+  <line x1="440" y1="740" x2="480" y2="850" stroke="#7C3AED" stroke-width="3" marker-end="url(#arrUC)" />
+
+
+  <!-- =============================================================== -->
+  <!-- ACTOR 2: PLATFORM ADMINISTRATOR (Right)                         -->
+  <!-- =============================================================== -->
+  <g transform="translate(1960, 1100)" filter="url(#shadow)">
+    <rect x="0" y="0" width="380" height="520" rx="14" fill="#FFFFFF" stroke="#0F172A" stroke-width="2.5" />
+    <rect x="0" y="0" width="380" height="56" rx="14" fill="url(#actorGrad)" />
+    <rect x="0" y="44" width="380" height="12" fill="#0F172A" />
+    <text x="24" y="36" font-size="19" font-weight="800" fill="#FFFFFF">🛡️ ADMIN ACTOR</text>
+
+    <!-- Actor details -->
+    <text x="24" y="90" font-size="14" font-weight="700" fill="#0F172A">Platform Governance Authority:</text>
+    <text x="24" y="120" font-size="13" fill="#334155">• Authors problem test suites</text>
+    <text x="24" y="145" font-size="13" fill="#334155">• Manages challenge calendar</text>
+    <text x="24" y="170" font-size="13" fill="#334155">• Inspects system telemetry</text>
+    <text x="24" y="195" font-size="13" fill="#334155">• Enforces academic integrity</text>
+    <text x="24" y="220" font-size="13" fill="#334155">• Suspends delinquent users</text>
+
+    <line x1="24" y1="250" x2="356" y2="250" stroke="#CBD5E1" stroke-width="1" />
+
+    <text x="24" y="280" font-size="13.5" font-weight="700" fill="#0F172A">Associated Use Cases:</text>
+    <text x="24" y="310" font-size="13" font-weight="600" fill="#14532D">• UC-01 (Admin Login)</text>
+    <text x="24" y="335" font-size="13" font-weight="600" fill="#0F172A">• UC-15 through UC-18 (Governance)</text>
+
+    <rect x="24" y="370" width="332" height="120" rx="8" fill="#F1F5F9" stroke="#475569" stroke-width="1" />
+    <text x="36" y="398" font-size="12.5" font-weight="700" fill="#0F172A">Security Context:</text>
+    <text x="36" y="422" font-size="12" fill="#475569">• Access: RBAC Admin Gate</text>
+    <text x="36" y="444" font-size="12" fill="#475569">• Token Claims: role: 'admin'</text>
+    <text x="36" y="466" font-size="12" fill="#475569">• Audit Logged: Every mutation</text>
+  </g>
+
+  <!-- Connectors from Admin Actor to Subsystems -->
+  <line x1="1960" y1="1200" x2="1920" y2="1350" stroke="#0F172A" stroke-width="3" marker-end="url(#arrAdmin)" />
+  <line x1="1960" y1="1120" x2="1920" y2="350" stroke="#16A34A" stroke-width="2.5" stroke-dasharray="6 3" marker-end="url(#arrAdmin)" />
+
+
+  <!-- =============================================================== -->
+  <!-- FOOTER LEGEND                                                   -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1860)">
+    <rect x="0" y="0" width="2280" height="130" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+    <text x="30" y="38" font-size="15" font-weight="800" fill="#0F172A">UML USE CASE MODELING CONVENTIONS &amp; RELATIONS:</text>
+
+    <rect x="30" y="55" width="480" height="34" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+    <text x="50" y="77" font-size="13.5" font-weight="700" fill="#1E3A8A">Core Practice Arena: Algorithmic problem discovery, editing &amp; AST execution</text>
+
+    <rect x="540" y="55" width="540" height="34" rx="8" fill="#F5F3FF" stroke="#7C3AED" stroke-width="1.5" />
+    <text x="560" y="77" font-size="13.5" font-weight="700" fill="#5B21B6">Battle Arena: 1v1 multiplayer duels, WebSockets, ELO ratings &amp; daily challenges</text>
+
+    <rect x="1110" y="55" width="560" height="34" rx="8" fill="#F1F5F9" stroke="#0F172A" stroke-width="1.5" />
+    <text x="1130" y="77" font-size="13.5" font-weight="700" fill="#0F172A">Governance: System telemetry, problem CRUD, and student account moderation</text>
+
+    <rect x="1700" y="55" width="550" height="34" rx="8" fill="#F0FDF4" stroke="#16A34A" stroke-width="1.5" />
+    <text x="1720" y="77" font-size="13.5" font-weight="700" fill="#14532D">Security Perimeter: Role-based access control with JWT revocation checking</text>
+
+    <text x="30" y="112" font-size="13" font-style="italic" fill="#64748B">Boundary Specification: All interactions within the boundary box represent automated system services executed by the Node.js/Express server and MongoDB.</text>
+  </g>
+</svg>

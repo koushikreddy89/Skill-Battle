@@ -1,77 +1,79 @@
 erDiagram
-    USER ||--o{ SUBMISSION : submits
-    USER ||--o{ BATTLE : creates
-    USER ||--o{ BATTLE : opposes
-    USER ||--o{ BATTLE : wins
-    USER ||--o{ TOKEN_BLACKLIST : invalidates
-    PROBLEM ||--o{ SUBMISSION : evaluated_for
-    PROBLEM ||--o{ BATTLE : assigned_to
-    PROBLEM ||--o{ DAILY_CHALLENGE : features_in
+    USER ||--o{ SUBMISSION : "submits"
+    USER ||--o{ BATTLE : "creates_as_host"
+    USER ||--o{ BATTLE : "joins_as_opponent"
+    USER ||--o{ BATTLE : "wins_match"
+    USER ||--o{ TOKEN_BLACKLIST : "revokes_token"
+    PROBLEM ||--o{ SUBMISSION : "evaluated_against"
+    PROBLEM ||--o{ BATTLE : "assigned_in_match"
+    PROBLEM ||--o{ DAILY_CHALLENGE : "featured_on_date"
 
     USER {
-        ObjectId id PK
-        string name
-        string username UK
-        string email UK
-        string password
+        ObjectId id PK "Primary Key"
+        string name "Full Name"
+        string username UK "Unique Handle"
+        string email UK "Unique Email Address"
+        string password "Bcrypt Password Hash"
         string role "student | admin"
-        int rating "Default 1200"
+        int rating "ELO Rating (Default: 1200)"
         object streak "current, max, lastDate"
-        object battleStats "battles, wins, losses, winRate"
-        date createdAt
+        object battleStats "battles, wins, losses"
+        date createdAt "Registration Timestamp"
     }
 
     PROBLEM {
-        ObjectId id PK
-        string title
-        string slug UK
-        string description
+        ObjectId id PK "Primary Key"
+        string title "Problem Statement Title"
+        string slug UK "URL Friendly Unique Slug"
+        string description "Markdown Description"
         string difficulty "Easy | Medium | Hard"
-        array tags
-        object starterCode "js, python"
-        array testCases "input, output, isHidden"
-        ObjectId author FK
-        date createdAt
+        array tags "Topic Classification Tags"
+        object starterCode "JS and Python Templates"
+        array sampleTestCases "Input, Output, Explanations"
+        array hiddenTestCases "Input, Expected Output"
+        ObjectId author FK "User ID of Author"
+        date createdAt "Creation Timestamp"
     }
 
     SUBMISSION {
-        ObjectId id PK
-        ObjectId user FK
-        ObjectId problem FK
+        ObjectId id PK "Primary Key"
+        ObjectId userId FK "Foreign Key -> USER"
+        ObjectId problemId FK "Foreign Key -> PROBLEM"
         string language "javascript | python"
-        string code
+        string code "Submitted Source Code"
         string status "Accepted | Wrong Answer | TLE"
-        float executionTime
-        float memory
-        int passedTests
-        int totalTests
-        date createdAt
+        float runtime "Execution Latency (ms)"
+        float memory "Memory Footprint (MB)"
+        int passedTests "Count of PassedTests"
+        int totalTests "Total Evaluated Tests"
+        date createdAt "Submission Timestamp"
     }
 
     BATTLE {
-        ObjectId id PK
-        string roomCode UK
-        ObjectId creator FK
-        ObjectId opponent FK
-        ObjectId problem FK
+        ObjectId id PK "Primary Key"
+        string roomCode UK "6-Character Room Code"
+        ObjectId hostId FK "Foreign Key -> USER"
+        ObjectId opponentId FK "Foreign Key -> USER"
+        ObjectId problemId FK "Foreign Key -> PROBLEM"
         string status "waiting | active | completed"
-        ObjectId winner FK
-        int duration "seconds"
-        date createdAt
+        ObjectId winnerId FK "Foreign Key -> USER"
+        int duration "Match Duration in Seconds"
+        object progress "Host and Opponent Stats"
+        date createdAt "Creation Timestamp"
     }
 
     DAILY_CHALLENGE {
-        ObjectId id PK
-        string date UK "YYYY-MM-DD"
-        ObjectId problem FK
-        int bonusPoints "Default 50"
-        array participants
+        ObjectId id PK "Primary Key"
+        string date UK "Calendar Date (YYYY-MM-DD)"
+        ObjectId problemId FK "Foreign Key -> PROBLEM"
+        int bonusPoints "Reward Bonus XP"
+        array participants "List of Solved User IDs"
     }
 
     TOKEN_BLACKLIST {
-        ObjectId id PK
-        string token UK
-        ObjectId userId FK
-        date expiresAt "TTL Indexed"
-        string reason
+        ObjectId id PK "Primary Key"
+        string token UK "Revoked JWT Signature / JTI"
+        ObjectId userId FK "Foreign Key -> USER"
+        date expiresAt "TTL Index Expiration Date"
+        string reason "Logout | Security Revocation"
     }

@@ -1,0 +1,47 @@
+flowchart TD
+    StartNode([● User Authenticated & Enters Platform]):::nodeStart --> ActivityChoice{Select Platform Activity}:::decisionStyle
+
+    ActivityChoice -->|Practice Solo| SoloPath[Browse Problem Catalogue & Filter by Tag/Difficulty]:::practiceStyle
+    SoloPath --> OpenProblem[Open Problem Workspace & Load Monaco Editor]:::practiceStyle
+    OpenProblem --> WriteCode[Write / Edit Algorithmic Solution]:::practiceStyle
+    WriteCode --> TestChoice{Run Sample Tests?}:::decisionStyle
+    
+    TestChoice -->|Yes| ExecSample[Execute in Local AST Sandbox Context]:::practiceStyle
+    ExecSample --> DisplayResults[Display Test Output, Execution Time & Diff]:::practiceStyle
+    DisplayResults --> WriteCode
+    
+    TestChoice -->|No| SubmitSolution[Submit Final Algorithmic Solution]:::practiceStyle
+    SubmitSolution --> ScanAST[AST Lexical Guard Scans for Forbidden Tokens]:::practiceStyle
+    ScanAST --> ASTCheck{Security Pass?}:::decisionStyle
+    ASTCheck -->|No| SecurityAlert[Display Security Violation Warning]:::errorStyle
+    SecurityAlert --> WriteCode
+    ASTCheck -->|Yes| EvalHidden[Evaluate Against Hidden & Edge Test Cases]:::practiceStyle
+    EvalHidden --> GradingCheck{All Test Cases Passed?}:::decisionStyle
+    GradingCheck -->|No| ShowFailures[Inspect Failed Test Diagnostics]:::practiceStyle
+    ShowFailures --> WriteCode
+    GradingCheck -->|Yes| UpdateStats[Increment Solved Count, Streaks & Save Submission]:::practiceStyle
+    UpdateStats --> PracticeComplete([● Practice Activity Complete]):::nodeEnd
+
+    ActivityChoice -->|1v1 Coding Battle| BattleMode{Host or Join Battle?}:::decisionStyle
+    BattleMode -->|Create Room| CreateLobby[Configure Difficulty, Duration & Generate 6-Char Code]:::battleStyle
+    CreateLobby --> WaitOpponent[Wait in Lobby for Opponent to Connect]:::battleStyle
+    BattleMode -->|Join Room| EnterCode[Enter 6-Character Room Code]:::battleStyle
+    EnterCode --> JoinLobby[Connect to Socket Room Namespace]:::battleStyle
+    WaitOpponent --> ReadyHandshake[Both Players Signal Ready]:::battleStyle
+    JoinLobby --> ReadyHandshake
+    ReadyHandshake --> Countdown[Server Broadcasts 5-Second Synchronized Countdown]:::battleStyle
+    Countdown --> BattleDuel[Simultaneous Live Coding Duel with Progress Telemetry]:::battleStyle
+    BattleDuel --> BattleSubmit[Submit Final Duel Solution]:::battleStyle
+    BattleSubmit --> DuelGrade{Passed 100% Tests First?}:::decisionStyle
+    DuelGrade -->|Yes| WinMatch[Declared Match Winner: +100 ELO Rating]:::winStyle
+    DuelGrade -->|No / Time Expired| ConcludeMatch[Match Concluded: ELO Rating Adjusted]:::battleStyle
+    WinMatch --> BattleComplete([● Battle Duel Concluded]):::nodeEnd
+    ConcludeMatch --> BattleComplete
+
+    classDef nodeStart fill:#1E3A8A,stroke:#0F172A,stroke-width:2.5px,color:#FFFFFF,font-weight:700;
+    classDef nodeEnd fill:#1E3A8A,stroke:#0F172A,stroke-width:2.5px,color:#FFFFFF,font-weight:700;
+    classDef decisionStyle fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#92400E,font-weight:700;
+    classDef practiceStyle fill:#EFF6FF,stroke:#1E3A8A,stroke-width:2px,color:#0F172A,font-weight:600;
+    classDef battleStyle fill:#F0FDFA,stroke:#0D9488,stroke-width:2px,color:#0F172A,font-weight:600;
+    classDef winStyle fill:#DCFCE7,stroke:#16A34A,stroke-width:2px,color:#14532D,font-weight:700;
+    classDef errorStyle fill:#FEE2E2,stroke:#DC2626,stroke-width:2px,color:#7F1D1D,font-weight:600;

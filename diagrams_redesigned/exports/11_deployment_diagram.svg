@@ -1,0 +1,315 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2050" width="2400" height="2050" style="background-color: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.10" />
+    </filter>
+    <linearGradient id="hdrDeploy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="cloudVercel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+    <linearGradient id="cloudRender" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4C1D95" />
+      <stop offset="100%" stop-color="#6D28D9" />
+    </linearGradient>
+    <linearGradient id="cloudAtlas" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="cloudJudge0" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#92400E" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+
+    <marker id="arrDeploy" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#2563EB" />
+    </marker>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="60" y="40" width="2280" height="120" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+  <text x="1200" y="90" text-anchor="middle" font-size="30" font-weight="800" fill="#0F172A" letter-spacing="0.5">FIGURE 4.10: PRODUCTION CLOUD DEPLOYMENT ARCHITECTURE</text>
+  <text x="1200" y="128" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Vercel Edge Global CDN, Render Cloud Compute, MongoDB Atlas Multi-AZ Cluster, and Judge0 Isolated Sandboxes</text>
+
+  <!-- =============================================================== -->
+  <!-- TOP ROW: CLIENT BROWSERS & EDGE NETWORK                         -->
+  <!-- =============================================================== -->
+
+  <!-- Node 1: Client Devices (Top-Left) -->
+  <g transform="translate(60, 200)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="340" rx="14" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="2.5" />
+    <rect x="0" y="0" width="680" height="50" rx="14" fill="#1E3A8A" />
+    <rect x="0" y="40" width="680" height="10" fill="#1E3A8A" />
+    <text x="24" y="32" font-size="18" font-weight="800" fill="#FFFFFF">💻 «device» Student &amp; Competitor Clients</text>
+    <rect x="530" y="12" width="130" height="26" rx="13" fill="#3B82F6" />
+    <text x="595" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">CLIENT TIER</text>
+
+    <text x="24" y="85" font-size="13.5" font-weight="700" fill="#0F172A">Hardware &amp; Execution Environment:</text>
+    <text x="24" y="112" font-size="13" fill="#475569">• Desktop / Laptop (Chrome 110+, Edge, Firefox, Safari)</text>
+    <text x="24" y="136" font-size="13" fill="#475569">• Mobile &amp; Tablet Responsive Browser Engine</text>
+    <text x="24" y="160" font-size="13" fill="#475569">• Local Storage (Keyed Monaco Drafts &amp; Preferences)</text>
+    <text x="24" y="184" font-size="13" fill="#475569">• Secure HttpOnly Cookie Storage for Auth Credentials</text>
+
+    <rect x="24" y="210" width="632" height="105" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1" />
+    <text x="36" y="235" font-size="13" font-weight="700" fill="#1E3A8A">Network Protocols Initiated:</text>
+    <text x="36" y="260" font-size="12.5" fill="#334155">• HTTPS (Port 443): Initial SPA bundle fetch &amp; REST APIs</text>
+    <text x="36" y="284" font-size="12.5" fill="#334155">• WSS (Port 443): Full-duplex WebSocket connection to Render</text>
+  </g>
+
+  <!-- Node 2: Vercel Global Edge Network (Top-Right) -->
+  <g transform="translate(860, 200)" filter="url(#shadow)">
+    <rect x="0" y="0" width="1480" height="340" rx="14" fill="#FFFFFF" stroke="#0F172A" stroke-width="2.5" />
+    <rect x="0" y="0" width="1480" height="50" rx="14" fill="url(#cloudVercel)" />
+    <rect x="0" y="40" width="1480" height="10" fill="#0F172A" />
+    <text x="24" y="32" font-size="18" font-weight="800" fill="#FFFFFF">▲ «cloud» Vercel Global Edge Network (Frontend SPA Hosting &amp; CDN)</text>
+    <rect x="1300" y="12" width="150" height="26" rx="13" fill="#475569" />
+    <text x="1375" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">GLOBAL EDGE</text>
+
+    <!-- 3 Internal Blocks Inside Vercel -->
+    <g transform="translate(24, 75)">
+      <rect x="0" y="0" width="460" height="240" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <text x="20" y="30" font-size="15" font-weight="800" fill="#0F172A">🌐 Global Anycast CDN</text>
+      <text x="20" y="60" font-size="13" fill="#475569">• 300+ Edge Points of Presence</text>
+      <text x="20" y="85" font-size="13" fill="#475569">• Automated SSL / TLS 1.3 Termination</text>
+      <text x="20" y="110" font-size="13" fill="#475569">• DDoS Mitigation &amp; Cloudflare DNS</text>
+      <text x="20" y="135" font-size="13" fill="#475569">• Brotli &amp; Gzip Compression Caching</text>
+      <text x="20" y="160" font-size="13" fill="#475569">• Sub-30ms Global Asset Delivery</text>
+    </g>
+
+    <g transform="translate(510, 75)">
+      <rect x="0" y="0" width="460" height="240" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <text x="20" y="30" font-size="15" font-weight="800" fill="#0F172A">📦 Static Build Artifacts</text>
+      <text x="20" y="60" font-size="13" fill="#475569">• Minified React 18 Production Bundle</text>
+      <text x="20" y="85" font-size="13" fill="#475569">• Split Chunks for Monaco Editor Engine</text>
+      <text x="20" y="110" font-size="13" fill="#475569">• Compiled Tailwind CSS 3.4 Stylesheet</text>
+      <text x="20" y="135" font-size="13" fill="#475569">• Webpack / Vite Code Split Optimization</text>
+      <text x="20" y="160" font-size="13" fill="#475569">• Immutable Content Hashed Filenames</text>
+    </g>
+
+    <g transform="translate(995, 75)">
+      <rect x="0" y="0" width="460" height="240" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <text x="20" y="30" font-size="15" font-weight="800" fill="#0F172A">🔄 CI/CD &amp; Deploy Automation</text>
+      <text x="20" y="60" font-size="13" fill="#475569">• Git Push Triggered Deploy Pipeline</text>
+      <text x="20" y="85" font-size="13" fill="#475569">• Preview Deployments on Feature Branches</text>
+      <text x="20" y="110" font-size="13" fill="#475569">• Instant Zero-Downtime Rollbacks</text>
+      <text x="20" y="135" font-size="13" fill="#475569">• Custom Domain DNS Routing</text>
+      <text x="20" y="160" font-size="13" fill="#475569">• Automated Performance Audits</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- MIDDLE ROW: RENDER CLOUD APPLICATION WEB SERVICE                -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 580)" filter="url(#shadow)">
+    <rect x="0" y="0" width="2280" height="520" rx="14" fill="#FFFFFF" stroke="#4C1D95" stroke-width="2.5" />
+    <rect x="0" y="0" width="2280" height="50" rx="14" fill="url(#cloudRender)" />
+    <rect x="0" y="40" width="2280" height="10" fill="#4C1D95" />
+    <text x="24" y="32" font-size="18" font-weight="800" fill="#FFFFFF">⚙️ «cloud» Render Cloud Web Service (Node.js &amp; Express Application Server Container)</text>
+    <rect x="2060" y="12" width="180" height="26" rx="13" fill="#7C3AED" />
+    <text x="2150" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">BACKEND COMPUTE</text>
+
+    <!-- 4 Sub-Nodes in Render -->
+    <!-- Pod 1: Container Runtime -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="520" height="400" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <rect x="0" y="0" width="520" height="38" rx="10" fill="#F5F3FF" />
+      <text x="20" y="25" font-size="15" font-weight="800" fill="#5B21B6">🐳 Container Runtime Environment</text>
+      <text x="20" y="65" font-size="13" font-weight="700" fill="#0F172A">Operating System &amp; Hardware:</text>
+      <text x="20" y="90" font-size="12.5" fill="#475569">• Alpine Linux / Ubuntu 22.04 LTS Kernel</text>
+      <text x="20" y="112" font-size="12.5" fill="#475569">• Node.js 18.x LTS High-Performance V8</text>
+      <text x="20" y="134" font-size="12.5" fill="#475569">• 512 MB – 2 GB Dynamically Scaled RAM</text>
+      <text x="20" y="156" font-size="12.5" fill="#475569">• Persistent Environment Secrets (.env)</text>
+      <text x="20" y="190" font-size="13" font-weight="700" fill="#5B21B6">Continuous Monitoring:</text>
+      <text x="20" y="215" font-size="12.5" fill="#475569">• Live CPU &amp; Memory Telemetry Gauges</text>
+      <text x="20" y="237" font-size="12.5" fill="#475569">• stdout / stderr Real-Time Log Streaming</text>
+      <text x="20" y="259" font-size="12.5" fill="#475569">• Health Check Probes: GET /api/health</text>
+      <text x="20" y="281" font-size="12.5" fill="#475569">• Auto-Restart Daemon on Fatal Crash</text>
+    </g>
+
+    <!-- Pod 2: Express HTTP/REST Server -->
+    <g transform="translate(580, 80)">
+      <rect x="0" y="0" width="520" height="400" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <rect x="0" y="0" width="520" height="38" rx="10" fill="#F5F3FF" />
+      <text x="20" y="25" font-size="15" font-weight="800" fill="#5B21B6">🚀 Express.js API Gateway Engine</text>
+      <text x="20" y="65" font-size="13" font-weight="700" fill="#0F172A">Defensive Middleware Chain:</text>
+      <text x="20" y="90" font-size="12.5" fill="#475569">• Helmet.js (HSTS, CSP, XSS Filter)</text>
+      <text x="20" y="112" font-size="12.5" fill="#475569">• CORS Whitelist (Permits Vercel Origins)</text>
+      <text x="20" y="134" font-size="12.5" fill="#475569">• Express Rate Limiter (Brute-Force Guard)</text>
+      <text x="20" y="156" font-size="12.5" fill="#475569">• NoSQL Query Sanitizer (Strips $ / .)</text>
+      <text x="20" y="190" font-size="13" font-weight="700" fill="#5B21B6">Business Logic Routing:</text>
+      <text x="20" y="215" font-size="12.5" fill="#475569">• Auth: Register, Login, Bcrypt, JWT Nonce</text>
+      <text x="20" y="237" font-size="12.5" fill="#475569">• Problems: Catalog, Filtering, Starter Code</text>
+      <text x="20" y="259" font-size="12.5" fill="#475569">• Analytics: 365d Heatmap &amp; Streaks</text>
+      <text x="20" y="281" font-size="12.5" fill="#475569">• Admin: CRUD Problems, User Suspensions</text>
+    </g>
+
+    <!-- Pod 3: Socket.IO Gateway Daemon -->
+    <g transform="translate(1130, 80)">
+      <rect x="0" y="0" width="540" height="400" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <rect x="0" y="0" width="540" height="38" rx="10" fill="#F5F3FF" />
+      <text x="20" y="25" font-size="15" font-weight="800" fill="#5B21B6">⚡ Stateful Socket.IO Gateway</text>
+      <text x="20" y="65" font-size="13" font-weight="700" fill="#0F172A">Authoritative Real-Time Architecture:</text>
+      <text x="20" y="90" font-size="12.5" fill="#475569">• Full-Duplex WebSockets over Port 443</text>
+      <text x="20" y="112" font-size="12.5" fill="#475569">• Dedicated /battle Isolated Namespace</text>
+      <text x="20" y="134" font-size="12.5" fill="#475569">• In-Memory Active Room State Registry</text>
+      <text x="20" y="156" font-size="12.5" fill="#475569">• Atomic Synchronized Match Countdown Clock</text>
+      <text x="20" y="190" font-size="13" font-weight="700" fill="#5B21B6">Multiplayer Matchmaker:</text>
+      <text x="20" y="215" font-size="12.5" fill="#475569">• Live Keystroke &amp; Test Progress Broadcast</text>
+      <text x="20" y="237" font-size="12.5" fill="#475569">• Instant First-to-Solve Victory Resolution</text>
+      <text x="20" y="259" font-size="12.5" fill="#475569">• Competitive ELO Rating Computation Hub</text>
+      <text x="20" y="281" font-size="12.5" fill="#475569">• Graceful Disconnect &amp; Forfeit Timers (30s)</text>
+    </g>
+
+    <!-- Pod 4: AST Execution Sandbox -->
+    <g transform="translate(1700, 80)">
+      <rect x="0" y="0" width="550" height="400" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <rect x="0" y="0" width="550" height="38" rx="10" fill="#F5F3FF" />
+      <text x="20" y="25" font-size="15" font-weight="800" fill="#5B21B6">🔒 AST In-Memory Code Sandbox</text>
+      <text x="20" y="65" font-size="13" font-weight="700" fill="#0F172A">Execution Security Features:</text>
+      <text x="20" y="90" font-size="12.5" fill="#475569">• AST Regex Pre-Execution Lexical Scan</text>
+      <text x="20" y="112" font-size="12.5" fill="#475569">• Blocks require, import, fs, child_process</text>
+      <text x="20" y="134" font-size="12.5" fill="#475569">• Node.js vm Isolated Context with Null Prototype</text>
+      <text x="20" y="156" font-size="12.5" fill="#475569">• Hard 2,500ms CPU Timeout Boundary</text>
+      <text x="20" y="190" font-size="13" font-weight="700" fill="#5B21B6">Output Capture &amp; Validation:</text>
+      <text x="20" y="215" font-size="12.5" fill="#475569">• Captures Execution Latency (ms) &amp; Memory (MB)</text>
+      <text x="20" y="237" font-size="12.5" fill="#475569">• Evaluates Public &amp; Hidden Testcases</text>
+      <text x="20" y="259" font-size="12.5" fill="#475569">• Normalizes Assertions (Accepted, WA, TLE)</text>
+      <text x="20" y="281" font-size="12.5" fill="#475569">• Fallback to Judge0 Cloud on Error</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- BOTTOM ROW: PERSISTENCE & EXTERNAL CLOUD SERVICES               -->
+  <!-- =============================================================== -->
+
+  <!-- Node 3: MongoDB Atlas Cloud (Bottom-Left) -->
+  <g transform="translate(60, 1140)" filter="url(#shadow)">
+    <rect x="0" y="0" width="1440" height="680" rx="14" fill="#FFFFFF" stroke="#065F46" stroke-width="2.5" />
+    <rect x="0" y="0" width="1440" height="50" rx="14" fill="url(#cloudAtlas)" />
+    <rect x="0" y="40" width="1440" height="10" fill="#065F46" />
+    <text x="24" y="32" font-size="18" font-weight="800" fill="#FFFFFF">🍃 «cloud» MongoDB Atlas Distributed Cloud Database (Multi-AZ Replica Set)</text>
+    <rect x="1260" y="12" width="160" height="26" rx="13" fill="#059669" />
+    <text x="1340" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">DATABASE CLUSTER</text>
+
+    <!-- 3 Internal Nodes in MongoDB Atlas -->
+    <!-- Node A: Primary Node -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="430" height="360" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <rect x="0" y="0" width="430" height="38" rx="10" fill="#ECFDF5" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#065F46">Primary Replica Node (AZ-1)</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Operational Duties:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• Serves 100% of Authoritative Write Ops</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• Atomic findOneAndUpdate() for Battles</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• Generates Oplog Replication Stream</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• Enforces Unique B-Tree Indexes</text>
+      <text x="15" y="190" font-size="13" font-weight="700" fill="#065F46">Security &amp; Encryption:</text>
+      <text x="15" y="215" font-size="12.5" fill="#475569">• TLS 1.3 In-Flight Encryption</text>
+      <text x="15" y="237" font-size="12.5" fill="#475569">• AES-256 At-Rest Storage Encryption</text>
+      <text x="15" y="259" font-size="12.5" fill="#475569">• IP Access Whitelist Enforcement</text>
+    </g>
+
+    <!-- Node B: Secondary Node 1 -->
+    <g transform="translate(490, 80)">
+      <rect x="0" y="0" width="430" height="360" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <rect x="0" y="0" width="430" height="38" rx="10" fill="#ECFDF5" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#065F46">Secondary Replica Node (AZ-2)</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Operational Duties:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• Continuous Asynchronous Oplog Sync</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• High-Availability Instant Auto-Failover</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• Handles Secondary Read Preference</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• Offloads Analytics &amp; Heatmap Queries</text>
+      <text x="15" y="190" font-size="13" font-weight="700" fill="#065F46">Failover Quorum:</text>
+      <text x="15" y="215" font-size="12.5" fill="#475569">• Raft-Style Automatic Election</text>
+      <text x="15" y="237" font-size="12.5" fill="#475569">• Promoted to Primary in &lt;3 Seconds</text>
+      <text x="15" y="259" font-size="12.5" fill="#475569">• Zero Data Loss Invariant</text>
+    </g>
+
+    <!-- Node C: Secondary Node 2 -->
+    <g transform="translate(950, 80)">
+      <rect x="0" y="0" width="460" height="360" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <rect x="0" y="0" width="460" height="38" rx="10" fill="#ECFDF5" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#065F46">Secondary Backup Node (AZ-3)</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Operational Duties:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• Geographical Disaster Recovery Node</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• Automated Point-In-Time Backups (PITR)</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• Snapshot Archival Storage (AWS S3)</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• Participates in Election Voting Quorum</text>
+      <text x="15" y="190" font-size="13" font-weight="700" fill="#065F46">Backup Policies:</text>
+      <text x="15" y="215" font-size="12.5" fill="#475569">• Continuous Oplog Backup Every 6h</text>
+      <text x="15" y="237" font-size="12.5" fill="#475569">• 30-Day Retention Window</text>
+      <text x="15" y="259" font-size="12.5" fill="#475569">• Instant Cluster Restore Verification</text>
+    </g>
+
+    <!-- Schema Summary Band -->
+    <g transform="translate(30, 460)">
+      <rect x="0" y="0" width="1380" height="200" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+      <text x="20" y="30" font-size="14.5" font-weight="800" fill="#065F46">Managed MongoDB Collections &amp; Storage Footprint:</text>
+      
+      <text x="20" y="65" font-size="13" fill="#334155">1. <tspan font-family="monospace" font-weight="700" fill="#1E3A8A">users</tspan>: Profiles, Bcrypt hashes, ELO ratings, streaks, battle win/loss tallies.</text>
+      <text x="20" y="90" font-size="13" fill="#334155">2. <tspan font-family="monospace" font-weight="700" fill="#065F46">problems</tspan>: Statements, tags, starter code templates, sample &amp; hidden testcase suites.</text>
+      <text x="20" y="115" font-size="13" fill="#334155">3. <tspan font-family="monospace" font-weight="700" fill="#1E40AF">submissions</tspan>: Source code, runtime latency (ms), memory footprint (MB), pass/fail status.</text>
+      <text x="20" y="140" font-size="13" fill="#334155">4. <tspan font-family="monospace" font-weight="700" fill="#5B21B6">battles</tspan>: 6-character room codes, player references, synchronized scores, winner ID.</text>
+      <text x="20" y="165" font-size="13" fill="#334155">5. <tspan font-family="monospace" font-weight="700" fill="#92400E">dailychallenges</tspan> &amp; <tspan font-family="monospace" font-weight="700" fill="#9F1239">tokenblacklists</tspan>: 24h bonus problem scheduler &amp; TTL automated session revocations.</text>
+    </g>
+  </g>
+
+  <!-- Node 4: Judge0 Isolated Cloud API (Bottom-Right) -->
+  <g transform="translate(1540, 1140)" filter="url(#shadow)">
+    <rect x="0" y="0" width="800" height="680" rx="14" fill="#FFFFFF" stroke="#92400E" stroke-width="2.5" />
+    <rect x="0" y="0" width="800" height="50" rx="14" fill="url(#cloudJudge0)" />
+    <rect x="0" y="40" width="800" height="10" fill="#92400E" />
+    <text x="24" y="32" font-size="18" font-weight="800" fill="#FFFFFF">⚡ «cloud» Judge0 CE Multi-Language Execution Cluster</text>
+    <rect x="630" y="12" width="146" height="26" rx="13" fill="#D97706" />
+    <text x="703" y="29" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">ISOLATED CE</text>
+
+    <!-- Details Inside Judge0 -->
+    <text x="24" y="90" font-size="14.5" font-weight="700" fill="#92400E">Cloud Sandboxing Architecture:</text>
+    <text x="24" y="120" font-size="13" fill="#475569">• REST API over HTTPS (Port 443) with API Key Auth</text>
+    <text x="24" y="145" font-size="13" fill="#475569">• Multi-Language Compilers: C++, Java, Python, Rust, Go</text>
+    <text x="24" y="170" font-size="13" fill="#475569">• Linux Cgroups &amp; Namespaces Kernel Containerization</text>
+    <text x="24" y="195" font-size="13" fill="#475569">• Hard Resource Bounds: 2.5s CPU Time, 128 MB RAM</text>
+    <text x="24" y="220" font-size="13" fill="#475569">• Isolated Ephemeral Container Spawn per Submission</text>
+
+    <rect x="24" y="260" width="750" height="380" rx="10" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.5" />
+    <text x="20" y="30" font-size="14" font-weight="700" fill="#0F172A">REST Submission Contract:</text>
+    <text x="20" y="60" font-size="12.5" font-family="monospace" fill="#2563EB">POST https://judge0-ce.p.rapidapi.com/submissions</text>
+    <text x="20" y="85" font-size="12" font-family="monospace" fill="#475569">{ "source_code": "...", "language_id": 63, "stdin": "..." }</text>
+    
+    <text x="20" y="125" font-size="14" font-weight="700" fill="#0F172A">Captured Execution Response Payload:</text>
+    <text x="20" y="150" font-size="12" font-family="monospace" fill="#059669">{ "stdout": "...", "time": "0.012", "memory": 2450, </text>
+    <text x="20" y="172" font-size="12" font-family="monospace" fill="#059669">  "status": { "id": 3, "description": "Accepted" } }</text>
+
+    <text x="20" y="220" font-size="13" font-weight="700" fill="#92400E">Fault Tolerance &amp; Graceful Degradation:</text>
+    <text x="20" y="245" font-size="12.5" fill="#475569">• Active Health Probe Heartbeat Every 60 Seconds</text>
+    <text x="20" y="270" font-size="12.5" fill="#475569">• Local AST In-Memory Sandbox acts as Instant Fallback</text>
+    <text x="20" y="295" font-size="12.5" fill="#475569">• 99.9% Uptime Guarantee Across Competition Tournaments</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- FOOTER LEGEND                                                   -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1860)">
+    <rect x="0" y="0" width="2280" height="130" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+    <text x="30" y="38" font-size="15" font-weight="800" fill="#0F172A">DEPLOYMENT TOPOLOGY &amp; CLOUD INFRASTRUCTURE CONVENTIONS:</text>
+
+    <rect x="30" y="55" width="480" height="34" rx="8" fill="#F1F5F9" stroke="#0F172A" stroke-width="1.5" />
+    <text x="50" y="77" font-size="13.5" font-weight="700" fill="#0F172A">Vercel Global CDN: Serverless frontend asset delivery with automatic SSL</text>
+
+    <rect x="540" y="55" width="540" height="34" rx="8" fill="#F5F3FF" stroke="#5B21B6" stroke-width="1.5" />
+    <text x="560" y="77" font-size="13.5" font-weight="700" fill="#5B21B6">Render Web Service: Continuous Node.js compute &amp; persistent WebSocket daemons</text>
+
+    <rect x="1110" y="55" width="560" height="34" rx="8" fill="#ECFDF5" stroke="#065F46" stroke-width="1.5" />
+    <text x="1130" y="77" font-size="13.5" font-weight="700" fill="#065F46">MongoDB Atlas: Multi-AZ distributed replica set with zero-downtime failover</text>
+
+    <rect x="1700" y="55" width="550" height="34" rx="8" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5" />
+    <text x="1720" y="77" font-size="13.5" font-weight="700" fill="#92400E">Judge0 Sandbox: Isolated containerized multi-language execution cluster</text>
+
+    <text x="30" y="112" font-size="13" font-style="italic" fill="#64748B">Network Topology: Zero plaintext traffic; all external egress utilizes TLS 1.3 / WSS encapsulation; database ports protected by VPC IP whitelisting.</text>
+  </g>
+</svg>

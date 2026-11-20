@@ -1,0 +1,275 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2050" width="2400" height="2050" style="background-color: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.12" />
+    </filter>
+    <linearGradient id="hdrStudent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="hdrAdmin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <linearGradient id="hdrJudge0" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="procGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EFF6FF" />
+      <stop offset="50%" stop-color="#FFFFFF" />
+      <stop offset="100%" stop-color="#DBEAFE" />
+    </linearGradient>
+
+    <!-- Arrow markers -->
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563EB" />
+    </marker>
+    <marker id="arrowDark" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0F172A" />
+    </marker>
+    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#059669" />
+    </marker>
+  </defs>
+
+  <!-- Document Header Banner -->
+  <rect x="60" y="40" width="2280" height="120" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+  <text x="1200" y="90" text-anchor="middle" font-size="30" font-weight="800" fill="#0F172A" letter-spacing="0.5">FIGURE 4.3: DATA FLOW DIAGRAM (DFD LEVEL 0) — SYSTEM CONTEXT MODEL</text>
+  <text x="1200" y="128" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Context Boundary, External Actors, Central Platform Process (0.0), and 15 Bidirectional Data Ingestion/Egress Streams</text>
+
+  <!-- =============================================================== -->
+  <!-- EXTERNAL ENTITY 1: STUDENT / COMPETITOR (Top-Left)              -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 210)" filter="url(#shadow)">
+    <rect x="0" y="0" width="500" height="340" rx="12" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="2.5" />
+    <rect x="0" y="0" width="500" height="60" rx="12" fill="url(#hdrStudent)" />
+    <rect x="0" y="48" width="500" height="12" fill="#1E3A8A" />
+    <text x="24" y="38" font-size="21" font-weight="800" fill="#FFFFFF">👤  STUDENT / COMPETITOR</text>
+    <rect x="360" y="16" width="120" height="28" rx="14" fill="#3B82F6" />
+    <text x="420" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">PRIMARY ACTOR</text>
+
+    <!-- Content / Responsibilities -->
+    <text x="24" y="95" font-size="14.5" font-weight="700" fill="#1E3A8A">External User Domain &amp; Operational Roles:</text>
+    <text x="24" y="130" font-size="13.5" fill="#334155">• Authenticate via JWT &amp; Manage Developer Profile</text>
+    <text x="24" y="165" font-size="13.5" fill="#334155">• Browse Problem Catalogue, Filter by Tags &amp; Difficulty</text>
+    <text x="24" y="200" font-size="13.5" fill="#334155">• Write Code in Monaco Editor (JavaScript / Python)</text>
+    <text x="24" y="235" font-size="13.5" fill="#334155">• Trigger AST Sandbox Execution &amp; Submit Solutions</text>
+    <text x="24" y="270" font-size="13.5" fill="#334155">• Create &amp; Join Real-Time 1v1 Battle Arenas</text>
+    <text x="24" y="305" font-size="13.5" fill="#334155">• Solve 24-Hour Daily Challenges &amp; Track Heatmap</text>
+  </g>
+
+  <!-- =============================================================== -->
+  <!-- EXTERNAL ENTITY 2: PLATFORM ADMINISTRATOR (Top-Right)           -->
+  <!-- =============================================================== -->
+  <g transform="translate(1840, 210)" filter="url(#shadow)">
+    <rect x="0" y="0" width="500" height="340" rx="12" fill="#FFFFFF" stroke="#0F172A" stroke-width="2.5" />
+    <rect x="0" y="0" width="500" height="60" rx="12" fill="url(#hdrAdmin)" />
+    <rect x="0" y="48" width="500" height="12" fill="#0F172A" />
+    <text x="24" y="38" font-size="21" font-weight="800" fill="#FFFFFF">🛡️  PLATFORM ADMINISTRATOR</text>
+    <rect x="360" y="16" width="120" height="28" rx="14" fill="#475569" />
+    <text x="420" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">GOVERNANCE</text>
+
+    <!-- Content / Responsibilities -->
+    <text x="24" y="95" font-size="14.5" font-weight="700" fill="#0F172A">Administrative Domain &amp; Operational Roles:</text>
+    <text x="24" y="130" font-size="13.5" fill="#334155">• Privileged Multi-Factor Authentication &amp; RBAC Access</text>
+    <text x="24" y="165" font-size="13.5" fill="#334155">• Problem CRUD Authoring &amp; Hidden Test Suite Definition</text>
+    <text x="24" y="200" font-size="13.5" fill="#334155">• Schedule Deterministic 24-Hour Daily Challenges</text>
+    <text x="24" y="235" font-size="13.5" fill="#334155">• Student Account Moderation &amp; Instant Token Revocation</text>
+    <text x="24" y="270" font-size="13.5" fill="#334155">• Real-Time Health Telemetry &amp; System Load Audits</text>
+    <text x="24" y="305" font-size="13.5" fill="#334155">• Global Leaderboard Integrity &amp; ELO Anomaly Detection</text>
+  </g>
+
+  <!-- =============================================================== -->
+  <!-- CENTRAL PROCESS 0.0: SKILL BATTLE PLATFORM                      -->
+  <!-- =============================================================== -->
+  <g transform="translate(1200, 930)" filter="url(#shadow)">
+    <!-- Outer concentric rings -->
+    <circle cx="0" cy="0" r="280" fill="url(#procGrad)" stroke="#1E3A8A" stroke-width="6" />
+    <circle cx="0" cy="0" r="268" fill="none" stroke="#3B82F6" stroke-width="2" stroke-dasharray="8 4" />
+    <circle cx="0" cy="0" r="260" fill="none" stroke="#1E3A8A" stroke-width="1.5" />
+
+    <!-- Process ID Pill -->
+    <rect x="-60" y="-235" width="120" height="42" rx="21" fill="#1E3A8A" stroke="#FFFFFF" stroke-width="2" />
+    <text x="0" y="-208" text-anchor="middle" font-size="20" font-weight="900" fill="#F8FAFC">0.0</text>
+
+    <!-- Process Main Titles -->
+    <text x="0" y="-140" text-anchor="middle" font-size="26" font-weight="900" fill="#0F172A" letter-spacing="1">SKILL BATTLE PLATFORM</text>
+    <text x="0" y="-110" text-anchor="middle" font-size="16" font-weight="700" fill="#2563EB">REAL-TIME COMPETITIVE PROGRAMMING SYSTEM</text>
+
+    <line x1="-180" y1="-85" x2="180" y2="-85" stroke="#CBD5E1" stroke-width="1.5" />
+
+    <!-- Process Internal Responsibilities / Architectural Modules -->
+    <text x="0" y="-55" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">MERN Stack &amp; Full-Duplex Gateway Hub</text>
+    <text x="0" y="-25" text-anchor="middle" font-size="13" fill="#334155">• Dual Execution: In-Memory AST Sandbox &amp; Judge0</text>
+    <text x="0" y="5" text-anchor="middle" font-size="13" fill="#334155">• Authoritative WebSocket Engine (/battle Namespace)</text>
+    <text x="0" y="35" text-anchor="middle" font-size="13" fill="#334155">• State Synchronization &amp; Atomic Clock Authority</text>
+    <text x="0" y="65" text-anchor="middle" font-size="13" fill="#334155">• ELO Rating Algorithm (+100 Win / -25 Loss / +25 Draw)</text>
+    <text x="0" y="95" text-anchor="middle" font-size="13" fill="#334155">• Mongoose ODM Persistence with TTL Token Revocation</text>
+
+    <line x1="-180" y1="125" x2="180" y2="125" stroke="#CBD5E1" stroke-width="1.5" />
+
+    <rect x="-160" y="145" width="320" height="34" rx="17" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1.5" />
+    <text x="0" y="168" text-anchor="middle" font-size="13" font-weight="800" fill="#1E3A8A">CENTRAL OPERATIONAL BOUNDARY</text>
+  </g>
+
+  <!-- =============================================================== -->
+  <!-- EXTERNAL ENTITY 3: EXTERNAL JUDGE0 SANDBOX API (Bottom-Center)  -->
+  <!-- =============================================================== -->
+  <g transform="translate(860, 1440)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="270" rx="12" fill="#FFFFFF" stroke="#065F46" stroke-width="2.5" />
+    <rect x="0" y="0" width="680" height="60" rx="12" fill="url(#hdrJudge0)" />
+    <rect x="0" y="48" width="680" height="12" fill="#065F46" />
+    <text x="24" y="38" font-size="21" font-weight="800" fill="#FFFFFF">⚙️  EXTERNAL JUDGE0 SANDBOX API</text>
+    <rect x="510" y="16" width="146" height="28" rx="14" fill="#059669" />
+    <text x="583" y="35" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">REMOTE COMPILER</text>
+
+    <!-- Content / Responsibilities -->
+    <text x="24" y="95" font-size="14.5" font-weight="700" fill="#065F46">Sandboxed Execution Cluster Specifications:</text>
+    <text x="24" y="130" font-size="13.5" fill="#334155">• Encrypted REST Fallback Execution Engine (HTTPS / Port 443)</text>
+    <text x="24" y="165" font-size="13.5" fill="#334155">• Isolated Ephemeral Docker Container Runtimes (Linux Cgroups &amp; Namespaces)</text>
+    <text x="24" y="200" font-size="13.5" fill="#334155">• Strict Enforcement: CPU Timeout (2500ms) &amp; Memory Allocation Cap (128 MB)</text>
+    <text x="24" y="235" font-size="13.5" fill="#334155">• Standard I/O Pipe Capture: Base64 Encoded Stdin, Stdout, Stderr, &amp; Status Tokens</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- DATA FLOWS: STUDENT <-> PLATFORM (FLOWS 1 to 8)                 -->
+  <!-- =============================================================== -->
+
+  <!-- Flow 1: Credentials & Registration (Student -> System) -->
+  <path d="M 560 250 L 980 690" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#arrowBlue)" />
+  <g transform="translate(710, 420)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E3A8A">1. Credentials, Profile Data &amp; Registration Info</text>
+  </g>
+
+  <!-- Flow 2: Algorithmic Source Code (Student -> System) -->
+  <path d="M 560 310 L 940 730" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#arrowBlue)" />
+  <g transform="translate(680, 500)">
+    <rect x="-180" y="-16" width="360" height="32" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E3A8A">2. Algorithmic Source Code (JS / Python)</text>
+  </g>
+
+  <!-- Flow 3: Battle Lobby Actions (Student -> System) -->
+  <path d="M 560 370 L 920 810" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#arrowBlue)" />
+  <g transform="translate(670, 580)">
+    <rect x="-180" y="-16" width="360" height="32" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E3A8A">3. Battle Lobby Actions &amp; 6-Char Room Codes</text>
+  </g>
+
+  <!-- Flow 4: Real-Time Duel Events (Student -> System) -->
+  <path d="M 560 430 L 910 880" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#arrowBlue)" />
+  <g transform="translate(670, 660)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E3A8A">4. Live Duel WebSockets &amp; AST Test Runs</text>
+  </g>
+
+  <!-- Flow 5: Auth Tokens & Cookies (System -> Student) -->
+  <path d="M 915 950 L 560 490" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#arrowGreen)" />
+  <g transform="translate(680, 740)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#059669" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#065F46">5. Signed JWT Access Tokens &amp; HttpOnly Cookies</text>
+  </g>
+
+  <!-- Flow 6: Execution Metrics & Output (System -> Student) -->
+  <path d="M 925 1020 L 520 620" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#arrowGreen)" />
+  <g transform="translate(670, 820)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#059669" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#065F46">6. AST / Sandbox Execution Output &amp; Metrics</text>
+  </g>
+
+  <!-- Flow 7: Opponent Telemetry (System -> Student) -->
+  <path d="M 950 1100 L 480 770" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#arrowGreen)" />
+  <g transform="translate(670, 900)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#059669" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#065F46">7. Live Opponent Progress &amp; Match Countdown</text>
+  </g>
+
+  <!-- Flow 8: Heatmap & ELO Rankings (System -> Student) -->
+  <path d="M 990 1170 L 440 920" fill="none" stroke="#059669" stroke-width="3" marker-end="url(#arrowGreen)" />
+  <g transform="translate(680, 980)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#059669" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#065F46">8. 365-Day Activity Heatmap &amp; ELO Rating Updates</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- DATA FLOWS: ADMIN <-> PLATFORM (FLOWS 9 to 14)                  -->
+  <!-- =============================================================== -->
+
+  <!-- Flow 9: Admin Login & Session (Admin -> System) -->
+  <path d="M 1840 250 L 1420 690" fill="none" stroke="#0F172A" stroke-width="3" marker-end="url(#arrowDark)" />
+  <g transform="translate(1690, 420)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F172A">9. Admin Credentials &amp; Privileged Auth Session</text>
+  </g>
+
+  <!-- Flow 10: Problem CRUD (Admin -> System) -->
+  <path d="M 1840 310 L 1460 730" fill="none" stroke="#0F172A" stroke-width="3" marker-end="url(#arrowDark)" />
+  <g transform="translate(1720, 500)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F172A">10. Problem CRUD, Authoring &amp; Hidden Tests</text>
+  </g>
+
+  <!-- Flow 11: Account Moderation (Admin -> System) -->
+  <path d="M 1840 370 L 1480 810" fill="none" stroke="#0F172A" stroke-width="3" marker-end="url(#arrowDark)" />
+  <g transform="translate(1730, 580)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F172A">11. Student Governance, Moderation &amp; Suspensions</text>
+  </g>
+
+  <!-- Flow 12: Daily Challenge Schedules (Admin -> System) -->
+  <path d="M 1840 430 L 1490 880" fill="none" stroke="#0F172A" stroke-width="3" marker-end="url(#arrowDark)" />
+  <g transform="translate(1730, 660)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#0F172A" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0F172A">12. Daily Challenge Schedules &amp; XP Multipliers</text>
+  </g>
+
+  <!-- Flow 13: System Telemetry & Metrics (System -> Admin) -->
+  <path d="M 1485 950 L 1840 490" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#arrowBlue)" />
+  <g transform="translate(1720, 750)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E3A8A">13. Real-Time System Telemetry &amp; Health Metrics</text>
+  </g>
+
+  <!-- Flow 14: Audit Logs & Reports (System -> Admin) -->
+  <path d="M 1475 1020 L 1880 620" fill="none" stroke="#2563EB" stroke-width="3" marker-end="url(#arrowBlue)" />
+  <g transform="translate(1730, 830)">
+    <rect x="-185" y="-16" width="370" height="32" rx="6" fill="#FFFFFF" stroke="#2563EB" stroke-width="1.5" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1E3A8A">14. User Audit Logs &amp; Operational Status Reports</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- DATA FLOW 15: PLATFORM <-> JUDGE0 API                           -->
+  <!-- =============================================================== -->
+  <!-- Bidirectional arrows between Platform Bottom and Judge0 Top -->
+  <!-- Outgoing (Platform -> Judge0) -->
+  <path d="M 1150 1210 L 1150 1440" fill="none" stroke="#059669" stroke-width="4" marker-end="url(#arrowGreen)" />
+  <!-- Returning (Judge0 -> Platform) -->
+  <path d="M 1250 1440 L 1250 1210" fill="none" stroke="#065F46" stroke-width="4" marker-end="url(#arrowGreen)" />
+
+  <g transform="translate(1200, 1325)">
+    <rect x="-260" y="-22" width="520" height="44" rx="22" fill="#ECFDF5" stroke="#059669" stroke-width="2" filter="url(#shadow)" />
+    <text x="0" y="5" text-anchor="middle" font-size="14.5" font-weight="800" fill="#065F46">15. Sandboxed Code Payloads &amp; Execution Output JSON Stream</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- FOOTER LEGEND                                                   -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1880)">
+    <rect x="0" y="0" width="2280" height="110" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+    <text x="30" y="38" font-size="15" font-weight="800" fill="#0F172A">DFD LEVEL 0 (CONTEXT MODEL) CONVENTIONS:</text>
+    
+    <rect x="30" y="55" width="28" height="28" rx="6" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+    <text x="70" y="74" font-size="14" font-weight="700" fill="#1E3A8A">External Entities (Square Rectangles): Student Contestants &amp; Platform Governance Authorities</text>
+
+    <circle cx="950" cy="69" r="14" fill="#EFF6FF" stroke="#1E3A8A" stroke-width="3" />
+    <text x="980" y="74" font-size="14" font-weight="700" fill="#1E3A8A">Central Process (Circle 0.0): Unified Skill Battle Execution &amp; State Authority Boundary</text>
+
+    <line x1="1720" y1="69" x2="1780" y2="69" stroke="#2563EB" stroke-width="3" marker-end="url(#arrowBlue)" />
+    <text x="1800" y="74" font-size="14" font-weight="700" fill="#1E3A8A">Numbered Data Flows (1–15): Formal Input/Output Information Interfaces</text>
+  </g>
+</svg>

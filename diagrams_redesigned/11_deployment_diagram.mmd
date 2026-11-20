@@ -1,0 +1,43 @@
+flowchart TD
+    subgraph ClientEnvironment ["CLIENT PLATFORM ENVIRONMENT"]
+        UserDevice["Student / Administrator Computer Device<br/>(PC / Mac / Linux / Chromebook)"]
+        Browser["Modern Web Browser Engine (Chrome, Edge, Firefox, Safari)<br/>V8 JavaScript Engine & WebSockets Support"]
+        UserDevice --> Browser
+    end
+
+    subgraph VercelEdge ["VERCEL GLOBAL EDGE CLOUD INFRASTRUCTURE"]
+        VercelCDN["Vercel Global AnyCast Edge CDN<br/>(TLS 1.3 Termination & DDoS Shield)"]
+        StaticBundle["Static React 18 SPA Artifacts<br/>(Optimized HTML5, Chunked JS, Minified CSS)"]
+        VercelCDN --> StaticBundle
+    end
+
+    subgraph RenderCloud ["RENDER MANAGED CLUSTER (APPLICATION HOSTING)"]
+        RenderRouter["Render Edge Load Balancer & Reverse Proxy<br/>(Automated SSL Provisioning & Health Checks)"]
+        AppContainer["Dockerized Node.js 20 LTS Web Service Container<br/>(Express.js HTTP Server & Socket.IO Gateway)"]
+        SandboxedRuntimes["Hardened Execution Environment<br/>(Node.js VM Sandbox & Python 3.11 Runtime)"]
+        
+        RenderRouter --> AppContainer
+        AppContainer --> SandboxedRuntimes
+    end
+
+    subgraph AtlasCloud ["MONGODB ATLAS CLUSTER (DATABASE PERSISTENCE)"]
+        AtlasGateway["MongoDB Atlas Cloud Gateway<br/>(IP Whitelisting & TLS 1.3 Enforcement)"]
+        PrimaryNode[("Primary Database Replica Node<br/>(Active Read / Write Operations)")]
+        SecondaryNode[("Secondary Replica Node<br/>(High Availability & Auto-Failover)")]
+        DailySnapshots[("Automated Cloud Backup Storage<br/>(Continuous Recovery Point)")]
+
+        AtlasGateway --> PrimaryNode
+        AtlasGateway --> SecondaryNode
+        PrimaryNode -.->|Replica Sync| SecondaryNode
+        PrimaryNode -.->|Automated Snapshots| DailySnapshots
+    end
+
+    subgraph ExternalCloud ["THIRD-PARTY CLOUD INTEGRATIONS"]
+        Judge0Cloud["Judge0 Cloud Execution Engine API<br/>(Sandboxed Multi-Language Compiler Fallback)"]
+    end
+
+    Browser -->|"1. HTTPS GET Static SPA Assets (Port 443)"| VercelCDN
+    Browser <-->|"2. HTTPS REST API Invocations with JWT Cookies (Port 443)"| RenderRouter
+    Browser <-->|"3. Full-Duplex WSS WebSocket Connection (Port 443)"| RenderRouter
+    AppContainer <-->|"4. Encrypted Mongoose TLS Driver Connection (Port 27017)"| AtlasGateway
+    AppContainer <-->|"5. HTTPS Outbound Fallback Code Execution (Port 443)"| Judge0Cloud

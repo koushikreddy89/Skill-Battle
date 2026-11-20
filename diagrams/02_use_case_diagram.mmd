@@ -1,26 +1,42 @@
 flowchart LR
-    Student((Student / Competitor))
-    Admin((System Administrator))
+    Student(["👤 Student / Competitor"]):::actorStyle
+    Admin(["🛡️ Platform Administrator"]):::actorStyle
 
-    subgraph SkillBattleSystem ["SKILL BATTLE SYSTEM"]
-        UC01["UC-01: Register & Authenticate Account"]
-        UC02["UC-02: Browse Algorithmic Problem Library"]
-        UC03["UC-03: Filter by Topic Tag & Difficulty"]
-        UC04["UC-04: Write Code in Monaco Editor"]
-        UC05["UC-05: Run Sample Test Cases"]
-        UC06["UC-06: Submit Final Algorithmic Solution"]
-        UC07["UC-07: Create 1v1 Battle Lobby"]
-        UC08["UC-08: Join 1v1 Battle with Room Code"]
-        UC09["UC-09: Compete in Real-Time 1v1 Duel"]
-        UC10["UC-10: View 365-Day Activity Heatmap & Streaks"]
-        UC11["UC-11: Solve 24-Hour Daily Coding Challenge"]
-        UC12["UC-12: View Global Leaderboards & Badges"]
-        
-        UC13["UC-13: View System Telemetry & Metrics"]
-        UC14["UC-14: Problem CRUD (Author Statements & Tests)"]
-        UC15["UC-15: Student Governance & Account Suspension"]
-        UC16["UC-16: Schedule Daily Challenge Calendar"]
+    subgraph SystemBoundary ["SKILL BATTLE PLATFORM SYSTEM BOUNDARY"]
+        direction TB
+
+        subgraph CoreSubsystem ["1. Authentication & Algorithmic Practice Arena"]
+            direction TB
+            UC01(["UC-01: Register & Authenticate Account (JWT)"]):::ucStyle
+            UC02(["UC-02: Manage User Profile & Security Settings"]):::ucStyle
+            UC03(["UC-03: Browse Problem Library by Topic Tag"]):::ucStyle
+            UC04(["UC-04: Filter by Difficulty & Acceptance Rate"]):::ucStyle
+            UC05(["UC-05: Write Code in Monaco Editor (JS/Python)"]):::ucStyle
+            UC06(["UC-06: Execute Sample Tests in AST Sandbox"]):::ucStyle
+            UC07(["UC-07: Submit Final Algorithmic Solution"]):::ucStyle
+        end
+
+        subgraph BattleSubsystem ["2. Real-Time 1v1 Battle Arena & Gamification"]
+            direction TB
+            UC08(["UC-08: Create 1v1 Battle Lobby & Room Code"]):::ucStyle
+            UC09(["UC-09: Join Battle Lobby with 6-Char Room Code"]):::ucStyle
+            UC10(["UC-10: Compete in Synchronized 1v1 Duel"]):::ucStyle
+            UC11(["UC-11: Stream Opponent Testcase Progress"]):::ucStyle
+            UC12(["UC-12: View 365-Day Activity Heatmap & Streaks"]):::ucStyle
+            UC13(["UC-13: Solve 24-Hour Daily Coding Challenge"]):::ucStyle
+            UC14(["UC-14: View Global Leaderboards & ELO Badges"]):::ucStyle
+        end
+
+        subgraph AdminSubsystem ["3. Platform Governance & Infrastructure Telemetry"]
+            direction TB
+            UC15(["UC-15: Monitor Real-Time System Telemetry & Metrics"]):::ucStyle
+            UC16(["UC-16: Problem CRUD (Author Statements & Test Cases)"]):::ucStyle
+            UC17(["UC-17: Student Governance & Account Moderation"]):::ucStyle
+            UC18(["UC-18: Schedule Daily Challenge Calendar"]):::ucStyle
+        end
     end
+
+    CoreSubsystem ~~~ BattleSubsystem ~~~ AdminSubsystem
 
     Student --> UC01
     Student --> UC02
@@ -34,9 +50,14 @@ flowchart LR
     Student --> UC10
     Student --> UC11
     Student --> UC12
+    Student --> UC13
+    Student --> UC14
 
     Admin --> UC01
-    Admin --> UC13
-    Admin --> UC14
     Admin --> UC15
     Admin --> UC16
+    Admin --> UC17
+    Admin --> UC18
+
+    classDef ucStyle fill:#EFF6FF,stroke:#1E3A8A,stroke-width:2px,color:#0F172A,font-weight:600;
+    classDef actorStyle fill:#1E3A8A,stroke:#0F172A,stroke-width:2.5px,color:#FFFFFF,font-weight:700;

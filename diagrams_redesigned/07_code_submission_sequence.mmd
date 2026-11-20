@@ -1,0 +1,55 @@
+sequenceDiagram
+    autonumber
+    actor Student
+    participant Monaco as Monaco Editor Component
+    participant API as Axios REST Service
+    participant Router as Express Problem Router
+    participant Service as Submission Controller
+    participant ASTGuard as AST Lexical Guard
+    participant Sandbox as Local Sandbox Runner (VM / Python)
+    participant Judge0 as Judge0 Cloud API (Fallback)
+    participant DB as MongoDB Atlas (submissions, users)
+
+    Student->>Monaco: Types code solution & clicks "Submit Solution"
+    Monaco->>API: POST /api/problems/:slug/submit {code, language}
+    API->>Router: Authenticated HTTP Request (JWT Bearer Token)
+    Router->>Service: handleCodeSubmission(problemSlug, code, language, user)
+    Service->>DB: Fetch Problem Document (Sample & Hidden Test Cases)
+    DB-->>Service: Returns Problem Statement & Test Case Array
+
+    Note over Service,ASTGuard: STATIC ANALYSIS & DEFENSE-IN-DEPTH SCAN
+    Service->>ASTGuard: inspectCode(code, language)
+    ASTGuard->>ASTGuard: Tokenize AST & check forbidden tokens (require, process, import os, eval)
+
+    alt AST Security Violation Detected
+        ASTGuard-->>Service: Violation Flagged ("Unauthorized System Access")
+        Service-->>Router: 400 Bad Request { error: "Security violation detected" }
+        Router-->>API: 400 Error Response
+        API-->>Monaco: Render Security Warning Banner
+    else AST Security Check Passed
+        ASTGuard-->>Service: Code Structure Clean (Pass)
+
+        Note over Service,Sandbox: DUAL-ENGINE TEST CASE EXECUTION
+        opt Local Sandbox Execution (Default)
+            Service->>Sandbox: execute(code, language, testCases)
+            loop For Each Test Case (Sample + Hidden)
+                Sandbox->>Sandbox: Instantiate Null-Prototype Isolated Context
+                Sandbox->>Sandbox: Execute with 3000ms CPU Timeout & Memory Ceiling
+                Sandbox->>Sandbox: Compare Normalized Stdout with Expected Output
+            end
+            Sandbox-->>Service: Execution Results { status: "Accepted", runtime: 42ms, memory: 14MB }
+        end
+        opt External Engine Fallback (If Configured)
+            Service->>Judge0: POST /submissions/batch {source_code, stdin, expected_output}
+            Judge0-->>Service: Batch Results JSON
+        end
+
+        Note over Service,DB: RESULT PERSISTENCE & METRIC MUTATION
+        Service->>DB: Submissions.create({ userId, problemId, code, status: "Accepted", runtime, memory })
+        Service->>DB: Problems.updateOne({ $inc: { totalSubmissions: 1, solvedCount: 1 } })
+        Service->>DB: Users.updateOne({ $inc: { problemsSolved: 1 }, $set: { streak: newStreak } })
+        DB-->>Service: Database Operations Confirmed
+        Service-->>Router: 200 OK { success: true, submissionId, status: "Accepted", passed: 5, total: 5 }
+        Router-->>API: 200 OK JSON Payload
+        API-->>Monaco: Trigger Results Drawer & Fire Victory Confetti
+    end

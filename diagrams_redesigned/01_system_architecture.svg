@@ -1,0 +1,398 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2050" width="2400" height="2050" style="background-color: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.10" />
+    </filter>
+    <linearGradient id="tier1Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="tier2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <linearGradient id="tier3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <marker id="arrBlue" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#2563EB" />
+    </marker>
+    <marker id="arrPurple" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#7C3AED" />
+    </marker>
+    <marker id="arrGreen" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#059669" />
+    </marker>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="60" y="40" width="2280" height="120" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+  <text x="1200" y="90" text-anchor="middle" font-size="30" font-weight="800" fill="#0F172A" letter-spacing="0.5">FIGURE 4.1: MULTI-TIER LAYERED SYSTEM ARCHITECTURE</text>
+  <text x="1200" y="128" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Presentation Tier (React 18 SPA), Application Execution Tier (Node.js/Express), and Cloud Persistence Tier (MongoDB Atlas)</text>
+
+  <!-- =============================================================== -->
+  <!-- TIER 1: PRESENTATION TIER (CLIENT)                              -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 200)" filter="url(#shadow)">
+    <!-- Main Tier Container -->
+    <rect x="0" y="0" width="2280" height="430" rx="14" fill="#F8FAFC" stroke="#1E3A8A" stroke-width="2.5" />
+    <!-- Tier Header -->
+    <rect x="0" y="0" width="2280" height="56" rx="14" fill="url(#tier1Grad)" />
+    <rect x="0" y="44" width="2280" height="12" fill="#1E3A8A" />
+    <text x="30" y="36" font-size="21" font-weight="800" fill="#FFFFFF">TIER 1: PRESENTATION &amp; CLIENT USER EXPERIENCE TIER (REACT 18 SINGLE PAGE APPLICATION)</text>
+    <rect x="2060" y="14" width="180" height="28" rx="14" fill="#3B82F6" />
+    <text x="2150" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">CLIENT SIDE RUNTIME</text>
+
+    <!-- 5 Component Modules Inside Tier 1 -->
+    <!-- Module 1.1: Web Browser Engine -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="410" height="320" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="42" rx="10" fill="#EFF6FF" />
+      <text x="20" y="27" font-size="15" font-weight="800" fill="#1E3A8A">🌐 Modern Browser Engine</text>
+      <text x="20" y="70" font-size="13.5" font-weight="700" fill="#0F172A">Host Execution Environment:</text>
+      <text x="20" y="100" font-size="13" fill="#475569">• Google Chrome (V8), Edge, Safari</text>
+      <text x="20" y="125" font-size="13" fill="#475569">• HTML5 Canvas &amp; SVG Rendering</text>
+      <text x="20" y="150" font-size="13" fill="#475569">• LocalStorage &amp; Session Management</text>
+      <text x="20" y="175" font-size="13" fill="#475569">• HttpOnly Cookie Credential Cache</text>
+      <text x="20" y="210" font-size="13" font-weight="700" fill="#1E3A8A">Scoped LocalStorage Keys:</text>
+      <text x="20" y="235" font-size="12" font-family="monospace" fill="#2563EB">code_solution_{uid}_{pid}_{lang}</text>
+      <text x="20" y="260" font-size="12" font-family="monospace" fill="#2563EB">skillbattle_active_battle_session</text>
+      <text x="20" y="285" font-size="12" font-family="monospace" fill="#2563EB">sb_editor_theme_preferences</text>
+    </g>
+
+    <!-- Module 1.2: React SPA & State Management -->
+    <g transform="translate(480, 80)">
+      <rect x="0" y="0" width="410" height="320" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="42" rx="10" fill="#EFF6FF" />
+      <text x="20" y="27" font-size="15" font-weight="800" fill="#1E3A8A">⚛️ React 18 Core &amp; Contexts</text>
+      <text x="20" y="70" font-size="13.5" font-weight="700" fill="#0F172A">Reactive Architectural State:</text>
+      <text x="20" y="100" font-size="13" fill="#475569">• Vite Bundler &amp; Fast Refresh HMR</text>
+      <text x="20" y="125" font-size="13" fill="#475569">• React Router v6 Client Routing</text>
+      <text x="20" y="150" font-size="13" fill="#475569">• AuthContext (User Session &amp; Claims)</text>
+      <text x="20" y="175" font-size="13" fill="#475569">• BattleContext (Lobby &amp; Duel Sync)</text>
+      <text x="20" y="210" font-size="13" font-weight="700" fill="#1E3A8A">Dynamic Component Views:</text>
+      <text x="20" y="235" font-size="13" fill="#475569">• Problem Library &amp; Difficulty Filter</text>
+      <text x="20" y="260" font-size="13" fill="#475569">• Student Dashboard &amp; 365d Heatmap</text>
+      <text x="20" y="285" font-size="13" fill="#475569">• Admin Telemetry &amp; Governance Panel</text>
+    </g>
+
+    <!-- Module 1.3: Monaco Code Editor Engine -->
+    <g transform="translate(930, 80)">
+      <rect x="0" y="0" width="410" height="320" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="42" rx="10" fill="#EFF6FF" />
+      <text x="20" y="27" font-size="15" font-weight="800" fill="#1E3A8A">💻 Monaco Code Editor Engine</text>
+      <text x="20" y="70" font-size="13.5" font-weight="700" fill="#0F172A">Enterprise IDE Experience:</text>
+      <text x="20" y="100" font-size="13" fill="#475569">• @monaco-editor/react Integration</text>
+      <text x="20" y="125" font-size="13" fill="#475569">• Full Syntax Highlighting (JS / Py)</text>
+      <text x="20" y="150" font-size="13" fill="#475569">• Real-Time IntelliSense &amp; Auto-Indent</text>
+      <text x="20" y="175" font-size="13" fill="#475569">• Keybindings (Tab Indent, Undo/Redo)</text>
+      <text x="20" y="210" font-size="13" font-weight="700" fill="#1E3A8A">Multi-Language Boilerplates:</text>
+      <text x="20" y="235" font-size="13" fill="#475569">• Dynamic Starter Code Hydration</text>
+      <text x="20" y="260" font-size="13" fill="#475569">• Custom Dark Theme (VS Code Charcoal)</text>
+      <text x="20" y="285" font-size="13" fill="#475569">• Clean Model Unmount &amp; Memory Flush</text>
+    </g>
+
+    <!-- Module 1.4: Socket.IO Client Gateway -->
+    <g transform="translate(1380, 80)">
+      <rect x="0" y="0" width="410" height="320" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="42" rx="10" fill="#EFF6FF" />
+      <text x="20" y="27" font-size="15" font-weight="800" fill="#1E3A8A">⚡ Socket.IO Real-Time Client</text>
+      <text x="20" y="70" font-size="13.5" font-weight="700" fill="#0F172A">Low-Latency Duplex Channel:</text>
+      <text x="20" y="100" font-size="13" fill="#475569">• WSS WebSocket Transport Layer</text>
+      <text x="20" y="125" font-size="13" fill="#475569">• Auto-Reconnect &amp; Exponential Backoff</text>
+      <text x="20" y="150" font-size="13" fill="#475569">• Heartbeat Ping-Pong Telemetry</text>
+      <text x="20" y="175" font-size="13" fill="#475569">• Authoritative Room Subscription</text>
+      <text x="20" y="210" font-size="13" font-weight="700" fill="#1E3A8A">Key Subscribed Event Channels:</text>
+      <text x="20" y="235" font-size="12" font-family="monospace" fill="#7C3AED">battle_countdown_tick</text>
+      <text x="20" y="260" font-size="12" font-family="monospace" fill="#7C3AED">opponent_testcase_progress</text>
+      <text x="20" y="285" font-size="12" font-family="monospace" fill="#7C3AED">battle_game_over_verdict</text>
+    </g>
+
+    <!-- Module 1.5: Axios REST Client -->
+    <g transform="translate(1830, 80)">
+      <rect x="0" y="0" width="410" height="320" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="42" rx="10" fill="#EFF6FF" />
+      <text x="20" y="27" font-size="15" font-weight="800" fill="#1E3A8A">📡 Axios HTTP Client</text>
+      <text x="20" y="70" font-size="13.5" font-weight="700" fill="#0F172A">REST Network Abstraction:</text>
+      <text x="20" y="100" font-size="13" fill="#475569">• Base URL &amp; HTTPS Configuration</text>
+      <text x="20" y="125" font-size="13" fill="#475569">• Bearer Token Header Injection</text>
+      <text x="20" y="150" font-size="13" fill="#475569">• Request &amp; Response Interceptors</text>
+      <text x="20" y="175" font-size="13" fill="#475569">• Unified Global Error Handling</text>
+      <text x="20" y="210" font-size="13" font-weight="700" fill="#1E3A8A">Tailwind &amp; UI Styling:</text>
+      <text x="20" y="235" font-size="13" fill="#475569">• Tailwind CSS 3.4 Utility Framework</text>
+      <text x="20" y="260" font-size="13" fill="#475569">• Lucide React High-DPI Icons</text>
+      <text x="20" y="285" font-size="13" fill="#475569">• Responsive Fluid Grid Layouts</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- COMMUNICATION BUS: TIER 1 TO TIER 2                             -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 650)">
+    <!-- Bus line 1: REST -->
+    <line x1="450" y1="0" x2="450" y2="100" stroke="#2563EB" stroke-width="4" marker-end="url(#arrBlue)" />
+    <g transform="translate(450, 50)">
+      <rect x="-220" y="-18" width="440" height="36" rx="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" filter="url(#shadow)" />
+      <text x="0" y="5" text-anchor="middle" font-size="13" font-weight="800" fill="#1E3A8A">1. HTTPS REST Endpoints (Port 443) — Bearer JWT &amp; JSON</text>
+    </g>
+
+    <!-- Bus line 2: WebSockets -->
+    <line x1="1650" y1="0" x2="1650" y2="100" stroke="#7C3AED" stroke-width="4" marker-end="url(#arrPurple)" />
+    <g transform="translate(1650, 50)">
+      <rect x="-220" y="-18" width="440" height="36" rx="18" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" filter="url(#shadow)" />
+      <text x="0" y="5" text-anchor="middle" font-size="13" font-weight="800" fill="#5B21B6">2. WSS Full-Duplex WebSockets (Port 443) — Real-Time Match Events</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- TIER 2: APPLICATION & EXECUTION TIER (BACKEND)                  -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 770)" filter="url(#shadow)">
+    <!-- Main Tier Container -->
+    <rect x="0" y="0" width="2280" height="520" rx="14" fill="#F8FAFC" stroke="#0F172A" stroke-width="2.5" />
+    <!-- Tier Header -->
+    <rect x="0" y="0" width="2280" height="56" rx="14" fill="url(#tier2Grad)" />
+    <rect x="0" y="44" width="2280" height="12" fill="#0F172A" />
+    <text x="30" y="36" font-size="21" font-weight="800" fill="#FFFFFF">TIER 2: APPLICATION, BUSINESS LOGIC &amp; SANDBOX EXECUTION TIER (NODE.JS &amp; EXPRESS SERVER)</text>
+    <rect x="2060" y="14" width="180" height="28" rx="14" fill="#475569" />
+    <text x="2150" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">SERVER RUNTIME</text>
+
+    <!-- 4 Sub-Blocks Inside Tier 2 -->
+    <!-- Block 2.1: Express Core & Security Guard -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="520" height="410" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="520" height="42" rx="10" fill="#F1F5F9" />
+      <text x="20" y="27" font-size="16" font-weight="800" fill="#0F172A">🛡️ Security Middleware &amp; HTTP Router</text>
+      <text x="20" y="70" font-size="14" font-weight="700" fill="#1E3A8A">Defensive Infrastructure Stack:</text>
+      <text x="20" y="100" font-size="13" fill="#334155">• Helmet.js (Strict CSP, HSTS, X-Frame-Options)</text>
+      <text x="20" y="125" font-size="13" fill="#334155">• CORS Whitelist (Restricted Origin Isolation)</text>
+      <text x="20" y="150" font-size="13" fill="#334155">• Express Rate Limiter (Anti-DDoS / Brute Force)</text>
+      <text x="20" y="175" font-size="13" fill="#334155">• Recursive NoSQL Sanitizer (Strips $ and .)</text>
+      <text x="20" y="210" font-size="14" font-weight="700" fill="#1E3A8A">Express Routing Architecture:</text>
+      <text x="20" y="235" font-size="12.5" font-family="monospace" fill="#059669">/api/auth       - Register, Login, Logout, Session</text>
+      <text x="20" y="260" font-size="12.5" font-family="monospace" fill="#059669">/api/problems   - Catalogue, Slugs, Run, Submit</text>
+      <text x="20" y="285" font-size="12.5" font-family="monospace" fill="#059669">/api/battles    - Matchmaker, Room State, Results</text>
+      <text x="20" y="310" font-size="12.5" font-family="monospace" fill="#059669">/api/profile    - ELO Stats, Streak, 365d Heatmap</text>
+      <text x="20" y="335" font-size="12.5" font-family="monospace" fill="#059669">/api/daily      - 24h Challenge Problem &amp; Rewards</text>
+      <text x="20" y="360" font-size="12.5" font-family="monospace" fill="#059669">/api/admin      - CRUD Problems, User Suspensions</text>
+    </g>
+
+    <!-- Block 2.2: Authentication & Token Revocation Guard -->
+    <g transform="translate(580, 80)">
+      <rect x="0" y="0" width="520" height="410" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="520" height="42" rx="10" fill="#F1F5F9" />
+      <text x="20" y="27" font-size="16" font-weight="800" fill="#0F172A">🔑 Authentication &amp; RBAC Guard</text>
+      <text x="20" y="70" font-size="14" font-weight="700" fill="#1E3A8A">Cryptographic Token Lifecycle:</text>
+      <text x="20" y="100" font-size="13" fill="#334155">• Passwords Hashed via Bcrypt (10 Salt Rounds)</text>
+      <text x="20" y="125" font-size="13" fill="#334155">• HS256 JWT Signed with 24-Hour Expiration</text>
+      <text x="20" y="150" font-size="13" fill="#334155">• Unique UUID JTI Nonce Embedded in Payloads</text>
+      <text x="20" y="175" font-size="13" fill="#334155">• HttpOnly, SameSite=Strict Secure Cookies</text>
+      <text x="20" y="210" font-size="14" font-weight="700" fill="#1E3A8A">Instant Session Invalidation Engine:</text>
+      <text x="20" y="235" font-size="13" fill="#334155">• Sub-Millisecond Token Blacklist Query on Requests</text>
+      <text x="20" y="260" font-size="13" fill="#334155">• Automatic MongoDB TTL Revocation Index</text>
+      <text x="20" y="285" font-size="13" fill="#334155">• Immediate Session Kill upon Password Change/Logout</text>
+      <text x="20" y="320" font-size="14" font-weight="700" fill="#1E3A8A">Role-Based Access Control (RBAC):</text>
+      <text x="20" y="345" font-size="13" fill="#334155">• Student: Execution, Duels, Profile, Daily Solves</text>
+      <text x="20" y="370" font-size="13" fill="#334155">• Admin: Telemetry, Content CRUD, Moderation</text>
+    </g>
+
+    <!-- Block 2.3: Socket.IO Real-Time Duel Gateway -->
+    <g transform="translate(1130, 80)">
+      <rect x="0" y="0" width="540" height="410" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="540" height="42" rx="10" fill="#F1F5F9" />
+      <text x="20" y="27" font-size="16" font-weight="800" fill="#0F172A">⚡ Authoritative Socket.IO Gateway</text>
+      <text x="20" y="70" font-size="14" font-weight="700" fill="#1E3A8A">Stateful Real-Time Duel Engine:</text>
+      <text x="20" y="100" font-size="13" fill="#334155">• Authoritative /battle Socket Namespace</text>
+      <text x="20" y="125" font-size="13" fill="#334155">• 6-Character Cryptographically Random Room Codes</text>
+      <text x="20" y="150" font-size="13" fill="#334155">• Server-Controlled 3-Second Countdown Synchronizer</text>
+      <text x="20" y="175" font-size="13" fill="#334155">• Authoritative 15-Minute Match Countdown Timer</text>
+      <text x="20" y="210" font-size="14" font-weight="700" fill="#1E3A8A">Telemetry Broadcast Protocols:</text>
+      <text x="20" y="235" font-size="13" fill="#334155">• Live Testcase Pass Ratio Streaming (e.g. 8/10 Tests)</text>
+      <text x="20" y="260" font-size="13" fill="#334155">• First-to-Solve Atomic Victory Resolution</text>
+      <text x="20" y="285" font-size="13" fill="#334155">• Sudden Death / Draw Evaluation on Timer Expiry</text>
+      <text x="20" y="320" font-size="14" font-weight="700" fill="#1E3A8A">Competitive ELO Computation Engine:</text>
+      <text x="20" y="345" font-size="13" fill="#334155">• Winner: +100 ELO Points | Loser: -25 ELO (Floor 800)</text>
+      <text x="20" y="370" font-size="13" fill="#334155">• Draw: +25 ELO Points to Both Contestants</text>
+    </g>
+
+    <!-- Block 2.4: Dual Code Execution Engine -->
+    <g transform="translate(1700, 80)">
+      <rect x="0" y="0" width="550" height="410" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="550" height="42" rx="10" fill="#F1F5F9" />
+      <text x="20" y="27" font-size="16" font-weight="800" fill="#0F172A">⚙️ Dual-Channel Code Execution Engine</text>
+      <text x="20" y="70" font-size="14" font-weight="700" fill="#1E3A8A">1. In-Memory AST Sandbox (Local Primary):</text>
+      <text x="20" y="100" font-size="13" fill="#334155">• Abstract Syntax Tree Lexical Regex Scanner</text>
+      <text x="20" y="125" font-size="13" fill="#334155">• Blocks fs, child_process, eval, Function, import</text>
+      <text x="20" y="150" font-size="13" fill="#334155">• Isolated Node.js vm2 Context with Prototype Null</text>
+      <text x="20" y="175" font-size="13" fill="#334155">• Hard 2,500ms CPU Timeout &amp; Memory Safeguard</text>
+      <text x="20" y="210" font-size="14" font-weight="700" fill="#065F46">2. Judge0 Cloud Sandbox API (Fallback Engine):</text>
+      <text x="20" y="235" font-size="13" fill="#334155">• Multi-Language Compilers (C++, Java, Rust, Go)</text>
+      <text x="20" y="260" font-size="13" fill="#334155">• Linux Cgroup Container Process Isolation</text>
+      <text x="20" y="285" font-size="13" fill="#334155">• Memory &amp; Wall-Clock Execution Containment</text>
+      <text x="20" y="320" font-size="14" font-weight="700" fill="#065F46">Result Normalizer &amp; Metric Capture:</text>
+      <text x="20" y="345" font-size="13" fill="#334155">• Formats Output: Runtime (ms), Memory (MB), Status</text>
+      <text x="20" y="370" font-size="13" fill="#334155">• Evaluates Public &amp; Secret Hidden Test Suites</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- COMMUNICATION BUS: TIER 2 TO TIER 3                             -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1310)">
+    <line x1="1140" y1="0" x2="1140" y2="70" stroke="#059669" stroke-width="4" marker-end="url(#arrGreen)" />
+    <g transform="translate(1140, 35)">
+      <rect x="-260" y="-18" width="520" height="36" rx="18" fill="#ECFDF5" stroke="#059669" stroke-width="2" filter="url(#shadow)" />
+      <text x="0" y="5" text-anchor="middle" font-size="13" font-weight="800" fill="#065F46">3. Mongoose 8 ODM Driver (TCP 27017) — B-Tree Indexes &amp; Atomic Write Ops</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- TIER 3: PERSISTENCE & STORAGE TIER (DATABASE)                   -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1400)" filter="url(#shadow)">
+    <!-- Main Tier Container -->
+    <rect x="0" y="0" width="2280" height="420" rx="14" fill="#F8FAFC" stroke="#065F46" stroke-width="2.5" />
+    <!-- Tier Header -->
+    <rect x="0" y="0" width="2280" height="56" rx="14" fill="url(#tier3Grad)" />
+    <rect x="0" y="44" width="2280" height="12" fill="#065F46" />
+    <text x="30" y="36" font-size="21" font-weight="800" fill="#FFFFFF">TIER 3: PERSISTENCE &amp; CLOUD STORAGE TIER (MONGODB ATLAS DISTRIBUTED REPLICA SET)</text>
+    <rect x="2060" y="14" width="180" height="28" rx="14" fill="#059669" />
+    <text x="2150" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">CLOUD ATLAS REPLICA</text>
+
+    <!-- 6 Collections Inside Tier 3 -->
+    <!-- Col 1: Users -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="350" height="310" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="38" rx="10" fill="#EFF6FF" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#1E3A8A">🗄️ users</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Document Schema:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• name, username, email [UK]</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• password (Bcrypt Hash)</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• role ('student' | 'admin')</text>
+      <text x="15" y="178" font-size="12.5" fill="#475569">• rating (ELO, Default 1200)</text>
+      <text x="15" y="200" font-size="12.5" fill="#475569">• streak &amp; battleStats Objects</text>
+      <text x="15" y="235" font-size="13" font-weight="700" fill="#1E3A8A">Indexes &amp; Constraints:</text>
+      <text x="15" y="260" font-size="12" font-family="monospace" fill="#2563EB">username_1 (Unique)</text>
+      <text x="15" y="282" font-size="12" font-family="monospace" fill="#2563EB">email_1 (Unique), rating_-1</text>
+    </g>
+
+    <!-- Col 2: Problems -->
+    <g transform="translate(410, 80)">
+      <rect x="0" y="0" width="350" height="310" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="38" rx="10" fill="#ECFDF5" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#065F46">🗄️ problems</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Document Schema:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• title, slug [UK]</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• description (Markdown)</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• difficulty ('Easy'|'Med'|'Hard')</text>
+      <text x="15" y="178" font-size="12.5" fill="#475569">• tags: [String]</text>
+      <text x="15" y="200" font-size="12.5" fill="#475569">• sample &amp; hidden TestCases</text>
+      <text x="15" y="235" font-size="13" font-weight="700" fill="#065F46">Indexes &amp; Constraints:</text>
+      <text x="15" y="260" font-size="12" font-family="monospace" fill="#059669">slug_1 (Unique Index)</text>
+      <text x="15" y="282" font-size="12" font-family="monospace" fill="#059669">difficulty_1, tags_1</text>
+    </g>
+
+    <!-- Col 3: Submissions -->
+    <g transform="translate(790, 80)">
+      <rect x="0" y="0" width="350" height="310" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="38" rx="10" fill="#EFF6FF" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#1E40AF">🗄️ submissions</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Document Schema:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• userId [FK], problemId [FK]</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• language, code</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• status, runtime, memory</text>
+      <text x="15" y="178" font-size="12.5" fill="#475569">• passedTests / totalTests</text>
+      <text x="15" y="200" font-size="12.5" fill="#475569">• createdAt: Date</text>
+      <text x="15" y="235" font-size="13" font-weight="700" fill="#1E40AF">Indexes &amp; Constraints:</text>
+      <text x="15" y="260" font-size="12" font-family="monospace" fill="#2563EB">userId_1_problemId_1</text>
+      <text x="15" y="282" font-size="12" font-family="monospace" fill="#2563EB">createdAt_-1 (Timeline)</text>
+    </g>
+
+    <!-- Col 4: Battles -->
+    <g transform="translate(1170, 80)">
+      <rect x="0" y="0" width="350" height="310" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="38" rx="10" fill="#F5F3FF" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#5B21B6">🗄️ battles</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Document Schema:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• roomCode [UK, 6 chars]</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• hostId [FK], opponentId [FK]</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• problemId [FK], winnerId [FK]</text>
+      <text x="15" y="178" font-size="12.5" fill="#475569">• status, duration, progress</text>
+      <text x="15" y="200" font-size="12.5" fill="#475569">• createdAt: Date</text>
+      <text x="15" y="235" font-size="13" font-weight="700" fill="#5B21B6">Indexes &amp; Constraints:</text>
+      <text x="15" y="260" font-size="12" font-family="monospace" fill="#7C3AED">roomCode_1 (Unique)</text>
+      <text x="15" y="282" font-size="12" font-family="monospace" fill="#7C3AED">status_1, createdAt_-1</text>
+    </g>
+
+    <!-- Col 5: Daily Challenges -->
+    <g transform="translate(1550, 80)">
+      <rect x="0" y="0" width="350" height="310" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="38" rx="10" fill="#FFFBEB" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#92400E">🗄️ dailychallenges</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Document Schema:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• date: String [UK, YYYY-MM-DD]</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• problemId [FK -> Problem]</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• bonusPoints: Number (50 XP)</text>
+      <text x="15" y="178" font-size="12.5" fill="#475569">• participants: [ObjectId]</text>
+      <text x="15" y="200" font-size="12.5" fill="#475569">• createdAt: Date</text>
+      <text x="15" y="235" font-size="13" font-weight="700" fill="#92400E">Indexes &amp; Constraints:</text>
+      <text x="15" y="260" font-size="12" font-family="monospace" fill="#D97706">date_1 (Unique Calendar)</text>
+      <text x="15" y="282" font-size="12" font-family="monospace" fill="#D97706">problemId_1</text>
+    </g>
+
+    <!-- Col 6: Token Blacklist -->
+    <g transform="translate(1930, 80)">
+      <rect x="0" y="0" width="320" height="310" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="320" height="38" rx="10" fill="#FFF1F2" />
+      <text x="15" y="25" font-size="15" font-weight="800" fill="#9F1239">🗄️ tokenblacklists</text>
+      <text x="15" y="65" font-size="13" font-weight="700" fill="#0F172A">Document Schema:</text>
+      <text x="15" y="90" font-size="12.5" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="112" font-size="12.5" fill="#475569">• token: String [UK]</text>
+      <text x="15" y="134" font-size="12.5" fill="#475569">• userId [FK -> User]</text>
+      <text x="15" y="156" font-size="12.5" fill="#475569">• expiresAt: Date (TTL)</text>
+      <text x="15" y="178" font-size="12.5" fill="#475569">• reason: String</text>
+      <text x="15" y="200" font-size="12.5" fill="#475569">• createdAt: Date</text>
+      <text x="15" y="235" font-size="13" font-weight="700" fill="#9F1239">Indexes &amp; Constraints:</text>
+      <text x="15" y="260" font-size="12" font-family="monospace" fill="#E11D48">token_1 (Unique Index)</text>
+      <text x="15" y="282" font-size="12" font-family="monospace" fill="#E11D48">expiresAt_1 (TTL: 0s)</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- FOOTER LEGEND                                                   -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1860)">
+    <rect x="0" y="0" width="2280" height="130" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+    <text x="30" y="38" font-size="15" font-weight="800" fill="#0F172A">TIERED ARCHITECTURE NOTATION &amp; PROTOCOL BOUNDARIES:</text>
+
+    <!-- Legend Pill 1 -->
+    <rect x="30" y="55" width="480" height="34" rx="8" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+    <text x="50" y="77" font-size="13.5" font-weight="700" fill="#1E3A8A">Presentation Tier: Client React 18 SPA on Vercel CDN</text>
+
+    <!-- Legend Pill 2 -->
+    <rect x="540" y="55" width="540" height="34" rx="8" fill="#F1F5F9" stroke="#0F172A" stroke-width="1.5" />
+    <text x="560" y="77" font-size="13.5" font-weight="700" fill="#0F172A">Application Tier: Node.js/Express Container on Render</text>
+
+    <!-- Legend Pill 3 -->
+    <rect x="1110" y="55" width="560" height="34" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="1.5" />
+    <text x="1130" y="77" font-size="13.5" font-weight="700" fill="#065F46">Persistence Tier: MongoDB Atlas Multi-AZ Sharded Replica Cluster</text>
+
+    <!-- Legend Pill 4 -->
+    <rect x="1700" y="55" width="550" height="34" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="1.5" />
+    <text x="1720" y="77" font-size="13.5" font-weight="700" fill="#9F1239">Security: TTL Index Session Blacklisting &amp; In-Memory AST Sandbox</text>
+
+    <text x="30" y="112" font-size="13" font-style="italic" fill="#64748B">System Guarantees: Sub-200ms API response latency, sub-50ms WebSocket duel state updates, strict zero cross-user code leakage.</text>
+  </g>
+</svg>

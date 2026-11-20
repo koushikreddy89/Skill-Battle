@@ -1,0 +1,49 @@
+flowchart TB
+    Student["👤 Student Actor"]:::entityStyle
+    Admin["🛡️ Administrator Actor"]:::entityStyle
+
+    P1(("1.0<br/>Authentication &<br/>Session Guard")):::processStyle
+    P2(("2.0<br/>Problem Catalogue &<br/>Search Filtering")):::processStyle
+    P3(("3.0<br/>Monaco Workspace &<br/>AST Code Runner")):::processStyle
+    P4(("4.0<br/>1v1 Battle Matchmaker &<br/>Socket Arena")):::processStyle
+    P5(("5.0<br/>Student Analytics &<br/>Heatmap Engine")):::processStyle
+    P6(("6.0<br/>Administrative Governance &<br/>Problem CRUD")):::processStyle
+
+    D1[("D1: Users Store")]:::storeStyle
+    D2[("D2: Problems Store")]:::storeStyle
+    D3[("D3: Submissions Store")]:::storeStyle
+    D4[("D4: Battles Store")]:::storeStyle
+    D5[("D5: Token Blacklist (TTL)")]:::storeStyle
+    D6[("D6: Daily Challenges Store")]:::storeStyle
+
+    Student -->|Credentials & Login| P1
+    P1 <-->|Verify Credentials & Fetch Profile| D1
+    P1 -->|Insert Revoked JWT on Logout| D5
+
+    Student -->|Search & Filter Query| P2
+    P2 <-->|Query Filtered Problems| D2
+
+    Student -->|Submit Code Solution| P3
+    P3 <-->|Fetch Hidden & Sample Test Cases| D2
+    P3 -->|Persist Evaluation Record| D3
+    P3 -->|Update Solved Count & Streaks| D1
+
+    Student -->|Create / Join Battle| P4
+    P4 <-->|Manage Room State & Sync| D4
+    P4 <-->|Retrieve Duel Problem| D2
+    P4 -->|Adjust ELO Rating Delta| D1
+
+    Student -->|Request Dashboard & Heatmap| P5
+    P5 <-->|Aggregate 365-Day Activity| D3
+    P5 <-->|Fetch Rating & Badges| D1
+
+    Admin -->|Author & Edit Problems| P6
+    P6 <-->|CRUD Problem Records| D2
+    Admin -->|Suspend / Unban Users| P6
+    P6 <-->|Update User Account Status| D1
+    Admin -->|Schedule Daily Challenge| P6
+    P6 <-->|Assign Daily Challenge Date| D6
+
+    classDef entityStyle fill:#1E3A8A,stroke:#0F172A,stroke-width:2.5px,color:#FFFFFF,font-weight:700;
+    classDef processStyle fill:#EFF6FF,stroke:#1E3A8A,stroke-width:2.5px,color:#0F172A,font-weight:700;
+    classDef storeStyle fill:#F1F5F9,stroke:#334155,stroke-width:2px,color:#0F172A,font-weight:600;

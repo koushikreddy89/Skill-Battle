@@ -1,0 +1,32 @@
+flowchart TB
+    subgraph FrontendArchitecture ["FRONTEND CLIENT MODULES (REACT 18 & VITE)"]
+        subgraph FE_Col1 ["Views & State Contexts"]
+            UIViews["UI Views (Auth, Dashboard, Problem, Battle, Admin)"]
+            StateContexts["Context Providers (AuthContext, SocketContext, ThemeContext)"]
+        end
+
+        subgraph FE_Col2 ["Core Components & Services"]
+            CoreComponents["Specialized Components (Monaco, Heatmap, Timer, OpponentTicker)"]
+            APIServices["Frontend API Services (authService, problemService, battleService, adminService)"]
+        end
+
+        FE_Col1 --> FE_Col2
+    end
+
+    subgraph BackendArchitecture ["BACKEND APPLICATION MODULES (NODE.JS & EXPRESS)"]
+        subgraph BE_Col1 ["Middleware & Controllers Layer"]
+            MiddlewareSuite["Security Middleware (Helmet, CORS, NoSQLSanitizer, RateLimiter, AuthGuard)"]
+            ControllersLayer["Controllers (authController, problemController, battleController, adminController)"]
+        end
+
+        subgraph BE_Col2 ["Application Engines & Mongoose Models"]
+            CoreEngines["Specialized Application Engines (SocketGateway, ASTScanner, VMSandbox, Judge0, ELO)"]
+            DataModels["Mongoose ODM Models (User, Problem, Submission, Battle, TokenBlacklist)"]
+        end
+
+        BE_Col1 --> BE_Col2
+    end
+
+    APIServices <-->|"HTTPS REST API (Port 443)"| MiddlewareSuite
+    FE_Col2 <-->|"WSS WebSockets (Port 443)"| CoreEngines
+    DataModels <-->|"TCP 27017 TLS Connection"| MongoDBCluster[("MongoDB Atlas Cloud Database")]

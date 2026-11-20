@@ -1,0 +1,348 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2050" width="2400" height="2050" style="background-color: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.10" />
+    </filter>
+    <linearGradient id="hdrDFD" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+
+    <marker id="arr1" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#2563EB" />
+    </marker>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#059669" />
+    </marker>
+    <marker id="arr3" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#7C3AED" />
+    </marker>
+    <marker id="arr4" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#0F172A" />
+    </marker>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="60" y="40" width="2280" height="120" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+  <text x="1200" y="90" text-anchor="middle" font-size="30" font-weight="800" fill="#0F172A" letter-spacing="0.5">FIGURE 4.4: DATA FLOW DIAGRAM (DFD LEVEL 1) — FUNCTIONAL DECOMPOSITION</text>
+  <text x="1200" y="128" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Six Core Processing Subsystems, Six MongoDB Data Stores (D1–D6), Inter-Process Data Pipelines, and Actor Interfaces</text>
+
+  <!-- =============================================================== -->
+  <!-- EXTERNAL ENTITY 1: STUDENT / COMPETITOR (Far-Left)              -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 210)" filter="url(#shadow)">
+    <rect x="0" y="0" width="360" height="580" rx="12" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="2.5" />
+    <rect x="0" y="0" width="360" height="52" rx="12" fill="#1E3A8A" />
+    <rect x="0" y="42" width="360" height="10" fill="#1E3A8A" />
+    <text x="20" y="34" font-size="18" font-weight="800" fill="#FFFFFF">👤 STUDENT ACTOR</text>
+
+    <text x="20" y="85" font-size="13.5" font-weight="700" fill="#1E3A8A">Interactive User Operations:</text>
+    <text x="20" y="115" font-size="12.5" fill="#334155">• Register Account &amp; Submit Credentials</text>
+    <text x="20" y="140" font-size="12.5" fill="#334155">• Request Problem List by Topic Tag</text>
+    <text x="20" y="165" font-size="12.5" fill="#334155">• Filter Difficulty (Easy, Medium, Hard)</text>
+    <text x="20" y="190" font-size="12.5" fill="#334155">• Edit Code in Monaco Editor Workspace</text>
+    <text x="20" y="215" font-size="12.5" fill="#334155">• Run Sample Tests in AST Sandbox</text>
+    <text x="20" y="240" font-size="12.5" fill="#334155">• Submit Final Solution Code</text>
+    <text x="20" y="265" font-size="12.5" fill="#334155">• Create &amp; Join 1v1 Battle Lobby</text>
+    <text x="20" y="290" font-size="12.5" fill="#334155">• Stream Keystrokes &amp; Test Updates</text>
+    <text x="20" y="315" font-size="12.5" fill="#334155">• Query 365-Day Activity Heatmap</text>
+    <text x="20" y="340" font-size="12.5" fill="#334155">• Solve Daily Coding Challenge</text>
+
+    <rect x="20" y="375" width="320" height="180" rx="8" fill="#EFF6FF" stroke="#3B82F6" stroke-width="1" />
+    <text x="32" y="405" font-size="13" font-weight="700" fill="#1E3A8A">Data Flows Received:</text>
+    <text x="32" y="432" font-size="12" fill="#334155">• Signed JWT Token &amp; Auth Cookie</text>
+    <text x="32" y="456" font-size="12" fill="#334155">• Filtered Problem Statement JSON</text>
+    <text x="32" y="480" font-size="12" fill="#334155">• Execution Latency, Memory &amp; Pass/Fail</text>
+    <text x="32" y="504" font-size="12" fill="#334155">• Live Opponent Progress Broadcast</text>
+    <text x="32" y="528" font-size="12" fill="#334155">• Updated ELO Rating (+100/-25/+25)</text>
+  </g>
+
+  <!-- =============================================================== -->
+  <!-- EXTERNAL ENTITY 2: PLATFORM ADMINISTRATOR (Far-Right)           -->
+  <!-- =============================================================== -->
+  <g transform="translate(1980, 210)" filter="url(#shadow)">
+    <rect x="0" y="0" width="360" height="580" rx="12" fill="#FFFFFF" stroke="#0F172A" stroke-width="2.5" />
+    <rect x="0" y="0" width="360" height="52" rx="12" fill="#0F172A" />
+    <rect x="0" y="42" width="360" height="10" fill="#0F172A" />
+    <text x="20" y="34" font-size="18" font-weight="800" fill="#FFFFFF">🛡️ ADMIN ACTOR</text>
+
+    <text x="20" y="85" font-size="13.5" font-weight="700" fill="#0F172A">Administrative Operations:</text>
+    <text x="20" y="115" font-size="12.5" fill="#334155">• Admin Multi-Factor Authentication</text>
+    <text x="20" y="140" font-size="12.5" fill="#334155">• Author Problem Statements (CRUD)</text>
+    <text x="20" y="165" font-size="12.5" fill="#334155">• Configure Public &amp; Hidden Test Suites</text>
+    <text x="20" y="190" font-size="12.5" fill="#334155">• Define Starter Boilerplate Templates</text>
+    <text x="20" y="215" font-size="12.5" fill="#334155">• Schedule 24h Daily Challenges</text>
+    <text x="20" y="240" font-size="12.5" fill="#334155">• Audit Real-Time System Telemetry</text>
+    <text x="20" y="265" font-size="12.5" fill="#334155">• Monitor Active WebSocket Connections</text>
+    <text x="20" y="290" font-size="12.5" fill="#334155">• Moderate Delinquent Student Accounts</text>
+    <text x="20" y="315" font-size="12.5" fill="#334155">• Invalidate Compromised JWT Sessions</text>
+
+    <rect x="20" y="375" width="320" height="180" rx="8" fill="#F1F5F9" stroke="#475569" stroke-width="1" />
+    <text x="32" y="405" font-size="13" font-weight="700" fill="#0F172A">Data Flows Received:</text>
+    <text x="32" y="432" font-size="12" fill="#334155">• Server CPU / Memory Telemetry</text>
+    <text x="32" y="456" font-size="12" fill="#334155">• MongoDB Query Latency Metrics</text>
+    <text x="32" y="480" font-size="12" fill="#334155">• Problem Submission Success Ratios</text>
+    <text x="32" y="504" font-size="12" fill="#334155">• Audit Log Mutation Confirmations</text>
+    <text x="32" y="528" font-size="12" fill="#334155">• Active Duels &amp; Concurrency Counts</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- 6 CORE PROCESSES (Central Grid: 2 Columns x 3 Rows)             -->
+  <!-- =============================================================== -->
+
+  <!-- Process 1.0: Authentication & Session Guard (Row 1 Left) -->
+  <g transform="translate(480, 210)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="230" rx="14" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="2.5" />
+    <rect x="0" y="0" width="680" height="46" rx="14" fill="#EFF6FF" />
+    <circle cx="35" cy="23" r="16" fill="#1E3A8A" />
+    <text x="35" y="29" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">1.0</text>
+    <text x="65" y="29" font-size="16" font-weight="800" fill="#1E3A8A">Authentication &amp; Session Guard</text>
+    
+    <text x="24" y="80" font-size="13.5" font-weight="700" fill="#0F172A">Functional Operations:</text>
+    <text x="24" y="105" font-size="13" fill="#475569">• Salt &amp; Hash Passwords via Bcrypt (10 rounds)</text>
+    <text x="24" y="128" font-size="13" fill="#475569">• Sign HS256 JWT tokens containing user ID &amp; role</text>
+    <text x="24" y="151" font-size="13" fill="#475569">• Check TokenBlacklist store on every protected request</text>
+    <text x="24" y="174" font-size="13" fill="#475569">• Write revoked tokens to TTL index store upon logout</text>
+    <text x="24" y="202" font-size="12" font-weight="700" fill="#2563EB">Interacts with: D1 (users), D6 (tokenblacklists)</text>
+  </g>
+
+  <!-- Process 2.0: Problem Catalogue & Filtering (Row 1 Right) -->
+  <g transform="translate(1220, 210)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="230" rx="14" fill="#FFFFFF" stroke="#065F46" stroke-width="2.5" />
+    <rect x="0" y="0" width="680" height="46" rx="14" fill="#ECFDF5" />
+    <circle cx="35" cy="23" r="16" fill="#065F46" />
+    <text x="35" y="29" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">2.0</text>
+    <text x="65" y="29" font-size="16" font-weight="800" fill="#065F46">Problem Catalogue &amp; Search Filtering</text>
+
+    <text x="24" y="80" font-size="13.5" font-weight="700" fill="#0F172A">Functional Operations:</text>
+    <text x="24" y="105" font-size="13" fill="#475569">• Query problem documents with difficulty &amp; tag filters</text>
+    <text x="24" y="128" font-size="13" fill="#475569">• Fetch problem details by unique SEO-friendly slug</text>
+    <text x="24" y="151" font-size="13" fill="#475569">• Hydrate Monaco editor with language starter code</text>
+    <text x="24" y="174" font-size="13" fill="#475569">• Strip hidden test cases from public API responses</text>
+    <text x="24" y="202" font-size="12" font-weight="700" fill="#059669">Interacts with: D2 (problems), D5 (dailychallenges)</text>
+  </g>
+
+  <!-- Process 3.0: Monaco Workspace & AST Sandbox (Row 2 Left) -->
+  <g transform="translate(480, 480)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="230" rx="14" fill="#FFFFFF" stroke="#1E40AF" stroke-width="2.5" />
+    <rect x="0" y="0" width="680" height="46" rx="14" fill="#EFF6FF" />
+    <circle cx="35" cy="23" r="16" fill="#1E40AF" />
+    <text x="35" y="29" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">3.0</text>
+    <text x="65" y="29" font-size="16" font-weight="800" fill="#1E40AF">Monaco Workspace &amp; AST Code Runner</text>
+
+    <text x="24" y="80" font-size="13.5" font-weight="700" fill="#0F172A">Functional Operations:</text>
+    <text x="24" y="105" font-size="13" fill="#475569">• Scan source code for unsafe AST tokens &amp; prototypes</text>
+    <text x="24" y="128" font-size="13" fill="#475569">• Execute code in-memory (Node VM) with 2500ms timeout</text>
+    <text x="24" y="151" font-size="13" fill="#475569">• Fall back to remote Judge0 API if local execution fails</text>
+    <text x="24" y="174" font-size="13" fill="#475569">• Measure runtime (ms) &amp; memory; save submission record</text>
+    <text x="24" y="202" font-size="12" font-weight="700" fill="#2563EB">Interacts with: D2 (problems), D3 (submissions)</text>
+  </g>
+
+  <!-- Process 4.0: 1v1 Battle Matchmaker & Socket Arena (Row 2 Right) -->
+  <g transform="translate(1220, 480)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="230" rx="14" fill="#FFFFFF" stroke="#5B21B6" stroke-width="2.5" />
+    <rect x="0" y="0" width="680" height="46" rx="14" fill="#F5F3FF" />
+    <circle cx="35" cy="23" r="16" fill="#5B21B6" />
+    <text x="35" y="29" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">4.0</text>
+    <text x="65" y="29" font-size="16" font-weight="800" fill="#5B21B6">1v1 Battle Matchmaker &amp; Socket Arena</text>
+
+    <text x="24" y="80" font-size="13.5" font-weight="700" fill="#0F172A">Functional Operations:</text>
+    <text x="24" y="105" font-size="13" fill="#475569">• Generate 6-char room codes &amp; initialize duel lobby</text>
+    <text x="24" y="128" font-size="13" fill="#475569">• Synchronize 3-second ready countdown across players</text>
+    <text x="24" y="151" font-size="13" fill="#475569">• Broadcast opponent testcase pass counts in real time</text>
+    <text x="24" y="174" font-size="13" fill="#475569">• Atomically adjust ELO ratings (+100 win / -25 loss)</text>
+    <text x="24" y="202" font-size="12" font-weight="700" fill="#7C3AED">Interacts with: D1 (users), D2 (problems), D4 (battles)</text>
+  </g>
+
+  <!-- Process 5.0: Student Analytics & Heatmap Engine (Row 3 Left) -->
+  <g transform="translate(480, 750)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="230" rx="14" fill="#FFFFFF" stroke="#92400E" stroke-width="2.5" />
+    <rect x="0" y="0" width="680" height="46" rx="14" fill="#FFFBEB" />
+    <circle cx="35" cy="23" r="16" fill="#92400E" />
+    <text x="35" y="29" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">5.0</text>
+    <text x="65" y="29" font-size="16" font-weight="800" fill="#92400E">Student Analytics &amp; Heatmap Engine</text>
+
+    <text x="24" y="80" font-size="13.5" font-weight="700" fill="#0F172A">Functional Operations:</text>
+    <text x="24" y="105" font-size="13" fill="#475569">• Aggregate 365-day submission history by calendar date</text>
+    <text x="24" y="128" font-size="13" fill="#475569">• Compute current &amp; longest consecutive solve streaks</text>
+    <text x="24" y="151" font-size="13" fill="#475569">• Calculate difficulty solve ratios (Easy, Medium, Hard)</text>
+    <text x="24" y="174" font-size="13" fill="#475569">• Rank students globally and generate competitive badges</text>
+    <text x="24" y="202" font-size="12" font-weight="700" fill="#D97706">Interacts with: D1 (users), D3 (submissions)</text>
+  </g>
+
+  <!-- Process 6.0: Administrator Telemetry & Moderation Console (Row 3 Right) -->
+  <g transform="translate(1220, 750)" filter="url(#shadow)">
+    <rect x="0" y="0" width="680" height="230" rx="14" fill="#FFFFFF" stroke="#0F172A" stroke-width="2.5" />
+    <rect x="0" y="0" width="680" height="46" rx="14" fill="#F1F5F9" />
+    <circle cx="35" cy="23" r="16" fill="#0F172A" />
+    <text x="35" y="29" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">6.0</text>
+    <text x="65" y="29" font-size="16" font-weight="800" fill="#0F172A">Administrator Telemetry &amp; Moderation Console</text>
+
+    <text x="24" y="80" font-size="13.5" font-weight="700" fill="#0F172A">Functional Operations:</text>
+    <text x="24" y="105" font-size="13" fill="#475569">• Monitor active Socket.IO connections &amp; server CPU load</text>
+    <text x="24" y="128" font-size="13" fill="#475569">• Execute Problem CRUD: create, update, deactivate</text>
+    <text x="24" y="151" font-size="13" fill="#475569">• Toggle student account suspension with instant token kill</text>
+    <text x="24" y="174" font-size="13" fill="#475569">• Assign and rotate 24-hour Daily Challenge problems</text>
+    <text x="24" y="202" font-size="12" font-weight="700" fill="#475569">Interacts with: D1 (users), D2 (problems), D5 (daily), D6 (blacklist)</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- 6 DATA STORES (D1 to D6) — Arranged Horizontally Beneath        -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1020)" filter="url(#shadow)">
+    <rect x="0" y="0" width="2280" height="460" rx="14" fill="#F8FAFC" stroke="#0F172A" stroke-width="2.5" />
+    <rect x="0" y="0" width="2280" height="46" rx="14" fill="url(#hdrDFD)" />
+    <rect x="0" y="36" width="2280" height="10" fill="#1E3A8A" />
+    <text x="30" y="30" font-size="18" font-weight="800" fill="#FFFFFF">PERSISTENT DATA STORES (MONGODB ATLAS CLUSTER COLLECTIONS)</text>
+    <rect x="2060" y="10" width="180" height="26" rx="13" fill="#3B82F6" />
+    <text x="2150" y="28" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">6 PERSISTENT STORES</text>
+
+    <!-- 6 Store Cards (D1 to D6) -->
+    <!-- D1: users -->
+    <g transform="translate(30, 70)">
+      <rect x="0" y="0" width="350" height="360" rx="10" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="2" />
+      <!-- Top Open-Ended Store Bar -->
+      <line x1="0" y1="42" x2="350" y2="42" stroke="#1E3A8A" stroke-width="2" />
+      <rect x="15" y="10" width="50" height="24" rx="4" fill="#1E3A8A" />
+      <text x="40" y="27" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">D1</text>
+      <text x="75" y="28" font-size="16" font-weight="800" fill="#1E3A8A">users</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Collection Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• username, email [UK]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• password (Bcrypt Hash)</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• role ('student'|'admin')</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• rating (ELO, Def: 1200)</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• streak, battleStats</text>
+      <line x1="15" y1="225" x2="335" y2="225" stroke="#E2E8F0" />
+      <text x="15" y="250" font-size="12.5" font-weight="700" fill="#1E3A8A">Data Flows:</text>
+      <text x="15" y="275" font-size="12" fill="#2563EB">← Reads: 1.0 (Auth), 4.0 (ELO), 5.0</text>
+      <text x="15" y="300" font-size="12" fill="#16A34A">→ Writes: 1.0 (Reg), 4.0 (Ratings), 6.0</text>
+    </g>
+
+    <!-- D2: problems -->
+    <g transform="translate(410, 70)">
+      <rect x="0" y="0" width="350" height="360" rx="10" fill="#FFFFFF" stroke="#065F46" stroke-width="2" />
+      <line x1="0" y1="42" x2="350" y2="42" stroke="#065F46" stroke-width="2" />
+      <rect x="15" y="10" width="50" height="24" rx="4" fill="#065F46" />
+      <text x="40" y="27" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">D2</text>
+      <text x="75" y="28" font-size="16" font-weight="800" fill="#065F46">problems</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Collection Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• title, slug [UK]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• difficulty, tags</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• starterCode (JS/Py)</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• sampleTestCases</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• hiddenTestCases</text>
+      <line x1="15" y1="225" x2="335" y2="225" stroke="#E2E8F0" />
+      <text x="15" y="250" font-size="12.5" font-weight="700" fill="#065F46">Data Flows:</text>
+      <text x="15" y="275" font-size="12" fill="#2563EB">← Reads: 2.0 (Catalogue), 3.0, 4.0</text>
+      <text x="15" y="300" font-size="12" fill="#16A34A">→ Writes: 6.0 (Admin Problem CRUD)</text>
+    </g>
+
+    <!-- D3: submissions -->
+    <g transform="translate(790, 70)">
+      <rect x="0" y="0" width="350" height="360" rx="10" fill="#FFFFFF" stroke="#1E40AF" stroke-width="2" />
+      <line x1="0" y1="42" x2="350" y2="42" stroke="#1E40AF" stroke-width="2" />
+      <rect x="15" y="10" width="50" height="24" rx="4" fill="#1E40AF" />
+      <text x="40" y="27" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">D3</text>
+      <text x="75" y="28" font-size="16" font-weight="800" fill="#1E40AF">submissions</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Collection Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• userId, problemId [FK]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• language, code</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• status, runtime, memory</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• passedTests, totalTests</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• createdAt: Date</text>
+      <line x1="15" y1="225" x2="335" y2="225" stroke="#E2E8F0" />
+      <text x="15" y="250" font-size="12.5" font-weight="700" fill="#1E40AF">Data Flows:</text>
+      <text x="15" y="275" font-size="12" fill="#2563EB">← Reads: 5.0 (Heatmap &amp; Analytics)</text>
+      <text x="15" y="300" font-size="12" fill="#16A34A">→ Writes: 3.0 (Code Run Submission)</text>
+    </g>
+
+    <!-- D4: battles -->
+    <g transform="translate(1170, 70)">
+      <rect x="0" y="0" width="350" height="360" rx="10" fill="#FFFFFF" stroke="#5B21B6" stroke-width="2" />
+      <line x1="0" y1="42" x2="350" y2="42" stroke="#5B21B6" stroke-width="2" />
+      <rect x="15" y="10" width="50" height="24" rx="4" fill="#5B21B6" />
+      <text x="40" y="27" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">D4</text>
+      <text x="75" y="28" font-size="16" font-weight="800" fill="#5B21B6">battles</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Collection Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• roomCode [UK, 6 chars]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• hostId, opponentId [FK]</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• problemId, winnerId [FK]</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• status, duration, progress</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• createdAt: Date</text>
+      <line x1="15" y1="225" x2="335" y2="225" stroke="#E2E8F0" />
+      <text x="15" y="250" font-size="12.5" font-weight="700" fill="#5B21B6">Data Flows:</text>
+      <text x="15" y="275" font-size="12" fill="#2563EB">← Reads: 4.0 (Match State Check)</text>
+      <text x="15" y="300" font-size="12" fill="#16A34A">→ Writes: 4.0 (Match Creation &amp; Finish)</text>
+    </g>
+
+    <!-- D5: dailychallenges -->
+    <g transform="translate(1550, 70)">
+      <rect x="0" y="0" width="350" height="360" rx="10" fill="#FFFFFF" stroke="#92400E" stroke-width="2" />
+      <line x1="0" y1="42" x2="350" y2="42" stroke="#92400E" stroke-width="2" />
+      <rect x="15" y="10" width="50" height="24" rx="4" fill="#92400E" />
+      <text x="40" y="27" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">D5</text>
+      <text x="75" y="28" font-size="16" font-weight="800" fill="#92400E">dailychallenges</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Collection Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• date: String [UK, YYYY-MM-DD]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• problemId [FK]</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• bonusPoints (50 XP)</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• participants: [ObjectId]</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• createdAt: Date</text>
+      <line x1="15" y1="225" x2="335" y2="225" stroke="#E2E8F0" />
+      <text x="15" y="250" font-size="12.5" font-weight="700" fill="#92400E">Data Flows:</text>
+      <text x="15" y="275" font-size="12" fill="#2563EB">← Reads: 2.0 (Active Daily Problem)</text>
+      <text x="15" y="300" font-size="12" fill="#16A34A">→ Writes: 6.0 (Schedule), 3.0 (Solve)</text>
+    </g>
+
+    <!-- D6: tokenblacklists -->
+    <g transform="translate(1930, 70)">
+      <rect x="0" y="0" width="320" height="360" rx="10" fill="#FFFFFF" stroke="#9F1239" stroke-width="2" />
+      <line x1="0" y1="42" x2="320" y2="42" stroke="#9F1239" stroke-width="2" />
+      <rect x="15" y="10" width="50" height="24" rx="4" fill="#9F1239" />
+      <text x="40" y="27" text-anchor="middle" font-size="13" font-weight="800" fill="#FFFFFF">D6</text>
+      <text x="75" y="28" font-size="16" font-weight="800" fill="#9F1239">tokenblacklists</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Collection Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• token: String [UK]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• userId [FK]</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• expiresAt: Date (TTL: 0s)</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• reason: String</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• createdAt: Date</text>
+      <line x1="15" y1="225" x2="305" y2="225" stroke="#E2E8F0" />
+      <text x="15" y="250" font-size="12.5" font-weight="700" fill="#9F1239">Data Flows:</text>
+      <text x="15" y="275" font-size="12" fill="#2563EB">← Reads: 1.0 (Token Verification)</text>
+      <text x="15" y="300" font-size="12" fill="#16A34A">→ Writes: 1.0 (Logout), 6.0 (Suspend)</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- FOOTER LEGEND                                                   -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1860)">
+    <rect x="0" y="0" width="2280" height="130" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+    <text x="30" y="38" font-size="15" font-weight="800" fill="#0F172A">DFD LEVEL 1 NOTATION &amp; DATA PIPELINE CONVENTIONS:</text>
+
+    <!-- Legend items -->
+    <rect x="30" y="55" width="480" height="34" rx="8" fill="#EFF6FF" stroke="#1E3A8A" stroke-width="1.5" />
+    <text x="50" y="77" font-size="13.5" font-weight="700" fill="#1E3A8A">Numbered Process Circles (1.0–6.0): Functional Transformational Subsystems</text>
+
+    <rect x="540" y="55" width="540" height="34" rx="8" fill="#F8FAFC" stroke="#0F172A" stroke-width="1.5" />
+    <text x="560" y="77" font-size="13.5" font-weight="700" fill="#0F172A">Open-Ended Stores (D1–D6): MongoDB Database Collections with Specific Schemas</text>
+
+    <rect x="1110" y="55" width="560" height="34" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="1.5" />
+    <text x="1130" y="77" font-size="13.5" font-weight="700" fill="#065F46">Data Flow Pipelines: Directed Information Flow with Explicit CRUD Semantics</text>
+
+    <rect x="1700" y="55" width="550" height="34" rx="8" fill="#F1F5F9" stroke="#475569" stroke-width="1.5" />
+    <text x="1720" y="77" font-size="13.5" font-weight="700" fill="#334155">Entities: External Actors Generating Input and Receiving System Output</text>
+
+    <text x="30" y="112" font-size="13" font-style="italic" fill="#64748B">Architectural Invariant: Zero direct inter-process database writes; all state mutations are gated through Mongoose schema validators and transaction guards.</text>
+  </g>
+</svg>

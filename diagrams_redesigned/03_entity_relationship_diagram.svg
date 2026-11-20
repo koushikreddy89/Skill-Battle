@@ -1,0 +1,651 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2000" width="2400" height="2000" style="background-color: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.10" />
+    </filter>
+    <linearGradient id="hdrUser" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="hdrProblem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+    <linearGradient id="hdrSubmission" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    <linearGradient id="hdrBattle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5B21B6" />
+      <stop offset="100%" stop-color="#7C3AED" />
+    </linearGradient>
+    <linearGradient id="hdrDaily" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#92400E" />
+      <stop offset="100%" stop-color="#D97706" />
+    </linearGradient>
+    <linearGradient id="hdrBlacklist" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9F1239" />
+      <stop offset="100%" stop-color="#E11D48" />
+    </linearGradient>
+    
+    <!-- Marker definitions for relationships -->
+    <marker id="dotBlue" markerWidth="8" markerHeight="8" refX="4" refY="4">
+      <circle cx="4" cy="4" r="3" fill="#2563EB" />
+    </marker>
+    <marker id="dotPurple" markerWidth="8" markerHeight="8" refX="4" refY="4">
+      <circle cx="4" cy="4" r="3" fill="#7C3AED" />
+    </marker>
+    <marker id="dotGreen" markerWidth="8" markerHeight="8" refX="4" refY="4">
+      <circle cx="4" cy="4" r="3" fill="#059669" />
+    </marker>
+    <marker id="dotAmber" markerWidth="8" markerHeight="8" refX="4" refY="4">
+      <circle cx="4" cy="4" r="3" fill="#D97706" />
+    </marker>
+    <marker id="dotRose" markerWidth="8" markerHeight="8" refX="4" refY="4">
+      <circle cx="4" cy="4" r="3" fill="#E11D48" />
+    </marker>
+  </defs>
+
+  <!-- Document Header Banner -->
+  <rect x="60" y="40" width="2280" height="130" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+  <text x="1200" y="95" text-anchor="middle" font-size="32" font-weight="800" fill="#0F172A" letter-spacing="0.5">FIGURE 4.2: ENTITY RELATIONSHIP DIAGRAM (ERD) — MONGODB DATA ARCHITECTURE</text>
+  <text x="1200" y="135" text-anchor="middle" font-size="18" font-weight="600" fill="#475569">Document Schema Specifications, Cross-Collection Key References, Index Constraints, and Relational Cardinalities</text>
+
+  <!-- =============================================================== -->
+  <!-- RELATIONSHIP CONNECTOR LINES (Drawn behind cards)                -->
+  <!-- =============================================================== -->
+
+  <!-- 1. USER to TOKEN_BLACKLIST (Col 1: Direct vertical down) -->
+  <path d="M 300 750 L 300 850" fill="none" stroke="#E11D48" stroke-width="4" stroke-dasharray="8 4" />
+  <g transform="translate(300, 800)">
+    <rect x="-110" y="-18" width="220" height="36" rx="18" fill="#FFF1F2" stroke="#E11D48" stroke-width="2" />
+    <text x="0" y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#9F1239">1 : N  revokes_token</text>
+  </g>
+
+  <!-- 2. USER to BATTLE (Col 1: Left bypass down to Battle) -->
+  <path d="M 200 750 L 200 1340" fill="none" stroke="#7C3AED" stroke-width="4" />
+  <g transform="translate(200, 1100)">
+    <rect x="-115" y="-18" width="230" height="36" rx="18" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+    <text x="0" y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#5B21B6">1 : N  hosts / duels</text>
+  </g>
+
+  <!-- 3. PROBLEM to DAILY_CHALLENGE (Col 2: Direct vertical down) -->
+  <path d="M 2100 770 L 2100 870" fill="none" stroke="#D97706" stroke-width="4" />
+  <g transform="translate(2100, 820)">
+    <rect x="-120" y="-18" width="240" height="36" rx="18" fill="#FFFBEB" stroke="#D97706" stroke-width="2" />
+    <text x="0" y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#92400E">1 : 1  featured_on_date</text>
+  </g>
+
+  <!-- 4. PROBLEM to SUBMISSION (Col 2: Right bypass down to Submission) -->
+  <path d="M 2200 770 L 2200 1340" fill="none" stroke="#059669" stroke-width="4" />
+  <g transform="translate(2200, 1140)">
+    <rect x="-135" y="-18" width="270" height="36" rx="18" fill="#ECFDF5" stroke="#059669" stroke-width="2" />
+    <text x="0" y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#065F46">1 : N  evaluated_against</text>
+  </g>
+
+  <!-- 5. USER to SUBMISSION (Diagonal cross through center: User bottom-right to Submission top-left) -->
+  <!-- Smooth orthogonal route: (840, 480) -> (1150, 480) -> (1150, 1560) -> (1560, 1560) -->
+  <path d="M 840 480 L 1150 480 L 1150 1560 L 1560 1560" fill="none" stroke="#2563EB" stroke-width="4" />
+  <g transform="translate(1150, 1020)">
+    <rect x="-110" y="-18" width="220" height="36" rx="18" fill="#EFF6FF" stroke="#2563EB" stroke-width="2" />
+    <text x="0" y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#1E3A8A">1 : N  submits_code</text>
+  </g>
+
+  <!-- 6. PROBLEM to BATTLE (Diagonal cross through center: Problem bottom-left to Battle top-right) -->
+  <!-- Smooth orthogonal route: (1560, 520) -> (1270, 520) -> (1270, 1620) -> (840, 1620) -->
+  <path d="M 1560 520 L 1270 520 L 1270 1620 L 840 1620" fill="none" stroke="#7C3AED" stroke-width="4" stroke-dasharray="10 5" />
+  <g transform="translate(1270, 1070)">
+    <rect x="-115" y="-18" width="230" height="36" rx="18" fill="#F5F3FF" stroke="#7C3AED" stroke-width="2" />
+    <text x="0" y="5" text-anchor="middle" font-size="14" font-weight="700" fill="#5B21B6">1 : N  assigned_problem</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- ENTITY CARD 1: USER (Top-Left)                                  -->
+  <!-- =============================================================== -->
+  <g transform="translate(120, 220)" filter="url(#shadow)">
+    <!-- Outer Card Container -->
+    <rect x="0" y="0" width="720" height="530" rx="12" fill="#FFFFFF" stroke="#1E3A8A" stroke-width="2.5" />
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="720" height="60" rx="12" fill="url(#hdrUser)" />
+    <rect x="0" y="48" width="720" height="12" fill="#1E3A8A" />
+    <text x="24" y="38" font-size="22" font-weight="800" fill="#FFFFFF">👤  USER</text>
+    <text x="145" y="38" font-size="16" font-weight="600" fill="#93C5FD">Collection: `users`</text>
+    <rect x="580" y="16" width="116" height="28" rx="14" fill="#3B82F6" />
+    <text x="638" y="35" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">CORE ENTITY</text>
+    
+    <!-- Table Column Subheader -->
+    <rect x="0" y="60" width="720" height="32" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1" />
+    <text x="20" y="81" font-size="12" font-weight="800" fill="#475569">KEY</text>
+    <text x="80" y="81" font-size="12" font-weight="800" fill="#475569">FIELD NAME</text>
+    <text x="250" y="81" font-size="12" font-weight="800" fill="#475569">DATA TYPE</text>
+    <text x="430" y="81" font-size="12" font-weight="800" fill="#475569">CONSTRAINTS / DESCRIPTION</text>
+
+    <!-- Rows (10 rows, 42px each) -->
+    <!-- Row 1: _id -->
+    <rect x="0" y="92" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="100" width="46" height="24" rx="6" fill="#FEF3C7" stroke="#F59E0B" />
+    <text x="39" y="116" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">PK</text>
+    <text x="80" y="118" font-size="15" font-weight="700" fill="#0F172A">_id</text>
+    <text x="250" y="118" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="118" font-size="13.5" fill="#475569">Unique Document Identifier</text>
+
+    <!-- Row 2: name -->
+    <rect x="0" y="134" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="155" r="4" fill="#94A3B8" />
+    <text x="80" y="160" font-size="15" font-weight="700" fill="#0F172A">name</text>
+    <text x="250" y="160" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="160" font-size="13.5" fill="#475569">Full Student Name (Trimmed)</text>
+
+    <!-- Row 3: username -->
+    <rect x="0" y="176" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="184" width="46" height="24" rx="6" fill="#F3E8FF" stroke="#A855F7" />
+    <text x="39" y="200" text-anchor="middle" font-size="11" font-weight="800" fill="#6B21A8">UK</text>
+    <text x="80" y="202" font-size="15" font-weight="700" fill="#0F172A">username</text>
+    <text x="250" y="202" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="202" font-size="13.5" fill="#475569">Unique Handle, Indexed, Lowercase</text>
+
+    <!-- Row 4: email -->
+    <rect x="0" y="218" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <rect x="16" y="226" width="46" height="24" rx="6" fill="#F3E8FF" stroke="#A855F7" />
+    <text x="39" y="242" text-anchor="middle" font-size="11" font-weight="800" fill="#6B21A8">UK</text>
+    <text x="80" y="244" font-size="15" font-weight="700" fill="#0F172A">email</text>
+    <text x="250" y="244" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="244" font-size="13.5" fill="#475569">Unique Email Address, Indexed</text>
+
+    <!-- Row 5: password -->
+    <rect x="0" y="260" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="281" r="4" fill="#94A3B8" />
+    <text x="80" y="286" font-size="15" font-weight="700" fill="#0F172A">password</text>
+    <text x="250" y="286" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="286" font-size="13.5" fill="#475569">Bcrypt Hash (10 Salt Rounds)</text>
+
+    <!-- Row 6: role -->
+    <rect x="0" y="302" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="323" r="4" fill="#94A3B8" />
+    <text x="80" y="328" font-size="15" font-weight="700" fill="#0F172A">role</text>
+    <text x="250" y="328" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="328" font-size="13.5" fill="#475569">Enum: 'student' | 'admin'</text>
+
+    <!-- Row 7: rating -->
+    <rect x="0" y="344" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="365" r="4" fill="#94A3B8" />
+    <text x="80" y="370" font-size="15" font-weight="700" fill="#0F172A">rating</text>
+    <text x="250" y="370" font-size="14" font-family="monospace" font-weight="600" fill="#D97706">Number</text>
+    <text x="430" y="370" font-size="13.5" fill="#475569">ELO Rating (Default: 1200, Desc Index)</text>
+
+    <!-- Row 8: streak -->
+    <rect x="0" y="386" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="407" r="4" fill="#94A3B8" />
+    <text x="80" y="412" font-size="15" font-weight="700" fill="#0F172A">streak</text>
+    <text x="250" y="412" font-size="14" font-family="monospace" font-weight="600" fill="#7C3AED">Object</text>
+    <text x="430" y="412" font-size="13.5" fill="#475569">{ current: int, max: int, lastDate: Date }</text>
+
+    <!-- Row 9: battleStats -->
+    <rect x="0" y="428" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="449" r="4" fill="#94A3B8" />
+    <text x="80" y="454" font-size="15" font-weight="700" fill="#0F172A">battleStats</text>
+    <text x="250" y="454" font-size="14" font-family="monospace" font-weight="600" fill="#7C3AED">Object</text>
+    <text x="430" y="454" font-size="13.5" fill="#475569">{ battles: int, wins: int, losses: int }</text>
+
+    <!-- Row 10: createdAt -->
+    <rect x="0" y="470" width="720" height="60" rx="12" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="495" r="4" fill="#94A3B8" />
+    <text x="80" y="500" font-size="15" font-weight="700" fill="#0F172A">createdAt</text>
+    <text x="250" y="500" font-size="14" font-family="monospace" font-weight="600" fill="#64748B">Date</text>
+    <text x="430" y="500" font-size="13.5" fill="#475569">Account Creation Timestamp</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- ENTITY CARD 2: PROBLEM (Top-Right)                              -->
+  <!-- =============================================================== -->
+  <g transform="translate(1560, 220)" filter="url(#shadow)">
+    <!-- Outer Card Container -->
+    <rect x="0" y="0" width="720" height="550" rx="12" fill="#FFFFFF" stroke="#065F46" stroke-width="2.5" />
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="720" height="60" rx="12" fill="url(#hdrProblem)" />
+    <rect x="0" y="48" width="720" height="12" fill="#065F46" />
+    <text x="24" y="38" font-size="22" font-weight="800" fill="#FFFFFF">🧩  PROBLEM</text>
+    <text x="180" y="38" font-size="16" font-weight="600" fill="#A7F3D0">Collection: `problems`</text>
+    <rect x="580" y="16" width="116" height="28" rx="14" fill="#059669" />
+    <text x="638" y="35" text-anchor="middle" font-size="13" font-weight="700" fill="#FFFFFF">CATALOGUE</text>
+
+    <!-- Table Column Subheader -->
+    <rect x="0" y="60" width="720" height="32" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1" />
+    <text x="20" y="81" font-size="12" font-weight="800" fill="#475569">KEY</text>
+    <text x="80" y="81" font-size="12" font-weight="800" fill="#475569">FIELD NAME</text>
+    <text x="250" y="81" font-size="12" font-weight="800" fill="#475569">DATA TYPE</text>
+    <text x="430" y="81" font-size="12" font-weight="800" fill="#475569">CONSTRAINTS / DESCRIPTION</text>
+
+    <!-- Rows (11 rows, 40px each) -->
+    <!-- Row 1: _id -->
+    <rect x="0" y="92" width="720" height="40" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="99" width="46" height="24" rx="6" fill="#FEF3C7" stroke="#F59E0B" />
+    <text x="39" y="115" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">PK</text>
+    <text x="80" y="117" font-size="15" font-weight="700" fill="#0F172A">_id</text>
+    <text x="250" y="117" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="117" font-size="13.5" fill="#475569">Primary Problem Identifier</text>
+
+    <!-- Row 2: title -->
+    <rect x="0" y="132" width="720" height="40" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="151" r="4" fill="#94A3B8" />
+    <text x="80" y="156" font-size="15" font-weight="700" fill="#0F172A">title</text>
+    <text x="250" y="156" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="156" font-size="13.5" fill="#475569">Problem Title (e.g. 'Two Sum')</text>
+
+    <!-- Row 3: slug -->
+    <rect x="0" y="172" width="720" height="40" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="179" width="46" height="24" rx="6" fill="#F3E8FF" stroke="#A855F7" />
+    <text x="39" y="195" text-anchor="middle" font-size="11" font-weight="800" fill="#6B21A8">UK</text>
+    <text x="80" y="197" font-size="15" font-weight="700" fill="#0F172A">slug</text>
+    <text x="250" y="197" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="197" font-size="13.5" fill="#475569">Unique URL Slug, Unique Index</text>
+
+    <!-- Row 4: description -->
+    <rect x="0" y="212" width="720" height="40" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="231" r="4" fill="#94A3B8" />
+    <text x="80" y="236" font-size="15" font-weight="700" fill="#0F172A">description</text>
+    <text x="250" y="236" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="236" font-size="13.5" fill="#475569">Markdown Formatted Statement</text>
+
+    <!-- Row 5: difficulty -->
+    <rect x="0" y="252" width="720" height="40" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="271" r="4" fill="#94A3B8" />
+    <text x="80" y="276" font-size="15" font-weight="700" fill="#0F172A">difficulty</text>
+    <text x="250" y="276" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="276" font-size="13.5" fill="#475569">Enum: 'Easy' | 'Medium' | 'Hard'</text>
+
+    <!-- Row 6: tags -->
+    <rect x="0" y="292" width="720" height="40" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="311" r="4" fill="#94A3B8" />
+    <text x="80" y="316" font-size="15" font-weight="700" fill="#0F172A">tags</text>
+    <text x="250" y="316" font-size="14" font-family="monospace" font-weight="600" fill="#7C3AED">[String]</text>
+    <text x="430" y="316" font-size="13.5" fill="#475569">['Array', 'Hash Map', 'DP', etc.]</text>
+
+    <!-- Row 7: starterCode -->
+    <rect x="0" y="332" width="720" height="40" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="351" r="4" fill="#94A3B8" />
+    <text x="80" y="356" font-size="15" font-weight="700" fill="#0F172A">starterCode</text>
+    <text x="250" y="356" font-size="14" font-family="monospace" font-weight="600" fill="#7C3AED">Object</text>
+    <text x="430" y="356" font-size="13.5" fill="#475569">{ javascript: str, python: str }</text>
+
+    <!-- Row 8: sampleTestCases -->
+    <rect x="0" y="372" width="720" height="40" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="391" r="4" fill="#94A3B8" />
+    <text x="80" y="396" font-size="15" font-weight="700" fill="#0F172A">sampleTestCases</text>
+    <text x="250" y="396" font-size="14" font-family="monospace" font-weight="600" fill="#7C3AED">[Object]</text>
+    <text x="430" y="396" font-size="13.5" fill="#475569">Public Tests [{ input, output, explain }]</text>
+
+    <!-- Row 9: hiddenTestCases -->
+    <rect x="0" y="412" width="720" height="40" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="431" r="4" fill="#94A3B8" />
+    <text x="80" y="436" font-size="15" font-weight="700" fill="#0F172A">hiddenTestCases</text>
+    <text x="250" y="436" font-size="14" font-family="monospace" font-weight="600" fill="#7C3AED">[Object]</text>
+    <text x="430" y="436" font-size="13.5" fill="#475569">Secret Evaluation Tests [{ in, out }]</text>
+
+    <!-- Row 10: author -->
+    <rect x="0" y="452" width="720" height="40" fill="#F8FAFC" stroke="#F1F5F9" />
+    <rect x="16" y="459" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="475" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="477" font-size="15" font-weight="700" fill="#0F172A">author</text>
+    <text x="250" y="477" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="477" font-size="13.5" fill="#475569">References USER._id (Author/Admin)</text>
+
+    <!-- Row 11: createdAt -->
+    <rect x="0" y="492" width="720" height="58" rx="12" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="516" r="4" fill="#94A3B8" />
+    <text x="80" y="520" font-size="15" font-weight="700" fill="#0F172A">createdAt</text>
+    <text x="250" y="520" font-size="14" font-family="monospace" font-weight="600" fill="#64748B">Date</text>
+    <text x="430" y="520" font-size="13.5" fill="#475569">Timestamp of Problem Creation</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- ENTITY CARD 3: TOKEN_BLACKLIST (Middle-Left)                     -->
+  <!-- =============================================================== -->
+  <g transform="translate(120, 850)" filter="url(#shadow)">
+    <!-- Outer Card Container -->
+    <rect x="0" y="0" width="720" height="310" rx="12" fill="#FFFFFF" stroke="#9F1239" stroke-width="2.5" />
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="720" height="56" rx="12" fill="url(#hdrBlacklist)" />
+    <rect x="0" y="44" width="720" height="12" fill="#9F1239" />
+    <text x="24" y="35" font-size="20" font-weight="800" fill="#FFFFFF">🔒  TOKEN_BLACKLIST</text>
+    <text x="270" y="35" font-size="15" font-weight="600" fill="#FECDD3">Collection: `tokenblacklists`</text>
+    <rect x="580" y="14" width="116" height="28" rx="14" fill="#E11D48" />
+    <text x="638" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">SECURITY TTL</text>
+
+    <!-- Table Column Subheader -->
+    <rect x="0" y="56" width="720" height="30" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1" />
+    <text x="20" y="76" font-size="11.5" font-weight="800" fill="#475569">KEY</text>
+    <text x="80" y="76" font-size="11.5" font-weight="800" fill="#475569">FIELD NAME</text>
+    <text x="250" y="76" font-size="11.5" font-weight="800" fill="#475569">DATA TYPE</text>
+    <text x="430" y="76" font-size="11.5" font-weight="800" fill="#475569">CONSTRAINTS / DESCRIPTION</text>
+
+    <!-- Rows (5 rows, 42px each) -->
+    <!-- Row 1: _id -->
+    <rect x="0" y="86" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="94" width="46" height="24" rx="6" fill="#FEF3C7" stroke="#F59E0B" />
+    <text x="39" y="110" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">PK</text>
+    <text x="80" y="112" font-size="15" font-weight="700" fill="#0F172A">_id</text>
+    <text x="250" y="112" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="112" font-size="13.5" fill="#475569">Primary Revocation Entry ID</text>
+
+    <!-- Row 2: token -->
+    <rect x="0" y="128" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <rect x="16" y="136" width="46" height="24" rx="6" fill="#F3E8FF" stroke="#A855F7" />
+    <text x="39" y="152" text-anchor="middle" font-size="11" font-weight="800" fill="#6B21A8">UK</text>
+    <text x="80" y="154" font-size="15" font-weight="700" fill="#0F172A">token</text>
+    <text x="250" y="154" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="154" font-size="13.5" fill="#475569">Revoked JWT String / Hash, Unique Index</text>
+
+    <!-- Row 3: userId -->
+    <rect x="0" y="170" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="178" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="194" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="196" font-size="15" font-weight="700" fill="#0F172A">userId</text>
+    <text x="250" y="196" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="196" font-size="13.5" fill="#475569">References USER._id</text>
+
+    <!-- Row 4: expiresAt -->
+    <rect x="0" y="212" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="233" r="4" fill="#94A3B8" />
+    <text x="80" y="238" font-size="15" font-weight="700" fill="#0F172A">expiresAt</text>
+    <text x="250" y="238" font-size="14" font-family="monospace" font-weight="600" fill="#64748B">Date</text>
+    <text x="430" y="238" font-size="13.5" font-weight="700" fill="#E11D48">TTL Index (expireAfterSeconds: 0)</text>
+
+    <!-- Row 5: reason -->
+    <rect x="0" y="254" width="720" height="56" rx="12" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="279" r="4" fill="#94A3B8" />
+    <text x="80" y="283" font-size="15" font-weight="700" fill="#0F172A">reason</text>
+    <text x="250" y="283" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="283" font-size="13.5" fill="#475569">'user_logout' | 'admin_revocation'</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- ENTITY CARD 4: DAILY_CHALLENGE (Middle-Right)                   -->
+  <!-- =============================================================== -->
+  <g transform="translate(1560, 870)" filter="url(#shadow)">
+    <!-- Outer Card Container -->
+    <rect x="0" y="0" width="720" height="310" rx="12" fill="#FFFFFF" stroke="#92400E" stroke-width="2.5" />
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="720" height="56" rx="12" fill="url(#hdrDaily)" />
+    <rect x="0" y="44" width="720" height="12" fill="#92400E" />
+    <text x="24" y="35" font-size="20" font-weight="800" fill="#FFFFFF">📅  DAILY_CHALLENGE</text>
+    <text x="280" y="35" font-size="15" font-weight="600" fill="#FDE68A">Collection: `dailychallenges`</text>
+    <rect x="580" y="14" width="116" height="28" rx="14" fill="#D97706" />
+    <text x="638" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">ROTATION</text>
+
+    <!-- Table Column Subheader -->
+    <rect x="0" y="56" width="720" height="30" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1" />
+    <text x="20" y="76" font-size="11.5" font-weight="800" fill="#475569">KEY</text>
+    <text x="80" y="76" font-size="11.5" font-weight="800" fill="#475569">FIELD NAME</text>
+    <text x="250" y="76" font-size="11.5" font-weight="800" fill="#475569">DATA TYPE</text>
+    <text x="430" y="76" font-size="11.5" font-weight="800" fill="#475569">CONSTRAINTS / DESCRIPTION</text>
+
+    <!-- Rows (5 rows, 42px each) -->
+    <!-- Row 1: _id -->
+    <rect x="0" y="86" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="94" width="46" height="24" rx="6" fill="#FEF3C7" stroke="#F59E0B" />
+    <text x="39" y="110" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">PK</text>
+    <text x="80" y="112" font-size="15" font-weight="700" fill="#0F172A">_id</text>
+    <text x="250" y="112" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="112" font-size="13.5" fill="#475569">Primary Challenge Identifier</text>
+
+    <!-- Row 2: date -->
+    <rect x="0" y="128" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <rect x="16" y="136" width="46" height="24" rx="6" fill="#F3E8FF" stroke="#A855F7" />
+    <text x="39" y="152" text-anchor="middle" font-size="11" font-weight="800" fill="#6B21A8">UK</text>
+    <text x="80" y="154" font-size="15" font-weight="700" fill="#0F172A">date</text>
+    <text x="250" y="154" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="154" font-size="13.5" fill="#475569">Calendar Date 'YYYY-MM-DD', Unique Index</text>
+
+    <!-- Row 3: problem -->
+    <rect x="0" y="170" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="178" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="194" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="196" font-size="15" font-weight="700" fill="#0F172A">problem</text>
+    <text x="250" y="196" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="196" font-size="13.5" fill="#475569">References PROBLEM._id</text>
+
+    <!-- Row 4: bonusPoints -->
+    <rect x="0" y="212" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="233" r="4" fill="#94A3B8" />
+    <text x="80" y="238" font-size="15" font-weight="700" fill="#0F172A">bonusPoints</text>
+    <text x="250" y="238" font-size="14" font-family="monospace" font-weight="600" fill="#D97706">Number</text>
+    <text x="430" y="238" font-size="13.5" fill="#475569">Bonus Rating ELO Award (Default: 50)</text>
+
+    <!-- Row 5: participants -->
+    <rect x="0" y="254" width="720" height="56" rx="12" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="279" r="4" fill="#94A3B8" />
+    <text x="80" y="283" font-size="15" font-weight="700" fill="#0F172A">participants</text>
+    <text x="250" y="283" font-size="14" font-family="monospace" font-weight="600" fill="#7C3AED">[ObjectId]</text>
+    <text x="430" y="283" font-size="13.5" fill="#475569">Array of USER._id who solved challenge</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- ENTITY CARD 5: BATTLE (Bottom-Left)                             -->
+  <!-- =============================================================== -->
+  <g transform="translate(120, 1340)" filter="url(#shadow)">
+    <!-- Outer Card Container -->
+    <rect x="0" y="0" width="720" height="480" rx="12" fill="#FFFFFF" stroke="#5B21B6" stroke-width="2.5" />
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="720" height="56" rx="12" fill="url(#hdrBattle)" />
+    <rect x="0" y="44" width="720" height="12" fill="#5B21B6" />
+    <text x="24" y="35" font-size="20" font-weight="800" fill="#FFFFFF">⚔️  BATTLE</text>
+    <text x="180" y="35" font-size="15" font-weight="600" fill="#DDD6FE">Collection: `battles`</text>
+    <rect x="580" y="14" width="116" height="28" rx="14" fill="#7C3AED" />
+    <text x="638" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">MULTIPLAYER</text>
+
+    <!-- Table Column Subheader -->
+    <rect x="0" y="56" width="720" height="30" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1" />
+    <text x="20" y="76" font-size="11.5" font-weight="800" fill="#475569">KEY</text>
+    <text x="80" y="76" font-size="11.5" font-weight="800" fill="#475569">FIELD NAME</text>
+    <text x="250" y="76" font-size="11.5" font-weight="800" fill="#475569">DATA TYPE</text>
+    <text x="430" y="76" font-size="11.5" font-weight="800" fill="#475569">CONSTRAINTS / DESCRIPTION</text>
+
+    <!-- Rows (9 rows, 42px each) -->
+    <!-- Row 1: _id -->
+    <rect x="0" y="86" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="94" width="46" height="24" rx="6" fill="#FEF3C7" stroke="#F59E0B" />
+    <text x="39" y="110" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">PK</text>
+    <text x="80" y="112" font-size="15" font-weight="700" fill="#0F172A">_id</text>
+    <text x="250" y="112" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="112" font-size="13.5" fill="#475569">Primary Match Identifier</text>
+
+    <!-- Row 2: roomCode -->
+    <rect x="0" y="128" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <rect x="16" y="136" width="46" height="24" rx="6" fill="#F3E8FF" stroke="#A855F7" />
+    <text x="39" y="152" text-anchor="middle" font-size="11" font-weight="800" fill="#6B21A8">UK</text>
+    <text x="80" y="154" font-size="15" font-weight="700" fill="#0F172A">roomCode</text>
+    <text x="250" y="154" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="154" font-size="13.5" fill="#475569">6-Character Unique Room Code, Index</text>
+
+    <!-- Row 3: hostId -->
+    <rect x="0" y="170" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="178" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="194" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="196" font-size="15" font-weight="700" fill="#0F172A">hostId</text>
+    <text x="250" y="196" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="196" font-size="13.5" fill="#475569">References USER._id (Room Creator)</text>
+
+    <!-- Row 4: opponentId -->
+    <rect x="0" y="212" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <rect x="16" y="220" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="236" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="238" font-size="15" font-weight="700" fill="#0F172A">opponentId</text>
+    <text x="250" y="238" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="238" font-size="13.5" fill="#475569">References USER._id (Joined Player)</text>
+
+    <!-- Row 5: problemId -->
+    <rect x="0" y="254" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="262" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="278" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="280" font-size="15" font-weight="700" fill="#0F172A">problemId</text>
+    <text x="250" y="280" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="280" font-size="13.5" fill="#475569">References PROBLEM._id</text>
+
+    <!-- Row 6: status -->
+    <rect x="0" y="296" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="317" r="4" fill="#94A3B8" />
+    <text x="80" y="322" font-size="15" font-weight="700" fill="#0F172A">status</text>
+    <text x="250" y="322" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="322" font-size="13.5" fill="#475569">'waiting' | 'active' | 'completed' | 'abandoned'</text>
+
+    <!-- Row 7: winnerId -->
+    <rect x="0" y="338" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="346" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="362" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="364" font-size="15" font-weight="700" fill="#0F172A">winnerId</text>
+    <text x="250" y="364" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="364" font-size="13.5" fill="#475569">References USER._id (or null if draw)</text>
+
+    <!-- Row 8: progress -->
+    <rect x="0" y="380" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="401" r="4" fill="#94A3B8" />
+    <text x="80" y="406" font-size="15" font-weight="700" fill="#0F172A">progress</text>
+    <text x="250" y="406" font-size="14" font-family="monospace" font-weight="600" fill="#7C3AED">Object</text>
+    <text x="430" y="406" font-size="13.5" fill="#475569">{ hostPassed: int, opponentPassed: int }</text>
+
+    <!-- Row 9: createdAt -->
+    <rect x="0" y="422" width="720" height="58" rx="12" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="446" r="4" fill="#94A3B8" />
+    <text x="80" y="450" font-size="15" font-weight="700" fill="#0F172A">createdAt</text>
+    <text x="250" y="450" font-size="14" font-family="monospace" font-weight="600" fill="#64748B">Date</text>
+    <text x="430" y="450" font-size="13.5" fill="#475569">Match Initialization Timestamp</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- ENTITY CARD 6: SUBMISSION (Bottom-Right)                         -->
+  <!-- =============================================================== -->
+  <g transform="translate(1560, 1340)" filter="url(#shadow)">
+    <!-- Outer Card Container -->
+    <rect x="0" y="0" width="720" height="480" rx="12" fill="#FFFFFF" stroke="#1E40AF" stroke-width="2.5" />
+    <!-- Header Banner -->
+    <rect x="0" y="0" width="720" height="56" rx="12" fill="url(#hdrSubmission)" />
+    <rect x="0" y="44" width="720" height="12" fill="#1E40AF" />
+    <text x="24" y="35" font-size="20" font-weight="800" fill="#FFFFFF">📝  SUBMISSION</text>
+    <text x="210" y="35" font-size="15" font-weight="600" fill="#BFDBFE">Collection: `submissions`</text>
+    <rect x="580" y="14" width="116" height="28" rx="14" fill="#3B82F6" />
+    <text x="638" y="33" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">EVALUATION</text>
+
+    <!-- Table Column Subheader -->
+    <rect x="0" y="56" width="720" height="30" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1" />
+    <text x="20" y="76" font-size="11.5" font-weight="800" fill="#475569">KEY</text>
+    <text x="80" y="76" font-size="11.5" font-weight="800" fill="#475569">FIELD NAME</text>
+    <text x="250" y="76" font-size="11.5" font-weight="800" fill="#475569">DATA TYPE</text>
+    <text x="430" y="76" font-size="11.5" font-weight="800" fill="#475569">CONSTRAINTS / DESCRIPTION</text>
+
+    <!-- Rows (9 rows, 42px each) -->
+    <!-- Row 1: _id -->
+    <rect x="0" y="86" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="94" width="46" height="24" rx="6" fill="#FEF3C7" stroke="#F59E0B" />
+    <text x="39" y="110" text-anchor="middle" font-size="11" font-weight="800" fill="#92400E">PK</text>
+    <text x="80" y="112" font-size="15" font-weight="700" fill="#0F172A">_id</text>
+    <text x="250" y="112" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="112" font-size="13.5" fill="#475569">Primary Submission Identifier</text>
+
+    <!-- Row 2: userId -->
+    <rect x="0" y="128" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <rect x="16" y="136" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="152" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="154" font-size="15" font-weight="700" fill="#0F172A">userId</text>
+    <text x="250" y="154" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="154" font-size="13.5" fill="#475569">References USER._id, Compound Index</text>
+
+    <!-- Row 3: problemId -->
+    <rect x="0" y="170" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <rect x="16" y="178" width="46" height="24" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="39" y="194" text-anchor="middle" font-size="11" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="80" y="196" font-size="15" font-weight="700" fill="#0F172A">problemId</text>
+    <text x="250" y="196" font-size="14" font-family="monospace" font-weight="600" fill="#2563EB">ObjectId</text>
+    <text x="430" y="196" font-size="13.5" fill="#475569">References PROBLEM._id, Compound Index</text>
+
+    <!-- Row 4: language -->
+    <rect x="0" y="212" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="233" r="4" fill="#94A3B8" />
+    <text x="80" y="238" font-size="15" font-weight="700" fill="#0F172A">language</text>
+    <text x="250" y="238" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="238" font-size="13.5" fill="#475569">'javascript' | 'python'</text>
+
+    <!-- Row 5: code -->
+    <rect x="0" y="254" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="275" r="4" fill="#94A3B8" />
+    <text x="80" y="280" font-size="15" font-weight="700" fill="#0F172A">code</text>
+    <text x="250" y="280" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="280" font-size="13.5" fill="#475569">Full Submitted Source Code</text>
+
+    <!-- Row 6: status -->
+    <rect x="0" y="296" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="317" r="4" fill="#94A3B8" />
+    <text x="80" y="322" font-size="15" font-weight="700" fill="#0F172A">status</text>
+    <text x="250" y="322" font-size="14" font-family="monospace" font-weight="600" fill="#059669">String</text>
+    <text x="430" y="322" font-size="13.5" fill="#475569">'Accepted' | 'Wrong Answer' | 'TLE' | 'Runtime Error'</text>
+
+    <!-- Row 7: runtime & memory -->
+    <rect x="0" y="338" width="720" height="42" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="359" r="4" fill="#94A3B8" />
+    <text x="80" y="364" font-size="15" font-weight="700" fill="#0F172A">runtime / memory</text>
+    <text x="250" y="364" font-size="14" font-family="monospace" font-weight="600" fill="#D97706">Number</text>
+    <text x="430" y="364" font-size="13.5" fill="#475569">Latency (ms) / Memory Allocation (MB)</text>
+
+    <!-- Row 8: testCounts -->
+    <rect x="0" y="380" width="720" height="42" fill="#F8FAFC" stroke="#F1F5F9" />
+    <circle cx="39" cy="401" r="4" fill="#94A3B8" />
+    <text x="80" y="406" font-size="15" font-weight="700" fill="#0F172A">passedTests / total</text>
+    <text x="250" y="406" font-size="14" font-family="monospace" font-weight="600" fill="#D97706">Number</text>
+    <text x="430" y="406" font-size="13.5" fill="#475569">Evaluated Test Suite Pass Ratio (e.g. 15/15)</text>
+
+    <!-- Row 9: createdAt -->
+    <rect x="0" y="422" width="720" height="58" rx="12" fill="#FFFFFF" stroke="#F1F5F9" />
+    <circle cx="39" cy="446" r="4" fill="#94A3B8" />
+    <text x="80" y="450" font-size="15" font-weight="700" fill="#0F172A">createdAt</text>
+    <text x="250" y="450" font-size="14" font-family="monospace" font-weight="600" fill="#64748B">Date</text>
+    <text x="430" y="450" font-size="13.5" fill="#475569">Submission Timestamp (Desc Index)</text>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- BOTTOM ERD LEGEND BAR                                           -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1850)">
+    <rect x="0" y="0" width="2280" height="100" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+    <text x="30" y="38" font-size="15" font-weight="800" fill="#0F172A">ERD NOTATION LEGEND:</text>
+    
+    <!-- Legend item 1: PK -->
+    <rect x="220" y="18" width="46" height="26" rx="6" fill="#FEF3C7" stroke="#F59E0B" />
+    <text x="243" y="36" text-anchor="middle" font-size="12" font-weight="800" fill="#92400E">PK</text>
+    <text x="280" y="36" font-size="14" font-weight="600" fill="#334155">Primary Key (_id ObjectId)</text>
+
+    <!-- Legend item 2: UK -->
+    <rect x="520" y="18" width="46" height="26" rx="6" fill="#F3E8FF" stroke="#A855F7" />
+    <text x="543" y="36" text-anchor="middle" font-size="12" font-weight="800" fill="#6B21A8">UK</text>
+    <text x="580" y="36" font-size="14" font-weight="600" fill="#334155">Unique Key Constraint (Index)</text>
+
+    <!-- Legend item 3: FK -->
+    <rect x="850" y="18" width="46" height="26" rx="6" fill="#DBEAFE" stroke="#3B82F6" />
+    <text x="873" y="36" text-anchor="middle" font-size="12" font-weight="800" fill="#1E40AF">FK</text>
+    <text x="910" y="36" font-size="14" font-weight="600" fill="#334155">Foreign Key Reference</text>
+
+    <!-- Legend item 4: 1 : N -->
+    <rect x="1150" y="18" width="60" height="26" rx="13" fill="#EFF6FF" stroke="#2563EB" stroke-width="1.5" />
+    <text x="1180" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#1E3A8A">1 : N</text>
+    <text x="1225" y="36" font-size="14" font-weight="600" fill="#334155">One-to-Many Relational Cardinality</text>
+
+    <!-- Legend item 5: 1 : 1 -->
+    <rect x="1540" y="18" width="60" height="26" rx="13" fill="#FFFBEB" stroke="#D97706" stroke-width="1.5" />
+    <text x="1570" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="#92400E">1 : 1</text>
+    <text x="1615" y="36" font-size="14" font-weight="600" fill="#334155">One-to-One Relational Cardinality</text>
+
+    <!-- Legend item 6: TTL -->
+    <rect x="1930" y="18" width="55" height="26" rx="6" fill="#FFE4E6" stroke="#E11D48" />
+    <text x="1957" y="36" text-anchor="middle" font-size="12" font-weight="800" fill="#9F1239">TTL</text>
+    <text x="2000" y="36" font-size="14" font-weight="600" fill="#334155">Time-to-Live Automated Index</text>
+
+    <!-- Subtitle explanation -->
+    <text x="30" y="78" font-size="13" font-style="italic" fill="#64748B">Architecture Note: Enforces referential integrity at the Mongoose ODM layer while maintaining sub-millisecond query performance via compound B-Tree indexes.</text>
+  </g>
+</svg>

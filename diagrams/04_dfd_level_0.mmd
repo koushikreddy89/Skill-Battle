@@ -1,24 +1,29 @@
-flowchart TD
-    Student[Student Competitor]
-    Admin[Platform Administrator]
-    System((0.0 SKILL BATTLE SYSTEM))
-    Judge0[External Execution API / Judge0]
+flowchart LR
+    Student["👤 Student / Competitor"]:::entityStyle
+    Admin["🛡️ Platform Administrator"]:::entityStyle
+    Judge0["⚙️ External Judge0 API Engine"]:::entityStyle
+    
+    System(("0.0<br/><b>SKILL BATTLE<br/>PLATFORM</b>")):::processStyle
 
-    Student -->|1. Credentials, Registration Data| System
-    Student -->|2. Code Solutions & Sample Inputs| System
+    Student -->|1. Credentials, Profile Data| System
+    Student -->|2. Algorithmic Source Code| System
     Student -->|3. Battle Lobby Actions & Room Codes| System
-    Student -->|4. Live Duel Socket Events & Progress| System
+    Student -->|4. Live Duel WebSockets & Test Runs| System
 
-    System -->|5. Auth Tokens & Cookie Handshake| Student
-    System -->|6. Test Results & Execution Metrics| Student
-    System -->|7. Opponent Progress & Sync Countdown| Student
-    System -->|8. Profile Heatmap, Streaks, Ratings| Student
+    System -->|5. Auth Tokens & HttpOnly Cookies| Student
+    System -->|6. Execution Metrics & Test Output| Student
+    System -->|7. Opponent Telemetry & Countdown| Student
+    System -->|8. 365-Day Heatmap & ELO Ranking| Student
 
-    Admin -->|9. Admin Credentials & Session| System
-    Admin -->|10. Problem CRUD Statements & Hidden Tests| System
-    Admin -->|11. User Suspension & Daily Schedules| System
+    Admin -->|9. Admin Login & Auth Session| System
+    Admin -->|10. Problem CRUD & Hidden Test Cases| System
+    Admin -->|11. Account Moderation & Suspension| System
+    Admin -->|12. Daily Challenge Schedules| System
 
-    System -->|12. Platform Telemetry & User Audits| Admin
-    System -->|13. Content Status Confirmations| Admin
+    System -->|13. Real-Time Telemetry & Metrics| Admin
+    System -->|14. User Audits & Operation Status| Admin
 
-    System <-->|14. Sandboxed Code Payloads & Execution Output| Judge0
+    System <-->|15. Sandboxed Code Payloads & Execution Output JSON| Judge0
+
+    classDef entityStyle fill:#1E3A8A,stroke:#0F172A,stroke-width:2.5px,color:#FFFFFF,font-weight:700;
+    classDef processStyle fill:#EFF6FF,stroke:#1E3A8A,stroke-width:3px,color:#0F172A,font-weight:700;

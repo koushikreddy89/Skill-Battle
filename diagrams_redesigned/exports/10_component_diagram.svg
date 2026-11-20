@@ -1,0 +1,454 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2400 2050" width="2400" height="2050" style="background-color: #FFFFFF; font-family: 'Segoe UI', Arial, sans-serif;">
+  <defs>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0F172A" flood-opacity="0.10" />
+    </filter>
+    <linearGradient id="hdrComp" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="hdrFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#3B82F6" />
+    </linearGradient>
+    <linearGradient id="hdrBack" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+    <linearGradient id="hdrData" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <marker id="arrComp" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#2563EB" />
+    </marker>
+  </defs>
+
+  <!-- Title Banner -->
+  <rect x="60" y="40" width="2280" height="120" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+  <text x="1200" y="90" text-anchor="middle" font-size="30" font-weight="800" fill="#0F172A" letter-spacing="0.5">FIGURE 4.9: UML COMPONENT DIAGRAM — SYSTEM MODULARITY &amp; INTERFACES</text>
+  <text x="1200" y="128" text-anchor="middle" font-size="16" font-weight="600" fill="#475569">Frontend React Components, Backend Express Middleware &amp; Controllers, and Mongoose Data Access Objects</text>
+
+  <!-- =============================================================== -->
+  <!-- LAYER 1: CLIENT-SIDE REACT COMPONENT SUBSYSTEM (TOP)            -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 200)" filter="url(#shadow)">
+    <rect x="0" y="0" width="2280" height="450" rx="14" fill="#F8FAFC" stroke="#1E3A8A" stroke-width="2.5" />
+    <rect x="0" y="0" width="2280" height="52" rx="14" fill="url(#hdrFront)" />
+    <rect x="0" y="42" width="2280" height="10" fill="#1E3A8A" />
+    <text x="30" y="34" font-size="20" font-weight="800" fill="#FFFFFF">«subsystem» FRONTEND PRESENTATION COMPONENTS (REACT 18 &amp; VITE)</text>
+    <rect x="2060" y="12" width="180" height="28" rx="14" fill="#3B82F6" />
+    <text x="2150" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">CLIENT COMPONENTS</text>
+
+    <!-- 5 Components Inside Layer 1 -->
+    <!-- Comp 1.1: AuthContext -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="410" height="340" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#EFF6FF" />
+      <!-- Component Icon -->
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#1E3A8A" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#93C5FD" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#93C5FD" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#1E3A8A">AuthContext &amp; Session</text>
+      
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Provided Interfaces:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#2563EB">IAuthService, ISessionState</text>
+      <text x="20" y="130" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="155" font-size="12.5" fill="#475569">• Stores JWT Bearer Claims in Memory</text>
+      <text x="20" y="178" font-size="12.5" fill="#475569">• Exposes login(), register(), logout()</text>
+      <text x="20" y="201" font-size="12.5" fill="#475569">• Intercepts 401s &amp; Redirects to Login</text>
+      <text x="20" y="224" font-size="12.5" fill="#475569">• Validates Session against /api/auth/me</text>
+      <text x="20" y="260" font-size="13" font-weight="700" fill="#1E3A8A">Required Interfaces:</text>
+      <text x="20" y="285" font-size="12" font-family="monospace" fill="#059669">POST /api/auth/login</text>
+      <text x="20" y="308" font-size="12" font-family="monospace" fill="#059669">POST /api/auth/logout</text>
+    </g>
+
+    <!-- Comp 1.2: ProblemCatalogue -->
+    <g transform="translate(480, 80)">
+      <rect x="0" y="0" width="410" height="340" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#EFF6FF" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#1E3A8A" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#93C5FD" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#93C5FD" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#1E3A8A">ProblemCatalogue</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Provided Interfaces:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#2563EB">IProblemFilter, ISearchCatalogue</text>
+      <text x="20" y="130" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="155" font-size="12.5" fill="#475569">• Dynamic Filter by Tags &amp; Difficulty</text>
+      <text x="20" y="178" font-size="12.5" fill="#475569">• Debounced Full-Text Query Search</text>
+      <text x="20" y="201" font-size="12.5" fill="#475569">• Paginated Problem Listing Table</text>
+      <text x="20" y="224" font-size="12.5" fill="#475569">• Solved / Unsolved Badge Indicators</text>
+      <text x="20" y="260" font-size="13" font-weight="700" fill="#1E3A8A">Required Interfaces:</text>
+      <text x="20" y="285" font-size="12" font-family="monospace" fill="#059669">GET /api/problems</text>
+      <text x="20" y="308" font-size="12" font-family="monospace" fill="#059669">GET /api/problems/:slug</text>
+    </g>
+
+    <!-- Comp 1.3: MonacoWorkspace -->
+    <g transform="translate(930, 80)">
+      <rect x="0" y="0" width="410" height="340" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#EFF6FF" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#1E3A8A" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#93C5FD" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#93C5FD" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#1E3A8A">MonacoWorkspace</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Provided Interfaces:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#2563EB">ICodeEditor, ITestRunnerDrawer</text>
+      <text x="20" y="130" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="155" font-size="12.5" fill="#475569">• Monaco Code Editor Instance Engine</text>
+      <text x="20" y="178" font-size="12.5" fill="#475569">• LocalStorage Key Drafting Autosave</text>
+      <text x="20" y="201" font-size="12.5" fill="#475569">• Execution Latency &amp; Memory Display</text>
+      <text x="20" y="224" font-size="12.5" fill="#475569">• Diff Assertion on Failed Testcases</text>
+      <text x="20" y="260" font-size="13" font-weight="700" fill="#1E3A8A">Required Interfaces:</text>
+      <text x="20" y="285" font-size="12" font-family="monospace" fill="#059669">POST /api/problems/:slug/run</text>
+      <text x="20" y="308" font-size="12" font-family="monospace" fill="#059669">POST /api/problems/:slug/submit</text>
+    </g>
+
+    <!-- Comp 1.4: BattleArenaComponent -->
+    <g transform="translate(1380, 80)">
+      <rect x="0" y="0" width="410" height="340" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#EFF6FF" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#5B21B6" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#DDD6FE" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#DDD6FE" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#5B21B6">BattleArenaComponent</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Provided Interfaces:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#7C3AED">IBattleDuel, IOpponentStream</text>
+      <text x="20" y="130" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="155" font-size="12.5" fill="#475569">• WSS /battle Namespace Connection</text>
+      <text x="20" y="178" font-size="12.5" fill="#475569">• 3s Ready Countdown &amp; Clock Sync</text>
+      <text x="20" y="201" font-size="12.5" fill="#475569">• Opponent Testcase Progress Bar</text>
+      <text x="20" y="224" font-size="12.5" fill="#475569">• Victory Screen &amp; Rating Adjustment</text>
+      <text x="20" y="260" font-size="13" font-weight="700" fill="#5B21B6">Required Interfaces:</text>
+      <text x="20" y="285" font-size="12" font-family="monospace" fill="#7C3AED">POST /api/battles/create</text>
+      <text x="20" y="308" font-size="12" font-family="monospace" fill="#7C3AED">WSS /battle (Socket Events)</text>
+    </g>
+
+    <!-- Comp 1.5: HeatmapAnalyticsWidget -->
+    <g transform="translate(1830, 80)">
+      <rect x="0" y="0" width="410" height="340" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#EFF6FF" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#92400E" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#FDE68A" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#FDE68A" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#92400E">HeatmapAnalyticsWidget</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Provided Interfaces:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#D97706">IHeatmapData, IStudentMetrics</text>
+      <text x="20" y="130" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="155" font-size="12.5" fill="#475569">• 365-Day SVG Contribution Grid</text>
+      <text x="20" y="178" font-size="12.5" fill="#475569">• Current &amp; Max Streak Calculation</text>
+      <text x="20" y="201" font-size="12.5" fill="#475569">• Difficulty Breakdown Doughnut Chart</text>
+      <text x="20" y="224" font-size="12.5" fill="#475569">• ELO History Trend Line Graph</text>
+      <text x="20" y="260" font-size="13" font-weight="700" fill="#92400E">Required Interfaces:</text>
+      <text x="20" y="285" font-size="12" font-family="monospace" fill="#059669">GET /api/profile/:username</text>
+      <text x="20" y="308" font-size="12" font-family="monospace" fill="#059669">GET /api/leaderboard</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- LAYER 2: BACKEND CONTROLLERS & SERVICES (MIDDLE)                -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 690)" filter="url(#shadow)">
+    <rect x="0" y="0" width="2280" height="560" rx="14" fill="#F8FAFC" stroke="#0F172A" stroke-width="2.5" />
+    <rect x="0" y="0" width="2280" height="52" rx="14" fill="url(#hdrBack)" />
+    <rect x="0" y="42" width="2280" height="10" fill="#0F172A" />
+    <text x="30" y="34" font-size="20" font-weight="800" fill="#FFFFFF">«subsystem» BACKEND APPLICATION SERVICES &amp; EXECUTION CONTROLLERS (EXPRESS &amp; NODE.JS)</text>
+    <rect x="2060" y="12" width="180" height="28" rx="14" fill="#475569" />
+    <text x="2150" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">SERVER SERVICES</text>
+
+    <!-- 5 Backend Components -->
+    <!-- Comp 2.1: AuthController & Guard -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="410" height="450" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#F1F5F9" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#0F172A" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#94A3B8" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#94A3B8" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#0F172A">AuthController &amp; RBAC</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Exported API Ports:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#059669">POST /api/auth/register</text>
+      <text x="20" y="120" font-size="12" font-family="monospace" fill="#059669">POST /api/auth/login</text>
+      <text x="20" y="142" font-size="12" font-family="monospace" fill="#059669">POST /api/auth/logout</text>
+      <text x="20" y="175" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="200" font-size="12.5" fill="#475569">• Validates Email &amp; Password Formats</text>
+      <text x="20" y="223" font-size="12.5" fill="#475569">• Bcrypt Salt Hash Generation (10 rds)</text>
+      <text x="20" y="246" font-size="12.5" fill="#475569">• HS256 JWT Token Signing with JTI</text>
+      <text x="20" y="269" font-size="12.5" fill="#475569">• Sets Secure HttpOnly Cookie</text>
+      <text x="20" y="292" font-size="12.5" fill="#475569">• Checks TokenBlacklist on Requests</text>
+      <text x="20" y="315" font-size="12.5" fill="#475569">• RBAC Gate for Protected Routes</text>
+      <text x="20" y="350" font-size="13" font-weight="700" fill="#1E3A8A">Model Collaborations:</text>
+      <text x="20" y="375" font-size="12" font-family="monospace" fill="#2563EB">UserModel.findOne({ email })</text>
+      <text x="20" y="398" font-size="12" font-family="monospace" fill="#E11D48">TokenBlacklist.create({ token })</text>
+    </g>
+
+    <!-- Comp 2.2: ProblemService -->
+    <g transform="translate(480, 80)">
+      <rect x="0" y="0" width="410" height="450" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#F1F5F9" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#0F172A" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#94A3B8" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#94A3B8" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#0F172A">ProblemService</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Exported API Ports:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#059669">GET /api/problems</text>
+      <text x="20" y="120" font-size="12" font-family="monospace" fill="#059669">GET /api/problems/:slug</text>
+      <text x="20" y="142" font-size="12" font-family="monospace" fill="#059669">POST /api/admin/problems</text>
+      <text x="20" y="175" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="200" font-size="12.5" fill="#475569">• Dynamic Filter by Difficulty &amp; Tags</text>
+      <text x="20" y="223" font-size="12.5" fill="#475569">• Lean Query Projections for Speed</text>
+      <text x="20" y="246" font-size="12.5" fill="#475569">• Strips Hidden Tests from Public API</text>
+      <text x="20" y="269" font-size="12.5" fill="#475569">• Problem CRUD for Administrators</text>
+      <text x="20" y="292" font-size="12.5" fill="#475569">• Slug Uniqueness &amp; B-Tree Indexing</text>
+      <text x="20" y="315" font-size="12.5" fill="#475569">• Resolves Daily Challenge Problem</text>
+      <text x="20" y="350" font-size="13" font-weight="700" fill="#1E3A8A">Model Collaborations:</text>
+      <text x="20" y="375" font-size="12" font-family="monospace" fill="#059669">ProblemModel.find(query)</text>
+      <text x="20" y="398" font-size="12" font-family="monospace" fill="#D97706">DailyChallenge.findOne({ date })</text>
+    </g>
+
+    <!-- Comp 2.3: ASTSandboxEngine -->
+    <g transform="translate(930, 80)">
+      <rect x="0" y="0" width="410" height="450" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#F1F5F9" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#0F172A" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#94A3B8" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#94A3B8" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#0F172A">AST Sandbox &amp; Judge0</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Exported API Ports:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#059669">POST /api/problems/:slug/run</text>
+      <text x="20" y="120" font-size="12" font-family="monospace" fill="#059669">POST /api/problems/:slug/submit</text>
+      <text x="20" y="142" font-size="12" font-family="monospace" fill="#059669">Internal: executeCodeSandbox()</text>
+      <text x="20" y="175" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="200" font-size="12.5" fill="#475569">• AST Regex Lexical Token Scanning</text>
+      <text x="20" y="223" font-size="12.5" fill="#475569">• Neutralizes Node.js VM Prototypes</text>
+      <text x="20" y="246" font-size="12.5" fill="#475569">• Enforces 2500ms CPU Timeout Cap</text>
+      <text x="20" y="269" font-size="12.5" fill="#475569">• Evaluates Public &amp; Hidden Testcases</text>
+      <text x="20" y="292" font-size="12.5" fill="#475569">• Fallback to Judge0 Cloud API</text>
+      <text x="20" y="315" font-size="12.5" fill="#475569">• Persists Submission &amp; Latency Stats</text>
+      <text x="20" y="350" font-size="13" font-weight="700" fill="#1E3A8A">Model Collaborations:</text>
+      <text x="20" y="375" font-size="12" font-family="monospace" fill="#2563EB">SubmissionModel.create({ ... })</text>
+      <text x="20" y="398" font-size="12" font-family="monospace" fill="#059669">ProblemModel.findById(problemId)</text>
+    </g>
+
+    <!-- Comp 2.4: SocketBattleGateway -->
+    <g transform="translate(1380, 80)">
+      <rect x="0" y="0" width="410" height="450" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#F1F5F9" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#5B21B6" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#DDD6FE" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#DDD6FE" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#5B21B6">SocketBattleGateway</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Exported Real-Time Ports:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#7C3AED">WSS /battle (Socket.IO)</text>
+      <text x="20" y="120" font-size="12" font-family="monospace" fill="#059669">POST /api/battles/create</text>
+      <text x="20" y="142" font-size="12" font-family="monospace" fill="#059669">GET /api/battles/:roomCode</text>
+      <text x="20" y="175" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="200" font-size="12.5" fill="#475569">• 6-Char Unique Room Code Generator</text>
+      <text x="20" y="223" font-size="12.5" fill="#475569">• Authoritative 3s Ready Countdown</text>
+      <text x="20" y="246" font-size="12.5" fill="#475569">• Synchronized Match Timer (15 min)</text>
+      <text x="20" y="269" font-size="12.5" fill="#475569">• Real-Time Opponent Telemetry Stream</text>
+      <text x="20" y="292" font-size="12.5" fill="#475569">• First-to-Solve Victory Evaluation</text>
+      <text x="20" y="315" font-size="12.5" fill="#475569">• Atomic ELO Rating Adjustment</text>
+      <text x="20" y="350" font-size="13" font-weight="700" fill="#5B21B6">Model Collaborations:</text>
+      <text x="20" y="375" font-size="12" font-family="monospace" fill="#7C3AED">BattleModel.findOneAndUpdate()</text>
+      <text x="20" y="398" font-size="12" font-family="monospace" fill="#2563EB">UserModel.bulkWrite([ ELO Ops ])</text>
+    </g>
+
+    <!-- Comp 2.5: AnalyticsEngine -->
+    <g transform="translate(1830, 80)">
+      <rect x="0" y="0" width="410" height="450" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="410" height="44" rx="10" fill="#F1F5F9" />
+      <rect x="15" y="12" width="20" height="20" rx="2" fill="#92400E" />
+      <rect x="10" y="15" width="8" height="5" rx="1" fill="#FDE68A" />
+      <rect x="10" y="24" width="8" height="5" rx="1" fill="#FDE68A" />
+      <text x="45" y="28" font-size="15" font-weight="800" fill="#92400E">Analytics &amp; Daily Engine</text>
+
+      <text x="20" y="75" font-size="13" font-weight="700" fill="#0F172A">Exported API Ports:</text>
+      <text x="20" y="98" font-size="12" font-family="monospace" fill="#059669">GET /api/profile/:username</text>
+      <text x="20" y="120" font-size="12" font-family="monospace" fill="#059669">GET /api/leaderboard</text>
+      <text x="20" y="142" font-size="12" font-family="monospace" fill="#059669">GET /api/daily-challenge</text>
+      <text x="20" y="175" font-size="13" font-weight="700" fill="#0F172A">Internal Responsibilities:</text>
+      <text x="20" y="200" font-size="12.5" fill="#475569">• Aggregates 365-Day Heatmap Submits</text>
+      <text x="20" y="223" font-size="12.5" fill="#475569">• Computes Streak Continuity Logic</text>
+      <text x="20" y="246" font-size="12.5" fill="#475569">• Solved Problem Category Ratios</text>
+      <text x="20" y="269" font-size="12.5" fill="#475569">• Global Leaderboard Sorting (ELO Desc)</text>
+      <text x="20" y="292" font-size="12.5" fill="#475569">• 24-Hour Daily Challenge Rotation</text>
+      <text x="20" y="315" font-size="12.5" fill="#475569">• Bonus XP &amp; Participation Records</text>
+      <text x="20" y="350" font-size="13" font-weight="700" fill="#92400E">Model Collaborations:</text>
+      <text x="20" y="375" font-size="12" font-family="monospace" fill="#D97706">DailyChallenge.findOne({ date })</text>
+      <text x="20" y="398" font-size="12" font-family="monospace" fill="#2563EB">SubmissionModel.aggregate([...])</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- LAYER 3: MONGOOSE ODM & DATABASE DATA ACCESS (BOTTOM)           -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1280)" filter="url(#shadow)">
+    <rect x="0" y="0" width="2280" height="540" rx="14" fill="#F8FAFC" stroke="#065F46" stroke-width="2.5" />
+    <rect x="0" y="0" width="2280" height="52" rx="14" fill="url(#hdrData)" />
+    <rect x="0" y="42" width="2280" height="10" fill="#065F46" />
+    <text x="30" y="34" font-size="20" font-weight="800" fill="#FFFFFF">«subsystem» PERSISTENCE &amp; DATA ACCESS OBJECT LAYER (MONGOOSE 8 ODM &amp; MONGODB ATLAS)</text>
+    <rect x="2060" y="12" width="180" height="28" rx="14" fill="#059669" />
+    <text x="2150" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#FFFFFF">DATA ACCESS OBJECTS</text>
+
+    <!-- 6 Mongoose Model Components -->
+    <!-- M1: UserModel -->
+    <g transform="translate(30, 80)">
+      <rect x="0" y="0" width="350" height="430" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="40" rx="10" fill="#EFF6FF" />
+      <text x="15" y="26" font-size="15" font-weight="800" fill="#1E3A8A">📦 UserModel</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Mongoose Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• name: String (Trimmed)</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• username: String [UK]</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• email: String [UK]</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• password: Bcrypt Hash</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• role: 'student' | 'admin'</text>
+      <text x="15" y="227" font-size="12" fill="#475569">• rating: Number (ELO)</text>
+      <text x="15" y="249" font-size="12" fill="#475569">• streak: { current, max }</text>
+      <text x="15" y="271" font-size="12" fill="#475569">• battleStats: { w, l, b }</text>
+      <line x1="15" y1="295" x2="335" y2="295" stroke="#E2E8F0" />
+      <text x="15" y="320" font-size="12.5" font-weight="700" fill="#1E3A8A">Schema Hooks &amp; Methods:</text>
+      <text x="15" y="345" font-size="12" fill="#334155">• pre('save') Bcrypt hashing</text>
+      <text x="15" y="367" font-size="12" fill="#334155">• comparePassword(candidate)</text>
+      <text x="15" y="389" font-size="12" fill="#334155">• generateAuthToken()</text>
+    </g>
+
+    <!-- M2: ProblemModel -->
+    <g transform="translate(410, 80)">
+      <rect x="0" y="0" width="350" height="430" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="40" rx="10" fill="#ECFDF5" />
+      <text x="15" y="26" font-size="15" font-weight="800" fill="#065F46">📦 ProblemModel</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Mongoose Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• title: String</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• slug: String [UK]</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• difficulty: 'Easy'|'Med'|'Hard'</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• tags: [String]</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• starterCode: { js, py }</text>
+      <text x="15" y="227" font-size="12" fill="#475569">• sampleTestCases: [...]</text>
+      <text x="15" y="249" font-size="12" fill="#475569">• hiddenTestCases: [...]</text>
+      <text x="15" y="271" font-size="12" fill="#475569">• author: Ref -> USER</text>
+      <line x1="15" y1="295" x2="335" y2="295" stroke="#E2E8F0" />
+      <text x="15" y="320" font-size="12.5" font-weight="700" fill="#065F46">Indexes &amp; Projections:</text>
+      <text x="15" y="345" font-size="12" fill="#334155">• slug_1 (Unique B-Tree)</text>
+      <text x="15" y="367" font-size="12" fill="#334155">• difficulty_1_tags_1</text>
+      <text x="15" y="389" font-size="12" fill="#334155">• select('-hiddenTestCases')</text>
+    </g>
+
+    <!-- M3: SubmissionModel -->
+    <g transform="translate(790, 80)">
+      <rect x="0" y="0" width="350" height="430" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="40" rx="10" fill="#EFF6FF" />
+      <text x="15" y="26" font-size="15" font-weight="800" fill="#1E40AF">📦 SubmissionModel</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Mongoose Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• userId: Ref -> USER</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• problemId: Ref -> PROBLEM</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• language: 'js' | 'python'</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• code: String (Source)</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• status: 'Accepted'|'WA'|'TLE'</text>
+      <text x="15" y="227" font-size="12" fill="#475569">• runtime: Number (ms)</text>
+      <text x="15" y="249" font-size="12" fill="#475569">• memory: Number (MB)</text>
+      <text x="15" y="271" font-size="12" fill="#475569">• passedTests / totalTests</text>
+      <line x1="15" y1="295" x2="335" y2="295" stroke="#E2E8F0" />
+      <text x="15" y="320" font-size="12.5" font-weight="700" fill="#1E40AF">Indexes &amp; Pipelines:</text>
+      <text x="15" y="345" font-size="12" fill="#334155">• userId_1_problemId_1</text>
+      <text x="15" y="367" font-size="12" fill="#334155">• createdAt_-1 (Timeline)</text>
+      <text x="15" y="389" font-size="12" fill="#334155">• Heatmap date aggregation</text>
+    </g>
+
+    <!-- M4: BattleModel -->
+    <g transform="translate(1170, 80)">
+      <rect x="0" y="0" width="350" height="430" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="40" rx="10" fill="#F5F3FF" />
+      <text x="15" y="26" font-size="15" font-weight="800" fill="#5B21B6">📦 BattleModel</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Mongoose Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• roomCode: String [UK]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• hostId: Ref -> USER</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• opponentId: Ref -> USER</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• problemId: Ref -> PROBLEM</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• status: 'active'|'done'</text>
+      <text x="15" y="227" font-size="12" fill="#475569">• winnerId: Ref -> USER</text>
+      <text x="15" y="249" font-size="12" fill="#475569">• duration: Number (sec)</text>
+      <text x="15" y="271" font-size="12" fill="#475569">• progress: { host, opp }</text>
+      <line x1="15" y1="295" x2="335" y2="295" stroke="#E2E8F0" />
+      <text x="15" y="320" font-size="12.5" font-weight="700" fill="#5B21B6">Indexes &amp; State Guards:</text>
+      <text x="15" y="345" font-size="12" fill="#334155">• roomCode_1 (Unique)</text>
+      <text x="15" y="367" font-size="12" fill="#334155">• status_1_createdAt_-1</text>
+      <text x="15" y="389" font-size="12" fill="#334155">• Atomic findOneAndUpdate()</text>
+    </g>
+
+    <!-- M5: DailyChallenge -->
+    <g transform="translate(1550, 80)">
+      <rect x="0" y="0" width="350" height="430" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="350" height="40" rx="10" fill="#FFFBEB" />
+      <text x="15" y="26" font-size="15" font-weight="800" fill="#92400E">📦 DailyChallenge</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Mongoose Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• date: String [UK, YYYY-MM-DD]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• problemId: Ref -> PROBLEM</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• bonusPoints: Number (50)</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• participants: [Ref USER]</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• createdAt: Date</text>
+      <line x1="15" y1="295" x2="335" y2="295" stroke="#E2E8F0" />
+      <text x="15" y="320" font-size="12.5" font-weight="700" fill="#92400E">Indexes &amp; Aggregations:</text>
+      <text x="15" y="345" font-size="12" fill="#334155">• date_1 (Unique Calendar)</text>
+      <text x="15" y="367" font-size="12" fill="#334155">• problemId_1</text>
+      <text x="15" y="389" font-size="12" fill="#334155">• $addToSet user solve atomic</text>
+    </g>
+
+    <!-- M6: TokenBlacklist -->
+    <g transform="translate(1930, 80)">
+      <rect x="0" y="0" width="320" height="430" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2" />
+      <rect x="0" y="0" width="320" height="40" rx="10" fill="#FFF1F2" />
+      <text x="15" y="26" font-size="15" font-weight="800" fill="#9F1239">📦 TokenBlacklist</text>
+      <text x="15" y="70" font-size="13" font-weight="700" fill="#0F172A">Mongoose Schema:</text>
+      <text x="15" y="95" font-size="12" fill="#475569">• _id: ObjectId [PK]</text>
+      <text x="15" y="117" font-size="12" fill="#475569">• token: String [UK]</text>
+      <text x="15" y="139" font-size="12" fill="#475569">• userId: Ref -> USER</text>
+      <text x="15" y="161" font-size="12" fill="#475569">• expiresAt: Date (TTL)</text>
+      <text x="15" y="183" font-size="12" fill="#475569">• reason: String</text>
+      <text x="15" y="205" font-size="12" fill="#475569">• createdAt: Date</text>
+      <line x1="15" y1="295" x2="305" y2="295" stroke="#E2E8F0" />
+      <text x="15" y="320" font-size="12.5" font-weight="700" fill="#9F1239">TTL Index Specification:</text>
+      <text x="15" y="345" font-size="12" fill="#E11D48">• expiresAt_1 (TTL: 0s)</text>
+      <text x="15" y="367" font-size="12" fill="#334155">• token_1 (Unique B-Tree)</text>
+      <text x="15" y="389" font-size="12" fill="#334155">• Auto-purges expired entries</text>
+    </g>
+  </g>
+
+
+  <!-- =============================================================== -->
+  <!-- FOOTER LEGEND                                                   -->
+  <!-- =============================================================== -->
+  <g transform="translate(60, 1860)">
+    <rect x="0" y="0" width="2280" height="130" rx="12" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2" />
+    <text x="30" y="38" font-size="15" font-weight="800" fill="#0F172A">UML COMPONENT MODELING CONVENTIONS &amp; DEPENDENCY PERIMETERS:</text>
+
+    <!-- Legend items -->
+    <rect x="30" y="55" width="480" height="34" rx="8" fill="#EFF6FF" stroke="#1E3A8A" stroke-width="1.5" />
+    <text x="50" y="77" font-size="13.5" font-weight="700" fill="#1E3A8A">Presentation Layer: React Contexts, Hook Providers &amp; Monaco Engine</text>
+
+    <rect x="540" y="55" width="540" height="34" rx="8" fill="#F1F5F9" stroke="#0F172A" stroke-width="1.5" />
+    <text x="560" y="77" font-size="13.5" font-weight="700" fill="#0F172A">Business Logic Layer: Express Controllers, In-Memory Sandbox &amp; Socket Gateway</text>
+
+    <rect x="1110" y="55" width="560" height="34" rx="8" fill="#ECFDF5" stroke="#059669" stroke-width="1.5" />
+    <text x="1130" y="77" font-size="13.5" font-weight="700" fill="#065F46">Data Layer: Mongoose ODM Schema Models with Pre-Save Hooks &amp; B-Tree Indexes</text>
+
+    <rect x="1700" y="55" width="550" height="34" rx="8" fill="#FFF1F2" stroke="#E11D48" stroke-width="1.5" />
+    <text x="1720" y="77" font-size="13.5" font-weight="700" fill="#9F1239">Interfaces: Provided (Lollipops/APIs) and Required (Sockets/REST Fetch)</text>
+
+    <text x="30" y="112" font-size="13" font-style="italic" fill="#64748B">Loose Coupling Design: Frontend components interact exclusively via HTTP/WebSocket ports; zero backend implementation details leaked to client bundles.</text>
+  </g>
+</svg>

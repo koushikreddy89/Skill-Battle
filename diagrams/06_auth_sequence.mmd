@@ -1,34 +1,43 @@
 sequenceDiagram
     autonumber
-    actor User as Student / Admin
-    participant Client as React 18 Client
+    actor User as Student / Administrator
+    participant Client as React 18 SPA Client
     participant Router as Express Auth Router
     participant Ctrl as Auth Controller
-    participant Security as Bcrypt & JWT
-    participant DB as MongoDB Atlas
-    participant Blacklist as TokenBlacklist (TTL)
+    participant Security as Bcrypt & JWT Service
+    participant DB as MongoDB Atlas (users)
+    participant Blacklist as TokenBlacklist (TTL Index)
 
-    Note over User,DB: REGISTRATION & LOGIN LIFECYCLE
-    User->>Client: Enters credentials & submits form
+    Note over User,Blacklist: PHASE 1: DUAL-CHANNEL AUTHENTICATION & SESSION INITIATION
+    User->>Client: Enters email & password, clicks "Login"
     Client->>Router: POST /api/auth/login {email, password}
-    Router->>Ctrl: invoke login()
-    Ctrl->>DB: findOne({ email: cleanEmail })
-    DB-->>Ctrl: returns User Document
-    Ctrl->>Security: bcrypt.compare(password, hash)
-    Security-->>Ctrl: password verified (True)
-    Ctrl->>Security: signJWT({ id, jti: uuid() }, secret, 7d)
-    Security-->>Ctrl: returns Signed Token
-    Ctrl-->>Router: setCookie('token', HttpOnly, SameSite=Lax)
-    Router-->>Client: 200 OK { success: true, token, user }
-    Client-->>User: Navigate to /dashboard (Session active)
+    Router->>Ctrl: execute login(req, res)
+    Ctrl->>DB: findOne({ email: normalizedEmail })
+    DB-->>Ctrl: Returns User Document (with passwordHash)
+    Ctrl->>Security: bcrypt.compare(password, passwordHash)
+    Security-->>Ctrl: Password verification successful (true)
+    Ctrl->>Security: signJWT({ id, role, jti: uuid() }, secret, 7d)
+    Security-->>Ctrl: Generates Signed Cryptographic JWT
+    Ctrl-->>Router: Set-Cookie: token (HttpOnly, SameSite=Lax, Secure)
+    Router-->>Client: 200 OK { success: true, token, user: profileData }
+    Client-->>User: Navigate to /dashboard (Session Established)
 
-    Note over User,DB: SECURE LOGOUT & SERVER-SIDE REVOCATION
-    User->>Client: Clicks "Logout"
+    Note over User,Blacklist: PHASE 2: SUBSEQUENT PROTECTED REQUEST VERIFICATION
+    User->>Client: Accesses protected view (/arena or /profile)
+    Client->>Router: GET /api/user/profile (Cookie + Authorization Bearer)
+    Router->>Blacklist: findOne({ token: hashedToken })
+    Blacklist-->>Router: null (Token is not revoked)
+    Router->>Security: jwt.verify(token, secret)
+    Security-->>Router: Valid Decoded Claims { id, role }
+    Router-->>Client: 200 OK { profileData }
+
+    Note over User,Blacklist: PHASE 3: SECURE LOGOUT & SERVER-SIDE TOKEN REVOCATION
+    User->>Client: Clicks "Sign Out" button
     Client->>Router: POST /api/auth/logout (Bearer Token + Cookie)
-    Router->>Ctrl: invoke logout()
-    Ctrl->>Blacklist: create({ token, userId, expiresAt })
-    Blacklist-->>Ctrl: Token blacklisted
-    Ctrl-->>Router: clearCookie('token') & no-store headers
-    Router-->>Client: 200 OK { message: "Session Invalidated" }
-    Client->>Client: localStorage.clear() & flush AuthContext
-    Client-->>User: Redirect to /login
+    Router->>Ctrl: execute logout(req, res)
+    Ctrl->>Blacklist: create({ token: hashedToken, userId, expiresAt })
+    Blacklist-->>Ctrl: Revocation recorded (TTL auto-cleanup active)
+    Ctrl-->>Router: Clear-Cookie: token (maxAge: 0, path: '/')
+    Router-->>Client: 200 OK { message: "Session successfully invalidated" }
+    Client->>Client: Flush AuthContext & purge scoped drafts
+    Client-->>User: Redirect to /login (Session terminated)

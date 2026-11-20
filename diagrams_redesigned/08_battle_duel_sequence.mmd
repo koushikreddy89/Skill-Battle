@@ -1,0 +1,47 @@
+sequenceDiagram
+    autonumber
+    actor Host as Player 1 (Host)
+    actor Opponent as Player 2 (Opponent)
+    participant SocketGateway as Socket.IO (/battle Gateway)
+    participant StateController as Battle State Controller
+    participant Evaluator as Duel Code Evaluator
+    participant DB as MongoDB Atlas (battles, users)
+
+    Note over Host,DB: ROOM INITIALIZATION & LOBBY DISCOVERY
+    Host->>SocketGateway: emit("battle:create", {difficulty: "Medium", duration: 600})
+    SocketGateway->>StateController: createBattleRoom(HostSocketId, options)
+    StateController->>StateController: Generate 6-Character Room Code ("SB89F2")
+    StateController->>DB: Battles.create({ roomCode: "SB89F2", hostId, status: "waiting" })
+    DB-->>StateController: Battle Document Created
+    SocketGateway-->>Host: emit("battle:created", { roomCode: "SB89F2" })
+
+    Opponent->>SocketGateway: emit("battle:join", { roomCode: "SB89F2" })
+    SocketGateway->>StateController: joinBattleRoom("SB89F2", OpponentSocketId)
+    StateController->>DB: Battles.updateOne({ opponentId, status: "matched" })
+    SocketGateway-->>Host: emit("battle:player_joined", { opponent: OpponentProfile })
+    SocketGateway-->>Opponent: emit("battle:join_success", { roomCode: "SB89F2", host: HostProfile })
+
+    Note over Host,DB: MUTUAL READINESS & SYNCHRONIZED COUNTDOWN
+    Host->>SocketGateway: emit("battle:ready")
+    Opponent->>SocketGateway: emit("battle:ready")
+    StateController->>StateController: Both Players Ready -> Fetch Random Problem
+    SocketGateway->>Host: emit("battle:countdown", { seconds: 5 })
+    SocketGateway->>Opponent: emit("battle:countdown", { seconds: 5 })
+    Note over SocketGateway: 5-Second Synchronized Countdown Ticks
+    SocketGateway->>Host: emit("battle:start", { problemStatement, starterCode, duration: 600 })
+    SocketGateway->>Opponent: emit("battle:start", { problemStatement, starterCode, duration: 600 })
+
+    Note over Host,Opponent: LIVE CODING & REAL-TIME PROGRESS TELEMETRY
+    Host->>SocketGateway: emit("battle:test_run", { passed: 3, total: 5 })
+    SocketGateway-->>Opponent: emit("opponent:progress", { testsPassed: 3, total: 5 })
+
+    Note over Opponent,DB: FINAL SUBMISSION, VICTORY & ELO RATING SHIFT
+    Opponent->>SocketGateway: emit("battle:submit", { code, language: "javascript" })
+    SocketGateway->>Evaluator: gradeDuelSubmission(code, problemTestCases)
+    Evaluator-->>SocketGateway: Verification Passed (5/5 Tests Accepted)
+    SocketGateway->>StateController: terminateMatch("SB89F2", Winner: Opponent)
+    StateController->>DB: Battles.updateOne({ status: "completed", winnerId: OpponentId })
+    StateController->>DB: Users.updateOne(Opponent: +100 ELO, Host: -25 ELO)
+    DB-->>StateController: Ratings Updated
+    SocketGateway-->>Opponent: emit("battle:game_over", { winner: true, ratingDelta: +100 })
+    SocketGateway-->>Host: emit("battle:game_over", { winner: false, ratingDelta: -25 })

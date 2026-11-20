@@ -1,38 +1,32 @@
 flowchart TB
-    subgraph FrontendComponents ["FRONTEND ARCHITECTURE (REACT 18)"]
-        UI_Pages["Pages (Public, Student, Admin)"]
-        UI_Context["Contexts (AuthContext, SocketContext, ToastContext)"]
-        UI_Editor["Editor Components (Monaco Workspace, LanguageSelect)"]
-        UI_Battle["Battle Components (BattleLobby, OpponentProgress, Timer)"]
-        UI_Profile["Profile Components (SolvedRings, 365DayHeatmap, Badges)"]
-        API_Services["Services Layer (authService, problemService, battleService)"]
-        StorageUtil["Storage Scoping Utility (editorStorage.js)"]
+    subgraph FrontendArchitecture ["FRONTEND CLIENT MODULES (REACT 18 & VITE)"]
+        subgraph FE_Col1 ["Views & State Contexts"]
+            UIViews["UI Views (Auth, Dashboard, Problem, Battle, Admin)"]
+            StateContexts["Context Providers (AuthContext, SocketContext, ThemeContext)"]
+        end
 
-        UI_Pages --> UI_Context
-        UI_Pages --> UI_Editor
-        UI_Pages --> UI_Battle
-        UI_Pages --> UI_Profile
-        UI_Editor --> StorageUtil
-        UI_Pages --> API_Services
+        subgraph FE_Col2 ["Core Components & Services"]
+            CoreComponents["Specialized Components (Monaco, Heatmap, Timer, OpponentTicker)"]
+            APIServices["Frontend API Services (authService, problemService, battleService, adminService)"]
+        end
+
+        FE_Col1 --> FE_Col2
     end
 
-    subgraph BackendComponents ["BACKEND ARCHITECTURE (EXPRESS & NODE.JS)"]
-        MW_Pipeline["Middleware (Security, Auth, RateLimit, Validate)"]
-        Routers["Express Routers (Auth, Problem, Battle, Profile, Admin)"]
-        Controllers["Controllers (authCtrl, problemCtrl, battleCtrl, adminCtrl)"]
-        SocketModule["WebSocket Gateway (battleSocket.js)"]
-        ExecutionService["Code Execution Service (AST Scanner & Sandbox)"]
-        StreakService["Gamification & Streak Calculation Service"]
-        DB_Models["Mongoose ODM Models (User, Problem, Submission, Battle)"]
+    subgraph BackendArchitecture ["BACKEND APPLICATION MODULES (NODE.JS & EXPRESS)"]
+        subgraph BE_Col1 ["Middleware & Controllers Layer"]
+            MiddlewareSuite["Security Middleware (Helmet, CORS, NoSQLSanitizer, RateLimiter, AuthGuard)"]
+            ControllersLayer["Controllers (authController, problemController, battleController, adminController)"]
+        end
 
-        Routers --> MW_Pipeline
-        Routers --> Controllers
-        Controllers --> ExecutionService
-        Controllers --> StreakService
-        Controllers --> DB_Models
-        SocketModule --> DB_Models
-        SocketModule --> ExecutionService
+        subgraph BE_Col2 ["Application Engines & Mongoose Models"]
+            CoreEngines["Specialized Application Engines (SocketGateway, ASTScanner, VMSandbox, Judge0, ELO)"]
+            DataModels["Mongoose ODM Models (User, Problem, Submission, Battle, TokenBlacklist)"]
+        end
+
+        BE_Col1 --> BE_Col2
     end
 
-    API_Services <-->|HTTP / JSON| Routers
-    UI_Battle <-->|WebSockets| SocketModule
+    APIServices <-->|"HTTPS REST API (Port 443)"| MiddlewareSuite
+    FE_Col2 <-->|"WSS WebSockets (Port 443)"| CoreEngines
+    DataModels <-->|"TCP 27017 TLS Connection"| MongoDBCluster[("MongoDB Atlas Cloud Database")]

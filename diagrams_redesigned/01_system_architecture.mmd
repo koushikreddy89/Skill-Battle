@@ -1,0 +1,55 @@
+flowchart TB
+    subgraph ClientTier ["PRESENTATION TIER (REACT 18 SINGLE PAGE APPLICATION)"]
+        Browser["Modern Web Browser Engine<br/>(Chrome / Edge / Firefox / Safari)"]
+        SPA["React 18 Component Tree & Router<br/>(Vite Framework)"]
+        Monaco["Monaco Code Editor Engine<br/>(@monaco-editor/react)"]
+        SocketClient["Socket.IO Client Library<br/>(Full-Duplex WSS Connection)"]
+        AxiosClient["Axios REST HTTP Client<br/>(Interceptors & Bearer Injection)"]
+        Tailwind["Tailwind CSS 3.4 & Lucide Icons<br/>(Charcoal Dark UI Design System)"]
+
+        Browser --> SPA
+        SPA --> Monaco
+        SPA --> SocketClient
+        SPA --> AxiosClient
+        SPA --> Tailwind
+    end
+
+    subgraph ServerTier ["APPLICATION & EXECUTION TIER (NODE.JS & EXPRESS BACKEND)"]
+        NodeServer["Express.js Application Server<br/>(Port 5000 / HTTPS)"]
+        SecurityMW["Security Middleware Suite<br/>(Helmet, CORS, NoSQL Sanitizer, Rate Limiter)"]
+        AuthMW["Authentication & RBAC Guard<br/>(JWT Verification & TTL Blacklist Check)"]
+        SocketServer["Socket.IO Real-Time Gateway<br/>(Authoritative /battle Namespace)"]
+        ASTSandbox["AST-Guarded In-Memory Sandbox<br/>(Node.js VM & Python Subprocess Runner)"]
+        Judge0Client["Judge0 Cloud API Client<br/>(Encrypted REST Fallback Execution)"]
+
+        NodeServer --> SecurityMW
+        SecurityMW --> AuthMW
+        NodeServer --> SocketServer
+        NodeServer --> ASTSandbox
+        NodeServer --> Judge0Client
+    end
+
+    subgraph DataTier ["PERSISTENCE & STORAGE TIER (MONGODB ATLAS CLOUD)"]
+        MongooseODM["Mongoose 8 ODM Layer<br/>(Schema Validation & Model Logic)"]
+        MongoDB[("MongoDB Replica Set Cluster<br/>(High Availability & Auto-Failover)")]
+        UsersCol[("users<br/>(Profiles, ELO, Streaks)")]
+        ProblemsCol[("problems<br/>(Statements, Test Cases)")]
+        SubmissionsCol[("submissions<br/>(Code, Metrics, Status)")]
+        BattlesCol[("battles<br/>(Rooms, Scores, Winner)")]
+        DailyCol[("dailychallenges<br/>(Dates, Bonus XP)")]
+        BlacklistCol[("tokenblacklists<br/>(TTL Indexed Revocation)")]
+
+        MongooseODM --> MongoDB
+        MongoDB --> UsersCol
+        MongoDB --> ProblemsCol
+        MongoDB --> SubmissionsCol
+        MongoDB --> BattlesCol
+        MongoDB --> DailyCol
+        MongoDB --> BlacklistCol
+    end
+
+    AxiosClient <-->|"1. HTTPS REST Requests & Responses (Port 443)"| SecurityMW
+    SocketClient <-->|"2. Full-Duplex WSS Bi-directional Events (Port 443)"| SocketServer
+    AuthMW <-->|"3. User Lookup & Blacklist Queries"| MongooseODM
+    ASTSandbox <-->|"4. Testcase Fetch & Result Storage"| MongooseODM
+    SocketServer <-->|"5. Authoritative Match State Sync"| MongooseODM
